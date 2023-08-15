@@ -1,6 +1,4 @@
-﻿<meta charset="UTF-8">
-<tr style="padding:0px;">
-<td style="width:10%;"></td>
-<td align="center" valign="middle" bgcolor="#003366"><font face="Trebuchet MS" color="white" size="2px"> Контакт e-mail:<a href=/"mailto: opstina@gmail.com/">strahinja.a.98@gmail.com</a> </font></td>
-<td style="width:10%;"></td>
-</tr>
+<meta charset="UTF-8">
+<footer>
+<span>Autor: Strahinja Arbanovski</span>&nbsp &nbsp &nbsp<span><a href="mailto:strahinja.a.98@gmail.com"> strahinja.a.98@gmail.com</a></span> 
+</footer>
