@@ -8,7 +8,6 @@
         Logo
         </div>
     <div class="menu">
-        <a class="myButton" href="index.php" >Листа</a>
         <a  class="myButton" href="Prijava.php" >Пријава</a>
     </div>
     </div>

@@ -1,135 +1,40 @@
 
 <meta charset="UTF-8">
 <!--==================================== SADRZAJ STRANICE DESNO pocinje ovde ------------------------------>
-<img src="images/sredinagore.jpg" width="100%" height="3" alt="" class="flt1 rp_topcornn" /> 
-
-<table style="width:100%;style="width:100%; padding:0" align="center" cellspacing="0" cellpadding="0" border="0"  bgcolor="#D8E7F4">
-<tr>
-<td style="width:5%;">
-</td>
-
-<td align="left">
-<br/>
-<b><font face="Trebuchet MS" color="darkblue" size="4px">  </font></b>
-<table style="width:100%;" bgcolor="#D8E7F4" padding:0" align="center" cellspacing="0" cellpadding="0" border="0">
-
-<tr>
-<td style="width:3%;">
-</td>
-<td align="center">
-<font color="#D8E7F4" size="1px">.</font>
-</td>
-<td style="width:3%;">
-</td>
-</tr>
-
-<tr>
-<td style="width:3%;">
-</td>
-<td align="center">
-<b><font face="Trebuchet MS" color="darkblue" size="3px">Унос хоспитализациј</font></b></br>
-</td>
-<td style="width:3%;">
-</td>
-</tr>
-
-<tr>
-<td style="width:3%;">
-</td>
-<td align="center">
-<font color="#D8E7F4" size="1px">.</font>
-</td>
-<td style="width:3%;">
-</td>
-</tr>
-
-<tr>
-<td style="width:3%;">
-</td>
-
-<td align="center">
 
 
-<!------------------------FORMA ZA UNOS ------->
-<table style="width:90%;" bgcolor="#D8E7F4" padding:0" align="center" cellspacing="0" cellpadding="0" border="0">
+   
+<h1 class="form-header-hospitalizacija">Унос Хоспитализације</h1>
+
 <form ACTION="./Logicki/AkcijaSnimi.php" METHOD="POST">
 
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Број историје болести:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="BrojIstorijeBolesti" type="text" size="40" required />
-<!-- Prosledjuemo promenljivu BrojIstorijeBolesti kroz metodu POST akciji AkcijaSnimi-->
-</td>
-</tr>
+<div class="form-container-pacijent">
 
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
 
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Назив здравствене установе:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="NazivZdravstveneUstanove" type="text" size="40" required />
-</td>
-</tr>
+<div class="input-container">
+    <label for="BrojIstorijeBolesti"> Број историје болести<span aria-label="required">*</span></label>
+    <input type="text" name="BrojIstorijeBolesti" required>
+</div>
 
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
+<div class="input-container">
+    <label for="NazivZdravstveneUstanove">Назив здравствене установе:<span aria-label="required">*</span></label>
+    <input type="text" name="NazivZdravstveneUstanove" required>
+</div>
+            
+<div class="input-container">
+    <label for="OdeljenjeNaPrijemu">Одељење на пријему:<span aria-label="required">*</span></label>
+    <input type="text" name="OdeljenjeNaPrijemu" required>
+</div>   
 
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Одељење на пријему:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="OdeljenjeNaPrijemu" type="text" size="40" required />
-</td>
-</tr>
 
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-<tr>
+<div class="input-container">
+    <label for="DatumPrijema">Датум пријема:<span aria-label="required">*</span></label>
+    <input type="text" name="DatumPrijema" required>
+</div>   
 
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Датум пријема:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="DatumPrijema" type="text" size="40" required />
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-<tr>
-
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Упутна дијагноза:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<select name="UputnaDijagnoza" >		
+<div class="input-container">
+    <label for="UputnaDijagnoza">Упутна дијагноза:<span aria-label="required">*</span></label>
+    <select name="UputnaDijagnoza" >		
 	<option value="">изаберите</option>
 	<?php
 	// KONEKTOVANJE NA BAZU
@@ -159,56 +64,22 @@
 	
 	?>
 </select>
-</td>
-</tr>
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
+</div>
 
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Повреда:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="Povreda" type="text" size="40" required />
-</td>
-</tr>
+<div class="input-container">
+    <label for="Povreda">Повреда:<span aria-label="required">*</span></label>
+    <input type="text" name="Povreda" required>
+</div>
 
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
 
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Спољни узрок повреде:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="SpoljniUzrokPovrede" type="text" size="40"  />
-</td>
-</tr>
+<div class="input-container">
+    <label for="SpoljniUzrokPovrede">Спољни узрок повреде:<span aria-label="required">*</span></label>
+    <input type="text" name="SpoljniUzrokPovrede" required>
+</div>   
 
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Основни узрок хоспитализација:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<select name="OsnovniUzrokHospitalizacije" >		
+<div class="input-container">
+    <label for="OsnovniUzrokHospitalizacije">Основни узрок хоспитализација:<span aria-label="required">*</span></label>
+    <select name="OsnovniUzrokHospitalizacije" >		
 	<option value=""></option>
 	<?php
 	if ($UkupanBrojZapisa>0) 
@@ -224,176 +95,52 @@
 	
 	?>
 	</select>
-</td>
-</tr>
+</div>   
 
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
 
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Пратеће дијагнозе:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="PrateceDijagnoze" type="text" size="40" />
-</td>
-</tr>
+<div class="input-container">
+    <label for="PrateceDijagnoze">Пратеће дијагнозе:<span aria-label="required">*</span></label>
+    <input type="text" name="PrateceDijagnoze" required>
+</div>   
 
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
+<div class="input-container">
+    <label for="SifraProcedurePoNomenklaturi">Шифра процедуре по номенклатури:<span aria-label="required">*</span></label>
+    <input type="text" name="SifraProcedurePoNomenklaturi" required>
+</div>   
 
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Шифра процедуре по номенклатури:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="SifraProcedurePoNomenklaturi" type="text" size="40" required />
-</td>
-</tr>
 
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
+<div class="input-container">
+    <label for="TezinaNaPrijemu">Тежина на пријему:<span aria-label="required">*</span></label>
+    <input type="text" name="TezinaNaPrijemu" required>
+</div>   
 
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Тежина на пријему:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="TezinaNaPrijemu" type="text" size="40" />
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Број сати вентилаторне подршке:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="BrojSatiVentilatornePodrske" type="text" size="40"/>
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Датум отпуста:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="DatumOtpusta" type="text" size="40" required />
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Број дана хоспитализације:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="BrojDanaHospitalizacije" type="text" size="40" required />
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Одељење са којег је отпуст извршен:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="OdeljenjeSaKojegJeOtpustIzvrsen" type="text" size="40" required />
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Врсте отпуста:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="VrstaOtpusta" type="text" size="40" required />
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Обдукован:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<input name="Obdukovan" type="text" size="40" />
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-</td>
-</tr>
-
-<tr>
-<td align="right" valign="top">
-<b><font face="Trebuchet MS" color="darkblue" size="2px">Основни узрок смрти:&nbsp;&nbsp;</font><br/></b>
-</td>
-<td align="left" valign="top">
-<select name="OsnovniUzrokSmrti" >		
+<div class="input-container">
+    <label for="BrojSatiVentilatornePodrske">Број сати вентилаторне подршке:<span aria-label="required">*</span></label>
+    <input type="text" name="BrojSatiVentilatornePodrske" required>
+</div> 
+<div class="input-container">
+    <label for="DatumOtpusta">Датум отпуста:<span aria-label="required">*</span></label>
+    <input type="text" name="DatumOtpusta" required>
+</div> 
+<div class="input-container">
+    <label for="BrojDanaHospitalizacije">Број дана хоспитализације:<span aria-label="required">*</span></label>
+    <input type="text" name="BrojDanaHospitalizacije" required>
+</div> 
+<div class="input-container">
+    <label for="OdeljenjeSaKojegJeOtpustIzvrsen">Одељење са којег је отпуст извршен::<span aria-label="required">*</span></label>
+    <input type="text" name="OdeljenjeSaKojegJeOtpustIzvrsen" required>
+</div> 
+<div class="input-container">
+    <label for="Obdukovan">Врсте отпуста:<span aria-label="required">*</span></label>
+    <input type="text" name="Obdukovan" required>
+</div> 
+<div class="input-container">
+    <label for="TezinaNaPrijemu">Обдукован:<span aria-label="required">*</span></label>
+    <input type="text" name="TezinaNaPrijemu" required>
+</div> 
+<div class="input-container">
+    <label for="OsnovniUzrokSmrti">Основни узрок смрти:<span aria-label="required">*</span></label>
+	<select name="OsnovniUzrokSmrti" >		
 	<option value=""></option>
 	<?php
 	if ($UkupanBrojZapisa>0) 
@@ -409,47 +156,11 @@
 	
 	?>
 	</select>
-</td>
-</tr>
-
-<!-------------------------- prazan red ------->
-<tr>
-<td align="right" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<td align="left" valign="top">
-<font face="Trebuchet MS" color="#D8E7F4" size="2px">.</font><br/>
-</td>
-<tr>
-
-<td>       
-</td>
-<td><input TYPE="submit" name="btnSnimiVozilo" value="Сними" TABINDEX=3/>
-</td>
+</div> 
+<div id="save-btn">
+    <button type="submit" class="signup-btn" name="btnSnimiVozilo" value="Сними">Сними</button>
+</div>
+</div>
 </form>
-</table>
 
-</td>
-<td style="width:3%;">
-</td>
-</tr>
 
-<tr>
-<td style="width:3%;">
-</td>
-<td align="center">
-<font color="#D8E7F4" size="1px">.</font>
-</td>
-<td style="width:3%;">
-</td>
-</tr>
-</table>
-</td>
-
-<td style="width:5%;">
-</td>
-
-</tr>
-</table>
-<img src="images/sredinadole.jpg" width="100%" height="5" alt="" class="flt1" /> 
-    

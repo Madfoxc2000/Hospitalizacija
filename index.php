@@ -112,7 +112,8 @@ session_destroy();
 	</tr> -->
 	<!--- DONJI DEO sa donjom ivicom zavrsava ovde  ------->
 	<!-- footer panel starts here -->
-	<!-- </table> --><?php include 'delovi/footer.php';?>
+	<!-- </table> -->
+	<?php include 'delovi/footer.php';?>
 </div>
 </body>
 </html>

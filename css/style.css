@@ -34,64 +34,7 @@ table.no-spacing {
   border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
 }
 
-.flt{ float:left;
-}
-.flt1{ clear:left; float:center;
-}
-.flt2{ float:right;
-}
-.flt3{ float:left;
-}
 
-.topblock{}
-.tp_txtplay{ font:bold 32px Trebuchet MS; color:#FFFFFF; text-decoration:none;}	
-.tp_txtcss{ font:bold 22px Trebuchet MS; color:#FFFFFF; }
-.tp_home{ font:bold  16px Trebuchet MS; color:#ffffff; margin:0px; text-decoration:none;}
-.tp_home2{ font:bold 16px Trebuchet MS; color:#ffffff; margin:0px; text-decoration:none;}
-.tp_pipe{display:inline; margin:0px 10px 0px 10px;}	
-#cpblock{float:left; display:inline; margin:0px 0px 0px 50px; width:898px;}
-.cpinner{display:inline; margin:0px; width:882px; border-left:8px solid #FFFFFF; border-right:8px solid #FFFFFF; background:#448CCB url(../images/cp_bg.gif) repeat-x;}
-.lp_block{ display:inline; width:260px; margin:0px 20px 0px 21px;}
-.lp_imgpair{ margin:50px 0px 0px 10px;}
-.lp_txtmem,.lp_txtour,.lp_txtclint{ font:bold 12px/14px Trebuchet MS; color:#ffffff; margin:80px 0px 0px 10px;}
-.lp_txtour{ color:#36382A; margin:10px 0px 0px 24px;}
-.lp_txtclint{ margin:5px 0px 0px 9px;}
-.lp_txtlog,.lp_txtlog2{ font:12px/14px Trebuchet MS; color:#ffffff; margin:18px 0px 0px 18px; width:54px;}
-.lp_txtlog2{ margin:6px 0px 0px 18px;}
-.lp_textbox,.lp_textbox2{ display:inline; width:110px; height:16px; margin:14px 0px 0px 8px; border:1px solid #8AC5E5;}
-.lp_textbox2{ margin:4px 0px 0px 8px; border:1px solid #8AC5E5;}
-.lp_arrow{ margin:4px 0px 0px 8px;}
-.lp_boxtop1{ margin:28px 1px 0px 1px;}
-.lp_boxtop2{ margin:0px 1px 0px 1px;}
-.lp_boxbg{width:258px; display:inline; background:#E4F0CD; margin:0px 1px 0px 1px; padding-bottom:24px;}
-.lp_boxtxt,.lp_boxtxt2,.lp_box2txt{ font:12px/14px Trebuchet MS; color:#5F5F5F; margin:12px 0px 0px 24px; width:196px;}
-.lp_box2txt{ font:12px/14px Trebuchet MS; color:#ffffff; margin:7px 0px 0px 27px; width:210px;}
-.lp_boxtxt2{ font:12px/14px Trebuchet MS; color:#36382A; margin:7px 0px 0px 10px; width:136px;}
-.lp_boxbult{ margin:13px 1px 0px 34px;}
-.lp_boxtop3{ margin:16px 0px 0px 0px;}
-.lp_box2bg{ display:inline; width:260px; background:url(../images/lp_box2bg.gif) repeat-y; padding-bottom:6px;}
-.lp_imgclient{ margin:3px 0px 0px 27px;}
-.rp_block{ display:inline; width:560px;}
-.rp_inner{ display:inline; width:570px; margin:0px; background:#D8E7F4 url(../images/rp_bg.gif) repeat-x; padding-bottom:10px;}
-.rp_txtour{ font: bold italic 20px Trebuchet MS; color:#99204E; margin:0px 0px 0px 0px;}
-.rp_abacus{ margin:30px 0px 0px 40px;}
-.rp_weltxt{ font:12px/14px Trebuchet MS; color:#5F5F5F; margin:26px 0px 0px 26px; width:378px;}
-.rp_linktxt{ font:12px/14px Trebuchet MS; color:#BD2E12; margin:8px 0px 0px 10px; width:350px;}
-.rp_read{ width:91px; height:16px; background:url(../images/cp_butt.gif) no-repeat; margin:10px 0px 0px 0px;}
-.rp_line{ margin:20px 0px 0px 24px;}
-.rp_bult{ margin:13px 0px 0px 0px;}
-.rp_topcornn{margin:15px 0px 0px 0px;}
-.rp_nameband{margin:30px 0px 0px 10px;}
-.rp_weltxt2{ font:12px/14px Trebuchet MS; color:#5F5F5F; margin:14px 0px 0px 0px; width:378px;}
-.ft_bg{width:1000px; height:50px; background:#ffffff; margin:0px;}
-.ft_txt,.ft_txt2,.ft_txt3{ font:bold italic 13px/15px Trebuchet MS; color:#ffffff; margin:16px 0px 0px 206px; text-decoration:none;}
-.ft_txt2{margin:16px 0px 0px 0px;}
-.ft_txt3{font:12px/14px Trebuchet MS; color:#555555; margin:0px 0px 0px 220px; width:1050px;}
-.ft_txt4{font:12px/14px Trebuchet MS; color:#555555; margin:50px 0px 0px 220px; width:1050px;}
-.ft_bult{margin:24px 20px 0px 20px;}
-.ft_button{margin:10px 0px 0px 15px;}
-.ft_button2{margin:10px 0px 0px 6px;}
-.ft_email{color:#CCBBAA;text-decoration:underline;}
 a:link {
     color: white;
     text-decoration:none;
@@ -139,11 +82,16 @@ a:hover {
     display: flex;
     gap: 1vw;
     margin-right: 2vw;
+    list-style: none;
 }
+.menu li {
+    display: flex;
+}
+
 .myButton {
+    width: 6rem;
     text-align: center;
     color: rgb(255, 255, 255);
-    width: 6rem; 
     font-size: 1rem;
     font-weight: 600;
     padding: 7px; 
@@ -158,6 +106,13 @@ a:hover {
     .myButton:active {
     background: #00B5E2; }
 
+
+.mobile-menu-icon {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    }
+
 .logo{
     margin-left: 1vw;
 }
@@ -171,7 +126,7 @@ img{
 }
 footer{
     display: flex;
-    background: linear-gradient( to right, rgba(243, 243, 243, 0.5) ,  rgba(0, 217, 243, 0.5) , rgba(0, 153, 171, 0.5),  rgba(0, 153, 171, 0.5),  rgba(0, 217, 243, 0.5), rgba(243, 243, 243, 0.5) );
+    background: linear-gradient( to right, rgba(243, 243, 243, 0.5) ,  rgba(0, 204, 250, 0.5) ,rgb(0, 183, 255, 0.7),  rgb(0, 183, 255, 0.7),  rgba(0, 217, 243, 0.5), rgba(243, 243, 243, 0.5) );
     border-radius: 2px;
     align-items: end;
     justify-content: center;
@@ -213,3 +168,262 @@ table caption{
     }
 }
 /* ====================================================== End Index section =====================================*/
+/* ====================================================== Prijava section =====================================*/
+.main-prijava{
+    display: grid;
+    grid-template-rows: 20vh 10vh minmax(63vh, auto) 7vh;
+}
+
+.form-header{
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+    font-size: 2rem;
+    width: 11rem;
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.form-content{
+  display: flex;
+  gap: 6em;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 9vh;
+}
+input {
+    display: block;
+    border-radius: 4px;
+    border: 0;
+    border-bottom: 1px solid rgb(0,0,0,.4);
+    padding: 2px 2px 2px 5px;
+    margin-top: 5px;
+    background-color: rgba(132, 103, 103, 0);
+    transition: all .5s ease-in;
+} 
+
+.signup-btn{
+    border: 0;
+    background-color :rgb(0, 183, 255);
+    color: white;
+    padding: 10px 50px;
+    letter-spacing: .05em;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 1rem;
+    outline: none;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.signup-btn:hover {
+    color: black;
+    background: #00CCFF; }
+
+input:valid {
+    border: 1px solid green;  
+}
+
+
+/* ====================================================== End prijava section =====================================*/
+/* ====================================================== Welcome message section =====================================*/
+.main-administrator{
+
+    display: grid;
+    grid-template-rows: 10vh minmax(86vh, auto) 4vh;
+}
+.welcome-message-container{
+    display: grid;
+    justify-content: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 100; 
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 101;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  
+}
+
+a {
+  color: hotpink;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block; }
+
+.dropdown:hover .dropbtn {background-color: #D8E7F4;}
+
+.card-image{
+    margin-top: 3vh;
+    position: relative;
+    z-index: -1; 
+ 
+}
+.card-image img{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 1.19);
+}
+/* .welcome-message-container{
+    display: flex;
+    justify-content: center;
+} */
+
+.card-body {
+    margin-top: 10vh;
+    position: absolute; 
+    width: 100%;
+    background: black;
+    opacity: 0.6;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: roboto;
+
+  }
+  @media (max-width: 600px){
+    .card-image{
+        margin-top: 0%;
+        align-self: center;
+    }
+    .card-body{
+        margin-top:0%;
+        margin-bottom: 150px;
+        align-self: center;
+    }
+    .menu{
+        flex-wrap: wrap;
+        display: none;
+        align-content: center;
+        flex-direction: column;
+
+        position: absolute;
+        top: 7vh;
+        left: 70vw;
+    
+      }
+      ul {
+        margin: 0%;
+        padding: 0%;
+      }
+      .menu.active {
+        display: flex;
+      }
+      .menu li {
+        margin: 0%; 
+      }
+    
+      .mobile-menu-icon {
+        display: block;
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+  }
+/* ====================================================== End Welcome messsage section =====================================*/
+
+/* ====================================================== Administrator section =====================================*/
+.administrator-table-content h1{
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.administrator-table-content>.table-spisak-hospitalizacija th{
+    font-size: 1rem;
+}
+.administrator-table-content>.table-spisak-hospitalizacija td{
+    font-size: 0.8rem;
+}
+
+
+/* ====================================================== Administrator section End =====================================*/
+.form-container-pacijent {
+    margin-right: 10vw;
+    margin-left: 10vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px); 
+    justify-content: center;
+}
+
+ .form-header-pacijent {
+    padding: 2vw;
+    letter-spacing: .06em;
+    font-size: 2rem;
+}
+@media (max-width: 500px) {
+    .form-header-pacijent {
+        text-align: center;
+    }
+    .input-container{
+        width: 80vw;
+    }
+    form{
+        padding-bottom: 1vw;
+    }
+}
+form {
+    width: auto;
+    display: grid;
+}
+
+.form-container-pacijent input {
+    display: block;
+    border-radius: 4px;
+    border: 0;
+    border-bottom: 1px solid rgb(0,0,0,.4);
+    padding: 6px 6px 6px 10px;
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0);
+    transition: all .5s ease-in;
+} 
+
+
+.form-container-pacijent span {
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .4s;
+}
+.input-container{
+    padding: 2vw;
+}
+/*
+    INPUT FIELD EFFECTS SECTION
+*/
+.form-container-pacijent input:focus ~ span,
+.form-container-pacijent input:valid ~ span{
+    font-size: 10px;
+    transform: translateX(4px) translateY(-7px);
+    font-size: 0.80em;
+    padding: 0 6px;
+    color: rgb(33, 250, 131);
+    background-color: rgb(6, 170, 94);
+    color: white;
+    border-radius: 2px;
+}
+.form-container-pacijent input:focus,
+.form-container-pacijent input:focus-visible {
+    border: 1px solid  rgb(33, 250, 131);
+    box-shadow: 0 0 5px rgb(0,0,0,.3);
+    outline: none;
+}
+.form-container-pacijent input:valid {
+    border: 1px solid rgb(33, 250, 131);  
+}

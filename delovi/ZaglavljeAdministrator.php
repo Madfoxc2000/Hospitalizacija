@@ -13,83 +13,21 @@ if(session_id() == '') {
       		
 ?>
 <meta charset="UTF-8">
-<style>
-.dropbtn {
-  background-color:#003366;
-  color: white;
-  font-size: 18px;
-  border: none;
-}
+<nav class="nav-bar">
+        <div class="logo"><font color="black" size="2px">Корисник: <b><?php echo $korisnik ;?></b></font></div>
+    <ul class="menu">
+              <li class="dropdown">
+                    <a class="myButton">Унос</a>
+                    <div class="dropdown-content">
+                    <a href="PacijentUnos.php">Унос пацијента</a>
+                    <a href="HospitalizacijaUnos.php">Унос хоспитализације</a>
+                    </div>
+                </li>
+        <li><a class="myButton" href="Stampa.php" >Штампа</a></li>
+        <li><a class="myButton" href="HospitalizacijaListaAdministrator.php" >Листа</a></li>
+        <li><a class="myButton" href="index.php" >Одјава</a></li>
+    </ul>
+    <div class="mobile-menu-icon">&#9776;</div>
+</nav>
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-a {
-  color: hotpink;
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #D8E7F4;}
-</style>
-<tr>
-<td style="width:10%;">
-</td>
-<td align="center" valign="middle"> 
-<?php include 'delovi/Baner.php';?>
-</td>
-<td style="width:10%;">
-</td>
-</tr>
-
-<tr>
-<td style="width:10%;">
-</td>
-<td>
-<table style="width:100%;" bgcolor="#003366">
-<tr>
-<td style="width:1%;">
-</td>
-<td align="left" valign="middle" style="width:25%;">
-<font face="Trebuchet MS" color="white" size="2px">Корисник: <b><?php echo $korisnik ;?></b></font>
-</td>
-<td style="width:50%;">
-</td>
-<td align="middle">
-<div class="dropdown">
-  <button class="dropbtn">Унос</button>
-  <div class="dropdown-content">
-    <a href="PacijentUnos.php">Унос пацијента</a>
-    <a href="HospitalizacijaUnos.php">Унос хоспитализације</a>
-  </div>
-</div>
-<font face="Trebuchet MS"  size="4px"><a style="text-decoration:none;" href="Stampa.php">Штампа</a> </font>
-<font face="Trebuchet MS"  size="4px"><a style="text-decoration:none;" href="HospitalizacijaListaAdministrator.php">Листа</a> </font>
-<font face="Trebuchet MS"  size="4px"><a style="text-decoration:none;" href="index.php">Одјава</a> </font>
-</tr>
-</table>
-</td>
-<td style="width:10%;">
-</td>
-</tr>
 

@@ -3,17 +3,8 @@
 <!-- Vrši tabelarni prikaz podataka o hospitalizacijiama za administratora. 
 Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija,  -->
 <!--==================================== SADRZAJ STRANICE DESNO pocinje ovde ------------------------------>
-<img src="" width="100%" height="3" alt="" class="flt1 rp_topcornn" /> 
-
-<table style="width:100%;style="width:100%; padding:0" align="center" cellspacing="0" cellpadding="0" border="0"  bgcolor="#D8E7F4">
-<tr>
-<td style="width:5%;">
-</td>
-
-<td align="left">
-<br/>
-<font face="Trebuchet MS" color="darkblue" size="4px">
-<b>Хоспитализације</br>
+<div class="administrator-table-content">
+	<h1>Хоспитализације</h1>
 <?php
 
 //KONEKCIJA KA SERVERU
@@ -34,27 +25,27 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija,  -->
 	    if ($UkupanBrojZapisa>0) {
 			//$rbvesti=0;
 			// ------------ zaglavlje ----------------
-			echo "<table style=\"width:100%; padding:0\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\" border=\"1\"  bgcolor=\"#D8E7F4\">";
-				echo "<tr>";
-				echo "<td style=\"width:25%;\">";
-				echo "<font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Број историје болести</font><br/>";
-				echo "</td>";
-				echo "<td style=\"width:25%;\">";
-				echo "<b><font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Основни узрок хоспитализације</font><br/>";
-				echo "</td>";
-				echo "<td style=\"width:25%;\">";
-				echo "<b><font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Датум пријема</font><br/>";
-				echo "</td>";
-				echo "<td style=\"width:25%;\">";
-				echo "<b><font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Датум отпуста</font><br/>";
-				echo "</td>";
-				echo "<td>";
-				echo "<b><font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Измена</font><br/>";
-				echo "</td>";
-				echo "<td>";
-				echo "<b><font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Брисање</font><br/>";
-				echo "</td>";
-				echo "</tr>";
+			echo "<table class =\"table-spisak-hospitalizacija\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\" border=\"1\"  bgcolor=\"\">";
+			echo "<tr>";
+			echo "<th style=\"width:23%;\">";
+			echo "<font face=\"Trebuchet MS\" >Broj istorije bolesti</font><br/>";
+			echo "</th>";
+			echo "<th style=\"width:23%;\">";
+			echo "<b><font face=\"Trebuchet MS\">Osnovni uzrok hospitalizacije</font><br/>";
+			echo "</th>";
+			echo "<th style=\"width:23%;\">";
+			echo "<b><font face=\"Trebuchet MS\">Datum prijema</font><br/>";
+			echo "</th>";
+			echo "<th style=\"width:23%;\">";
+			echo "<b><font face=\"Trebuchet MS\">Datum otpusta</font><br/>";
+			echo "</th>";
+			echo "<th>";
+			echo "<b><font face=\"Trebuchet MS\">Измена</font><br/>";
+			echo "</th>";
+			echo "<th>";
+			echo "<b><font face=\"Trebuchet MS\">Брисање</font><br/>";
+			echo "</th>";
+			echo "</tr>";
 			
 			for ($RBZapisa = 0; $RBZapisa < $UkupanBrojZapisa; $RBZapisa++) 
 			{
@@ -118,7 +109,7 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija,  -->
 
 ?>
 
-
+</div>
 
 </td>
 
