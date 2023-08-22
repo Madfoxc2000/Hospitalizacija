@@ -7,7 +7,7 @@
         <div class="logo">
         Logo
         </div>
-    <div class="menu">
+    <div class="menu-index">
         <a class="myButton" href="index.php" >Почетна</a>
     </div>
     </div>

@@ -20,16 +20,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="sr-RS" xml:lang="sr-RS">
 <meta charset="UTF-8">
 <head>
-<title>Општина Зрењанин</title>
+<title>Болница</title>
 <meta charset="UTF-8">
-<script src="script.js" async></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+<link rel="stylesheet" href="css/administrator.css" media="screen">
+<script src="script.js" async></script>
 </head>
 <body>
-
-<!-- <table style="width:100%; padding:0" align="center" cellspacing="0" cellpadding="0" border="0"> -->
-
 <!-------------------------- ZAGLAVLJE ------->
 <div class="main-administrator">
 	<?php include 'delovi/ZaglavljeAdministrator.php';?>

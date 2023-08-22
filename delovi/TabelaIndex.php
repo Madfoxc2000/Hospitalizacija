@@ -1,6 +1,6 @@
 
 <meta charset="UTF-8">
-<!-- Vrši prikaz podataka o hospitalizacijama za neprijavljenog korisnika.
+<!-- Vrši prikaz podataka o hospitalizacijama za prijavljenog korisnika.
 Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 <!--==================================== SADRZAJ STRANICE DESNO pocinje ovde ------------------------------>
 <div class="main-index-table-content">
@@ -14,16 +14,16 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 				echo "<table class =\"table-spisak-hospitalizacija\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\" border=\"1\"  bgcolor=\"\">";
 					echo "<tr>";
 					echo "<th style=\"width:23%;\">";
-					echo "<font face=\"Trebuchet MS\" >Broj istorije bolesti</font><br/>";
+					echo "<font face=\"Trebuchet MS\" >Број историје болести</font><br/>";
 					echo "</th>";
 					echo "<th style=\"width:23%;\">";
-					echo "<b><font face=\"Trebuchet MS\">Osnovni uzrok hospitalizacije</font><br/>";
+					echo "<b><font face=\"Trebuchet MS\">Основни узрок хоспитализације</font><br/>";
 					echo "</th>";
 					echo "<th style=\"width:23%;\">";
-					echo "<b><font face=\"Trebuchet MS\">Datum prijema</font><br/>";
+					echo "<b><font face=\"Trebuchet MS\">Датум пријема</font><br/>";
 					echo "</th>";
 					echo "<th style=\"width:23%;\">";
-					echo "<b><font face=\"Trebuchet MS\">Datum otpusta</font><br/>";
+					echo "<b><font face=\"Trebuchet MS\">Датум отпуста</font><br/>";
 					echo "</th>";
 					echo "</tr>";
 	

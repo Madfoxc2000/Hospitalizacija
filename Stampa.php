@@ -27,8 +27,8 @@ session_destroy();
 			// filtrirano
 			$filterVrednost=$_GET["filter"];
 			$greska3=$ValidacijaObjekt->DaLiIma7karaktera($filterVrednost,'Филтер вредност'); 
-			$greska4=$ValidacijaObjekt->DaLiSuOdgovarajućiTipoviPodataka($filterVrednost, ' за филтрирање '); 
-			$GreskaValidacije=$greska3.$greska4;
+			// $greska4=$ValidacijaObjekt->DaLiSuOdgovarajućiTipoviPodataka($filterVrednost, ' за филтрирање '); 
+			$GreskaValidacije=$greska3;
 			if($GreskaValidacije){
 				echo "<script>alert('.$GreskaValidacije.');</script>";
 					}

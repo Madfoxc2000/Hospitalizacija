@@ -1,8 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
-/* CSS Document */
-
+:root{
+    --base-font-size: 16px;
+    --dusky-green: rgb(6, 170, 94);
+    --bright-green: rgb(2, 237, 124);
+    --dark-blue: rgb(0, 122, 236);
+}
+@media(max-width: 600px){
+    :root{
+        --base-font-size: 14px;        
+    }
+}
 html{
-    font-size: 16px;
+    font-size: var(--base-font-size);
 }
 body{ 
     font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -11,7 +20,6 @@ body{
     padding:0px;
     background:#FFFFFF url(../images/blue-background3.jpg) left top repeat;
 }
-
 p{
     margin:0px; padding:0px;
 }
@@ -21,24 +29,18 @@ img{
 table {
     border-collapse:collapse;
 }
-
 td{
     padding: 0%;
 }
-
-table.no-spacing {
-  border-spacing: 0;
-  width:100%;
-  padding:0;
-  border-spacing:0; /* Removes the cell spacing via CSS */
-  border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
+.main-index{
+    margin: 0%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 20vh 10vh minmax(63vh, auto) 7vh;
 }
-
-
 a:link {
     color: white;
-    text-decoration:none;
-    
+    text-decoration:none;    
 }
 
 /* visited link */
@@ -51,10 +53,128 @@ a:visited {
 a:hover {
     color: black;
     background-color: #B7F3FE;
-}
+} 
 
 /* ======================================================Index section =====================================*/
-/* banner section */
+/* ====================================================== Table section =====================================*/
+table.no-spacing {
+    border-spacing: 0;
+    width:100%;
+    padding:0;
+    border-spacing:0; /* Removes the cell spacing via CSS */
+    border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
+}
+table caption{
+    margin-top: 1vw;
+}
+.main-index-table-content h1{
+    font-size: 1.5rem;
+}
+.table-spisak-hospitalizacija th{
+    padding: 0.5vw;
+    text-align: center;
+    font-size: 1.25rem;
+    background-color:rgb(0, 189, 236);
+    color: white;
+}
+.table-spisak-hospitalizacija td{
+    font-size: 1rem;
+}
+.table-spisak-hospitalizacija tr:nth-child(even){background-color: #f2f2f2;}
+
+.table-spisak-hospitalizacija tr:hover {background-color: #ddd;}
+.main-index-table-content h1{
+    font-weight: 400;
+    text-align: center;
+}
+
+/* ====================================================== End Index section =====================================*/
+/* ====================================================== Footer section =====================================*/
+footer{
+    display: flex;
+    background: linear-gradient( to right, rgba(243, 243, 243, 0.5) ,  rgba(0, 204, 250, 0.5) ,rgb(0, 183, 255, 0.7),  rgb(0, 183, 255, 0.7),  rgba(0, 217, 243, 0.5), rgba(243, 243, 243, 0.5) );
+    border-radius: 2px;
+    align-items: end;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+/* ====================================================== End Footer section =====================================*/
+/* ====================================================== Prijava section =====================================*/
+.main-prijava{
+    display: grid;
+    grid-template-rows: 20vh 10vh minmax(63vh, auto) 7vh;
+}
+
+.form-header{
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+    font-size: 2rem;
+    width: 11rem;
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.form-content{
+  display: flex;
+  gap: 6em;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 9vh;
+}
+.form-content>.input-container{
+    display: grid;
+    justify-content: center;
+}
+
+.form-content input{
+    display: block;
+    border-radius: 4px;
+    border: 0;
+    border-bottom: 1px solid rgb(0,0,0,.4);
+    padding: 2px 2px 2px 5px;
+    margin-top: 5px;
+    background-color: rgba(132, 103, 103, 0);
+    transition: all .5s ease-in;
+}
+
+input[type="text"] {
+    display: block;
+    border-radius: 4px;
+    border: 0;
+    border-bottom: 1px solid rgb(0,0,0,.4);
+    padding: 2px 2px 2px 5px;
+    margin-top: 5px;
+    background-color: rgba(132, 103, 103, 0);
+    transition: all .5s ease-in;
+} 
+
+.signup-btn{
+    border: 0;
+    background-color :rgb(0, 183, 255);
+    color: white;
+    padding: 10px 50px;
+    letter-spacing: .05em;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 1rem;
+    outline: none;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.signup-btn:hover {
+    color: black;
+    background: #00CCFF; }
+
+input[type="text"]:valid {
+    border: 1px solid green;  
+}
+
+/* ====================================================== End prijava section =====================================*/
+/* ====================================================== Nav-Bar section =====================================*/
+
 .banner{
     position: absolute;
     height: 30vh;
@@ -66,7 +186,6 @@ a:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 1.19);
 }
 
-/* nav section */
 .nav-bar{
     align-self: start;
     top: 0;
@@ -78,13 +197,18 @@ a:hover {
     align-items: center;
     background-color: rgb(66, 135, 245, 0.2);
 }
-.menu{
+.banner-container
+{
+    height: 20vh;
+    background-color: transparent;
+}
+.menu-index{
     display: flex;
     gap: 1vw;
     margin-right: 2vw;
     list-style: none;
 }
-.menu li {
+.menu-index li {
     display: flex;
 }
 
@@ -116,126 +240,24 @@ a:hover {
 .logo{
     margin-left: 1vw;
 }
-.banner-container
-{
-    height: 20vh;
-    background-color: transparent;
-}
+
 img{
     object-fit: cover;
 }
-footer{
+
+.menu{
     display: flex;
-    background: linear-gradient( to right, rgba(243, 243, 243, 0.5) ,  rgba(0, 204, 250, 0.5) ,rgb(0, 183, 255, 0.7),  rgb(0, 183, 255, 0.7),  rgba(0, 217, 243, 0.5), rgba(243, 243, 243, 0.5) );
-    border-radius: 2px;
-    align-items: end;
-    justify-content: center;
-    font-size: 0.8rem;
-}
-.main-index{
-    margin: 0%;
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: 20vh 10vh minmax(63vh, auto) 7vh;
+    gap: 1vw;
+    margin-right: 2vw;
+    list-style: none;
 }
 
-table caption{
-    margin-top: 1vw;
-}
-.main-index-table-content h1{
-    font-size: 1.5rem;
-}
-.table-spisak-hospitalizacija th{
-    padding: 0.5vw;
-    text-align: center;
-    font-size: 1.25rem;
-    background-color:rgb(0, 189, 236);
-    color: white;
-}
-.table-spisak-hospitalizacija td{
-    font-size: 1rem;
-}
-.table-spisak-hospitalizacija tr:nth-child(even){background-color: #f2f2f2;}
-
-.table-spisak-hospitalizacija tr:hover {background-color: #ddd;}
-.main-index-table-content h1{
-    font-weight: 400;
-    text-align: center;
-}
-@media(max-width: 600px){
-    html{
-        font-size: 14px;
-    }
-}
-/* ====================================================== End Index section =====================================*/
-/* ====================================================== Prijava section =====================================*/
-.main-prijava{
-    display: grid;
-    grid-template-rows: 20vh 10vh minmax(63vh, auto) 7vh;
-}
-
-.form-header{
-    margin-top: 8vh;
-    margin-bottom: 8vh;
-    font-size: 2rem;
-    width: 11rem;
-}
-.form-container {
+.menu li {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-}
-.form-content{
-  display: flex;
-  gap: 6em;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 9vh;
-}
-input {
-    display: block;
-    border-radius: 4px;
-    border: 0;
-    border-bottom: 1px solid rgb(0,0,0,.4);
-    padding: 2px 2px 2px 5px;
-    margin-top: 5px;
-    background-color: rgba(132, 103, 103, 0);
-    transition: all .5s ease-in;
-} 
-
-.signup-btn{
-    border: 0;
-    background-color :rgb(0, 183, 255);
-    color: white;
-    padding: 10px 50px;
-    letter-spacing: .05em;
-    border-radius: 5px;
-    margin-top: 20px;
-    font-size: 1rem;
-    outline: none;
-    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.signup-btn:hover {
-    color: black;
-    background: #00CCFF; }
-
-input:valid {
-    border: 1px solid green;  
 }
 
-
-/* ====================================================== End prijava section =====================================*/
-/* ====================================================== Welcome message section =====================================*/
-.main-administrator{
-
-    display: grid;
-    grid-template-rows: 10vh minmax(86vh, auto) 4vh;
-}
-.welcome-message-container{
-    display: grid;
-    justify-content: center;
+.menu.active{
+z-index: 2;
 }
 
 .dropdown {
@@ -252,7 +274,6 @@ input:valid {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 101;
 }
-
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -261,52 +282,13 @@ input:valid {
   
 }
 
-a {
-  color: hotpink;
-}
-
 .dropdown-content a:hover {background-color: #ddd;}
 
 .dropdown:hover .dropdown-content {display: block; }
 
 .dropdown:hover .dropbtn {background-color: #D8E7F4;}
 
-.card-image{
-    margin-top: 3vh;
-    position: relative;
-    z-index: -1; 
- 
-}
-.card-image img{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 1.19);
-}
-/* .welcome-message-container{
-    display: flex;
-    justify-content: center;
-} */
-
-.card-body {
-    margin-top: 10vh;
-    position: absolute; 
-    width: 100%;
-    background: black;
-    opacity: 0.6;
-    color: white;
-    text-align: center;
-    font-size: 1.2em;
-    font-family: roboto;
-
-  }
-  @media (max-width: 600px){
-    .card-image{
-        margin-top: 0%;
-        align-self: center;
-    }
-    .card-body{
-        margin-top:0%;
-        margin-bottom: 150px;
-        align-self: center;
-    }
+@media (max-width: 600px){
     .menu{
         flex-wrap: wrap;
         display: none;
@@ -336,94 +318,49 @@ a {
         display: block;
       }
   }
-/* ====================================================== End Welcome messsage section =====================================*/
-
-/* ====================================================== Administrator section =====================================*/
-.administrator-table-content h1{
-    font-size: 1.5rem;
-    font-weight: 400;
-    text-align: center;
-}
-
-.administrator-table-content>.table-spisak-hospitalizacija th{
-    font-size: 1rem;
-}
-.administrator-table-content>.table-spisak-hospitalizacija td{
-    font-size: 0.8rem;
-}
-
-
-/* ====================================================== Administrator section End =====================================*/
-.form-container-pacijent {
-    margin-right: 10vw;
-    margin-left: 10vw;
+/* ====================================================== End Nav-Bar section =====================================*/
+/* ====================================================== Welcome message section =====================================*/
+.welcome-message-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, 250px); 
     justify-content: center;
 }
 
- .form-header-pacijent {
-    padding: 2vw;
-    letter-spacing: .06em;
-    font-size: 2rem;
+.card-image{
+    margin-top: 3vh;
+    position: relative;
+    z-index: -1; 
+ 
 }
-@media (max-width: 500px) {
-    .form-header-pacijent {
-        text-align: center;
-    }
-    .input-container{
-        width: 80vw;
-    }
-    form{
-        padding-bottom: 1vw;
-    }
-}
-form {
-    width: auto;
-    display: grid;
+.card-image img{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 1.19);
 }
 
-.form-container-pacijent input {
-    display: block;
-    border-radius: 4px;
-    border: 0;
-    border-bottom: 1px solid rgb(0,0,0,.4);
-    padding: 6px 6px 6px 10px;
-    margin-top: 5px;
-    background-color: rgba(255, 255, 255, 0);
-    transition: all .5s ease-in;
-} 
 
-
-.form-container-pacijent span {
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    font-size: 15px;
-    transition: all .4s;
-}
-.input-container{
-    padding: 2vw;
-}
-/*
-    INPUT FIELD EFFECTS SECTION
-*/
-.form-container-pacijent input:focus ~ span,
-.form-container-pacijent input:valid ~ span{
-    font-size: 10px;
-    transform: translateX(4px) translateY(-7px);
-    font-size: 0.80em;
-    padding: 0 6px;
-    color: rgb(33, 250, 131);
-    background-color: rgb(6, 170, 94);
+.card-body {
+    margin-top: 10vh;
+    position: absolute; 
+    width: 100%;
+    background: black;
+    opacity: 0.6;
     color: white;
-    border-radius: 2px;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: roboto;
+  }
+
+  @media (max-width: 600px){
+    .card-image{
+        margin-top: 0%;
+        align-self: center;
+    }
+    .card-body{
+        margin-top:0%;
+        margin-bottom: 150px;
+        align-self: center;
+    }
 }
-.form-container-pacijent input:focus,
-.form-container-pacijent input:focus-visible {
-    border: 1px solid  rgb(33, 250, 131);
-    box-shadow: 0 0 5px rgb(0,0,0,.3);
-    outline: none;
-}
-.form-container-pacijent input:valid {
-    border: 1px solid rgb(33, 250, 131);  
-}
+/* ====================================================== Welcome message section =====================================*/
+
+
+
+

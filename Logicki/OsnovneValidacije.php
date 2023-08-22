@@ -12,7 +12,7 @@ public function DaLiJeVeliko($string,$NazivPolja)
 }
 public function DaLiIma13brojeva($JMBG)
 {
-    $length = strlen(bin2hex($JMBG));
+    $length = strlen($JMBG);
     if($length==13){
 
     }
@@ -22,7 +22,7 @@ public function DaLiIma13brojeva($JMBG)
 }
 public function DaLiIma7karaktera($OsnoviUzrokHospitalizacije)
 {
-    $length = strlen(bin2hex($OsnoviUzrokHospitalizacije));
+    $length = strlen($OsnoviUzrokHospitalizacije);
     if($length==7){
 
     }
@@ -30,10 +30,11 @@ public function DaLiIma7karaktera($OsnoviUzrokHospitalizacije)
         return ' Основни узрок хоспитализације мора имати 7 карактера ';
     }
 }
-public function DaLiSuOdgovarajućiTipoviPodataka($OsnoviUzrokHospitalizacije, $NazivPolja)
+public function DaLiSuOdgovarajućiTipoviPodataka($OsnovniUzrokHospitalizacije, $NazivPolja)
 {
-        if (ctype_alnum(str_replace(' ', '', $OsnoviUzrokHospitalizacije)) && ctype_space($OsnoviUzrokHospitalizacije)) {
-         
+        $pattern = '/^[A-Za-z0-9\s]+$/';
+        if (preg_match($pattern, $OsnovniUzrokHospitalizacije) === 1) {
+  
         } else {
             return 'Поље'.$NazivPolja.'мора да садржи само слова, бројеве и размак';
         }

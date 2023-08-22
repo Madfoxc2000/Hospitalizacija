@@ -1,0 +1,114 @@
+@import "style.css";
+
+.main-korisnik{
+    display: grid;
+    grid-template-rows: 10vh minmax(86vh, auto) 4vh;
+}
+/* ====================================================== Form section =====================================*/
+.main-korisnik h1{
+    font-size: 1.5rem;
+}
+.filter-form-container{
+    z-index: 1; 
+    display: grid;
+    gap: 0.3rem;
+    padding: 1vw;
+    height: 25vh;
+    background-color:  rgb(0,181,226,0.1);
+    border-radius: 10px;
+}
+.filter-form-upper{
+    justify-items: center;
+    display: grid;
+    gap: 0.3rem;
+}
+.filter-form-lower{
+    justify-items: center;
+    display: grid;
+    gap: 0.3rem;
+}
+.filter-form-container input{
+    background-color:rgb(2, 237, 124, 0.3);
+}
+
+.table-form-container{
+    margin-left: 5vw;
+    margin-right: 5vw; 
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10vh;
+}
+.table-form-container button{
+    width: 80%;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: var(--dusky-green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem; 
+    border-radius: 2px; 
+    box-shadow: var(--dusky-green) 2px 2px 5px;
+    border: 0px solid rgb(28, 110, 164);
+}
+.table-form-container button:hover{
+color: black;
+background-color: var(--bright-green);
+}
+
+@media (max-width: 600px) {
+    .table-form-container{
+        grid-template-columns: 1fr;
+        margin-left: 0;
+        margin-right: 0;
+        gap: 0; 
+    }
+    .filter-form-container{
+        position: relative;
+        top: 0;
+    }
+}
+/* ====================================================== End Form section =====================================*/
+/* ====================================================== Table section =====================================*/
+.table-container{
+    height: 50vh;
+    overflow-x:auto;
+}
+@media (min-height: 800px){
+    .table-container{
+        height: 40vh;
+    }
+}
+.nav-bar-korisnik{
+    align-self: start;
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: rgb(66, 135, 245, 0.2);
+}
+
+.table-spisak-hospitalizacija-korisnik th{
+    padding: 0.5vw;
+    text-align: center;
+    font-size: 1.25rem;
+    background-color:rgb(0, 189, 236);
+    color: white;
+}
+.table-spisak-hospitalizacija-korisnik {
+    width: 100%;
+}
+.table-spisak-hospitalizacija-korisnik td{
+    font-size: 1rem;
+    width: 25%;
+}
+.table-spisak-hospitalizacija-korisnik tr:nth-child(even){background-color: #f2f2f2;}
+
+.table-spisak-hospitalizacija-korisnik tr:hover {background-color: #ddd;}
+.main-index-table-content h1{
+    font-weight: 400;
+    text-align: center;
+    
+}
+/* ====================================================== End Table section =====================================*/

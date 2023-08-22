@@ -52,65 +52,16 @@ session_destroy();
 <link rel="stylesheet"  href="css/style.css?v=1" media="screen">
 </head>
 <body>
-
 <div class="main-index">
-	
 	<!-------------------------- ZAGLAVLJE ------->
 	<?php include 'delovi/ZaglavljeIndex.php';?>
 	
-	<!-----VELIKA TABELA KOJA SADRZI SVE---->
-	<!-----10% SADRZAJ 10%---->
-	<!-- <table class="no-spacing"> -->
 	
-	<!-------------------------- DONJI DEO  ------->
-	<!-- <tr style="padding:0px;"> -->
-	
-	<!-----LEVO PRAZNINA---->
-	<!-- <td style="width:10%;">
-	</td> -->
-	
-	<!------------------------------------------------------------------------------------------->
-	<!---------------------- SREDINA DONJEG DELA SA SADRZAJEM pocinje ovde ---------------------->
-	<!-- <td align="center" valign="middle" style="width:80%; padding:0" >
-	
-	<table style="width:100%; padding:0" align="center" cellspacing="0" cellpadding="0" border="0" background="images/pozadina.jpg">
-	
-	<tr>
-	<td style="width:1%;">
-	</td>
-	
-	
-	<td style="width:1%;">
-	</td>
-	
-	<td style="width:80%;padding:0" cellspacing="0" cellpadding="0" border="0" valign="top"> -->
 	<!------- GLAVNI SADRZAJ desno ----------->
 	
 	<div><?php include 'delovi/TabelaIndex.php';?></div>
 	
 	
-	<!--
-	</td>
-	<td style="width:1%;">
-	</td>
-	</tr>
-	</table>
-	
-	</td> -->
-	<!---------------------- SADRZAJ zavrsava ovde ---------------------->
-	
-	<!-----DESNO PRAZNINA---->
-	<!-- <td style="width:10%;">
-	</td>
-	
-	</tr> -->
-	<!---------------------- DONJI DEO zavrsava ovde ---------------------->
-	<!-- <tr style="padding:0px;">
-	<td style="width:10%;"></td>
-	<td align="center" valign="middle"></td>
-	<td style="width:10%;"></td>
-	</tr> -->
-	<!--- DONJI DEO sa donjom ivicom zavrsava ovde  ------->
 	<!-- footer panel starts here -->
 	<!-- </table> -->
 	<?php include 'delovi/footer.php';?>

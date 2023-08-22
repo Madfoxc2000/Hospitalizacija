@@ -19,6 +19,7 @@
 <head>
 <title>Болница</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+<link rel="stylesheet" href="css/administrator.css" media="screen">
 <script src="script.js" async></script>
 </head>
 <body>
@@ -40,7 +41,7 @@
 	<?php include 'delovi/footer.php';?>
 </div>
 
-</table>
+
 
 </body>
 </html>

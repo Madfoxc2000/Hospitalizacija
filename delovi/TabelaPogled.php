@@ -1,4 +1,5 @@
- <?php
+<h1>Све хоспитализације пацијента</h1>
+<?php
 // Omogućava tabelarni prikaz podataka za pogled “pacijentpogled”.
 // Saradjuje sa klasama BaznaKonekcija, SPHospitalizacija
 	   $BrojIstorijeBolesti=$_POST['IdHospitalizacije'];
@@ -15,23 +16,23 @@
             if ($UkupanBrojZapisa>0) {
                 //$rbvesti=0;
                 // ------------ zaglavlje ----------------
-                echo "<table style=\"width:100%; padding:0\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\" border=\"1\"  bgcolor=\"#D8E7F4\">";
+                echo "<table class =\"table-pacijent\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\" border=\"1\"  bgcolor=\"\">";
                     echo "<tr>";
-                    echo "<td style=\"width:20%;\">";
-                    echo "<font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Број историје болести</font><br/>";
-                    echo "</td>";
-                    echo "<td style=\"width:20%;\">";
-                    echo "<b><font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Основни узрок хоспитализације</font><br/>";
-                    echo "</td>";
-                    echo "<td style=\"width:20%;\">";
-                    echo "<b><font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Број дана хоспитализације</font><br/>";
-                    echo "</td>";
-                    echo "<td style=\"width:20%;\">";
-                    echo "<b><font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Презиме</font><br/>";
-                    echo "</td>";
-                    echo "<td>";
-                    echo "<b><font face=\"Trebuchet MS\" color:#3F4534 size=\"3px\">Име</font><br/>";
-                    echo "</td>";
+                    echo "<th style=\"width:20%;\">";
+                    echo "<font>Број историје болести</font><br/>";
+                    echo "</th>";
+                    echo "<th style=\"width:20%;\">";
+                    echo "<b><font>Основни узрок хоспитализације</font><br/>";
+                    echo "</th>";
+                    echo "<th style=\"width:20%;\">";
+                    echo "<b><font>Број дана хоспитализације</font><br/>";
+                    echo "</th>";
+                    echo "<th style=\"width:20%;\">";
+                    echo "<b><font>Презиме</font><br/>";
+                    echo "</th>";
+                    echo "<th>";
+                    echo "<b><font>Име</font><br/>";
+                    echo "</th>";
                     echo "</tr>";
                 
                 for ($RBZapisa = 0; $RBZapisa < $UkupanBrojZapisa; $RBZapisa++) 

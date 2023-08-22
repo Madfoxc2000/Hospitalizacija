@@ -21,6 +21,7 @@
 <title>Општина Зрењанин</title>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+<link rel="stylesheet" href="css/administrator.css" media="screen">
 <script src="script.js" async></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>

@@ -7,7 +7,7 @@
 
 <form ACTION="./Logicki/AkcijaIzmeni.php" METHOD="POST">
 
-<div class="form-container-pacijent">
+<div class="form-container-hospitalizacija">
 <?php echo "<input type=\"hidden\" name=\"IdHospitalizacije\" value=\"$idHospitalizacije\">";
 ?>
 
@@ -111,7 +111,7 @@
     <input type="text" name="BrojDanaHospitalizacije" required value="<?php echo $BrojDanaHospitalizacije; ?>">
 </div> 
 <div class="input-container">
-    <label for="OdeljenjeSaKojegJeOtpustIzvrsen">Одељење са којег је отпуст извршен::<span aria-label="required">*</span></label>
+    <label for="OdeljenjeSaKojegJeOtpustIzvrsen">Одељење са којег је отпуст извршен:<span aria-label="required">*</span></label>
     <input type="text" name="OdeljenjeSaKojegJeOtpustIzvrsen" required value="<?php echo $OdeljenjeSaKojegJeOtpustIzvrsen; ?>">
 </div> 
 <div class="input-container">

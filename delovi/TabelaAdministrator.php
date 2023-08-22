@@ -25,25 +25,22 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija,  -->
 	    if ($UkupanBrojZapisa>0) {
 			//$rbvesti=0;
 			// ------------ zaglavlje ----------------
-			echo "<table class =\"table-spisak-hospitalizacija\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\" border=\"1\"  bgcolor=\"\">";
+			echo "<table class =\"table-spisak-hospitalizacija-administrator\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\" border=\"1\"  bgcolor=\"\">";
 			echo "<tr>";
 			echo "<th style=\"width:23%;\">";
-			echo "<font face=\"Trebuchet MS\" >Broj istorije bolesti</font><br/>";
+			echo "<font>Број историје болести</font><br/>";
 			echo "</th>";
 			echo "<th style=\"width:23%;\">";
-			echo "<b><font face=\"Trebuchet MS\">Osnovni uzrok hospitalizacije</font><br/>";
+			echo "<b><font>Основни узрок хоспитализације</font><br/>";
 			echo "</th>";
 			echo "<th style=\"width:23%;\">";
-			echo "<b><font face=\"Trebuchet MS\">Datum prijema</font><br/>";
+			echo "<b><font>Датум пријема</font><br/>";
 			echo "</th>";
 			echo "<th style=\"width:23%;\">";
-			echo "<b><font face=\"Trebuchet MS\">Datum otpusta</font><br/>";
+			echo "<b><font>Датум отпуста</font><br/>";
 			echo "</th>";
 			echo "<th>";
-			echo "<b><font face=\"Trebuchet MS\">Измена</font><br/>";
-			echo "</th>";
-			echo "<th>";
-			echo "<b><font face=\"Trebuchet MS\">Брисање</font><br/>";
+			echo "<b><font>Измена</font><br/>";
 			echo "</th>";
 			echo "</tr>";
 			
@@ -71,24 +68,22 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija,  -->
 
 				echo "</td>";
 				echo "<td>";
-				echo "<b><font face=\"Trebuchet MS\" size=\"2px\">$OsnovniUzrokHospitalizacije</font><br/>";
+				echo "<b><font size=\"2px\">$OsnovniUzrokHospitalizacije</font><br/>";
 				echo "</td>";
 				echo "<td>";
-				echo "<b><font face=\"Trebuchet MS\" size=\"2px\">$DatumPrijema</font><br/>";
+				echo "<b><font  size=\"2px\">$DatumPrijema</font><br/>";
 				echo "</td>";
 				echo "<td>";
-				echo "<b><font face=\"Trebuchet MS\" size=\"2px\">$DatumOtpusta</font><br/>";
+				echo "<b><font size=\"2px\">$DatumOtpusta</font><br/>";
 				echo "</td>";
 				echo "<td>";
 				echo "<form ACTION=\"HospitalizacijaIzmeni.php\" METHOD=\"POST\">";
 				echo "<input type=\"hidden\" name=\"IdHospitalizacije\" value=\"$ID\">";
-				echo "<b><font face=\"Trebuchet MS\" size=\"2px\"><input TYPE=\"submit\" name=\"izmenivozilo\" value=\"Измени\" /></font></b>";
+				echo "<b><input TYPE=\"submit\" class=\"table-button\" name=\"izmenivozilo\" value=\"Измени\" /></font></b>";
 				echo "</form>";
-				echo "</td>";
-				echo "<td>";
 				echo "<form ACTION=\"Logicki\AkcijaObrisi.php\" METHOD=\"POST\">";
 				echo "<input type=\"hidden\" name=\"IdHospitalizacije\" value=\"$ID\">";
-				echo "<b><font face=\"Trebuchet MS\" size=\"2px\"><input TYPE=\"submit\" name=\"obrisiHospitalizaciju\" value=\"Обриши\"  onclick=\"return confirm('Da li ste sigurni da zelite da obrisete zapis?')\"/></font></b>";
+				echo "<b><input TYPE=\"submit\" class=\"table-button\" name=\"obrisiHospitalizaciju\" value=\"Обриши\"  onclick=\"return confirm('Da li ste sigurni da zelite da obrisete zapis?')\"/></font></b>";
 				echo "</form>";
 				echo "</td>";
 				echo "</tr>";

@@ -69,7 +69,7 @@
 </div>   
 
 <div id="save-btn">
-    <button type="submit" class="signup-btn" name="btnSnimiVozilo" value="Сними">Сними</button>
+    <button type="submit" class="save-btn" name="btnSnimiVozilo" value="Сними">Сними</button>
 </div>
 </div>
 </form>
