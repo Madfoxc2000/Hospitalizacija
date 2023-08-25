@@ -26,6 +26,7 @@
 	   $OsnovniUzrokSmrti=$_POST['OsnovniUzrokSmrti'];
 	   $Maloletan;
 	   $Datum;
+
       //KONEKCIJA KA SERVERU
 // koristimo klasu za poziv procedure za konekciju
 require dirname(__DIR__)."/klase/BaznaKonekcija.php";
@@ -73,6 +74,7 @@ $KonekcijaObject = new Konekcija($xml);
 	
 	if ($greska) {
 	echo "Greska $greska";	
+
      }	
 	 else
 	 {

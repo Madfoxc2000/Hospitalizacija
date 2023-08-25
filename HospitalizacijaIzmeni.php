@@ -32,6 +32,19 @@
 			$MKBObject = new MKB($KonekcijaObject, 'mkb');
 			$KolekcijaZapisa1 =$MKBObject->DajKolekcijuSvihSifri();
 			$UkupanBrojZapisa1 =$MKBObject->DajUkupanBrojSvihSifri($KolekcijaZapisa);
+			require "klase/DBOdeljenje.php";
+			$OdeljenjeObject = new Odeljenje($KonekcijaObject,'odeljenje');
+			$KolekcijaZapisaOdeljenja = $OdeljenjeObject->DajKolekcijuSvihOdeljenja();
+			$UkupanBrojZapisaOdeljenja = $OdeljenjeObject->DajUkupanBrojSvihOdeljenja($KolekcijaZapisaOdeljenja);
+			require "klase/DBSpoljniUzrokPovrede.php";
+			$SpoljniUzrokPovredeObject = new SpoljniUzrokPovrede($KonekcijaObject, 'spoljasnji_uzrok_povrede');
+			$KolekcijaZapisaUzroka =$SpoljniUzrokPovredeObject->DajKolekcijuSvihSpoljnihUzroka();
+			$UkupanBrojZapisaUzroka =$SpoljniUzrokPovredeObject->DajUkupanBrojSvihSpoljnihUzroka($KolekcijaZapisaUzroka);	
+			// IZDVAJANJE PODATAKA KORISTECI KLASU mkb
+			require "klase/DBOtpust.php";
+			$VrstaOtpustaObject = new VrstaOtpusta($KonekcijaObject, 'vrsta_otpusta');
+			$KolekcijaZapisaOtpusta =$VrstaOtpustaObject->DajKolekcijuSvihOtpusta();
+			$UkupanBrojZapisaOtpusta =$VrstaOtpustaObject->DajUkupanBrojSvihOtpusta($KolekcijaZapisaOtpusta);	
 			if ($UkupanBrojZapisa>0) 
 			{
 				$row=0;  // prvi i jedini red ima taj idvesti 
@@ -69,6 +82,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
 <link rel="stylesheet" href="css/administrator.css">
 <script src="script.js" async></script>
+<script src="UnosHospitalizacije.js" async></script>
 </head>
 <body>
 

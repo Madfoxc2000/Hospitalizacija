@@ -60,14 +60,14 @@ form {
     }
 }
 
-.form-container-pacijent input {
+.form-container-pacijent input,select {
     display: block;
     border-radius: 4px;
     border: 0;
     border-bottom: 1px solid rgb(0,0,0,.4);
     padding: 6px 6px 6px 10px;
     margin-top: 5px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     transition: all .5s ease-in;
 } 
 
@@ -99,8 +99,14 @@ form {
     box-shadow: 0 0 5px rgb(0,0,0,.3);
     outline: none;
 }
-.form-container-pacijent input:valid {
+/* .form-container-pacijent input:valid {
     border: 1px solid rgb(33, 250, 131);  
+} */
+/* .form-container-pacijent input:invalid {
+    border: 1px solid rgb(250, 33, 33);  
+} */
+.form-container-pacijent .input-container select{
+    width:80%
 }
 /* ======================================================  End Form pacijent =====================================*/
 /* ======================================================  Form Hospitalizacija =====================================*/
@@ -118,28 +124,24 @@ form {
     display: grid;
     padding: 2vw;
 }
-.form-container-hospitalizacija .input-container input[type ="text"]{
-    justify-self: center;
-    align-self: flex-end;
-    height: 0.5rem;
-}
-.form-container-hospitalizacija .input-container select{
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    justify-self: center;
-}
 
-.form-container-hospitalizacija input {
+
+.form-container-hospitalizacija input, select {
     display: block;
     border-radius: 4px;
     border: 0;
     border-bottom: 1px solid rgb(0,0,0,.4);
     padding: 6px 6px 6px 10px;
     margin-top: 5px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     transition: all .5s ease-in;
-} 
+    justify-self: center;
+    align-self: flex-end;
 
+} 
+.form-container-hospitalizacija input:disabled{
+    background-color: rgba(255, 255, 255, 0.2);
+}
 
 .form-container-hospitalizacija span {
     letter-spacing: .05em;
@@ -147,6 +149,8 @@ form {
     font-size: 15px;
     transition: all .4s;
 }
+
+
 
 .form-container-hospitalizacija input:focus ~ span,
 .form-container-hospitalizacija input:valid ~ span{
@@ -165,9 +169,9 @@ form {
     box-shadow: 0 0 5px rgb(0,0,0,.3);
     outline: none;
 }
-.form-container-hospitalizacija input:valid {
-    border: 1px solid rgb(33, 250, 131);  
-}
+/* .form-container-hospitalizacija input:valid {
+    border: 1px solid rgb(47, 33, 250);  
+} */
 
 .form-header-hospitalizacija {
     padding: 1vw;
@@ -175,17 +179,20 @@ form {
     font-size: 2rem;
 }
 @media (max-width: 600px){
-    .form-container-hospitalizacija .input-container input[type ="text"] {
-        justify-self: center;
-
-    }
-    .form-container-hospitalizacija .input-container select{
-        width: 80%;
-    }
+    
     .form-container-hospitalizacija{
         padding-bottom: 2vw;
     }
+    select{
+        max-height: 10vw;
+    }
 }
+
+.form-container-hospitalizacija fieldset {
+    display: flex;
+    gap: 5vw;
+}
+
 /* ====================================================== End Form Hospitalizacija =====================================*/
 /* ====================================================== End Form section =====================================*/
 

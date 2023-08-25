@@ -89,7 +89,7 @@ public function DodajNovuHospitalizaciju()
 		$GreskarezultatPar18 =  mysqli_error($this->OtvorenaKonekcija->konekcijaDB);
 		$rezultatCall = mysqli_query($this->OtvorenaKonekcija->konekcijaDB, "CALL `DodajHospitalizaciju` (@BrojIstorijeBolesti, @NazivZdravstveneUstanove, @OdeljenjeNaPrijemu, @DatumPrijema, @UputnaDijagnoza, @Povreda, @SpoljniUzrokPovrede, @OsnovniUzrokHospitalizacije, @PrateceDijagnoze, @SifraProcedurePoNomenklaturi, @TezinaNaPrijemu, @BrojSatiVentilatornePodrske, @DatumOtpusta, @BrojDanaHospitalizacije, @OdeljenjeSaKojegJeOtpustIzvrsen, @VrstaOtpusta, @Obdukovan, @OsnovniUzrokSmrti,@Maloletan);");
 		$GreskarezultatCall =  mysqli_error($this->OtvorenaKonekcija->konekcijaDB);
-	
+		
 	}
 	else // mysql
 	{

@@ -26,6 +26,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
 <link rel="stylesheet" href="css/administrator.css" media="screen">
 <script src="script.js" async></script>
+<script src="UnosHospitalizacije.js" async></script>
 </head>
 <body>
 <!-------------------------- ZAGLAVLJE ------->

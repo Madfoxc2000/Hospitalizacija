@@ -22,12 +22,12 @@
      require dirname(__DIR__)."/klase/BaznaKonekcija.php";
      require dirname(__DIR__)."/klase/BaznaTabela.php";
      $ValidacijaObjekt= new Validacije();
-     $greska3=$ValidacijaObjekt->DaLiJeVeliko($Ime,'имена'); 
-     $greska4=$ValidacijaObjekt->DaLiJeVeliko($ImeJednogRoditelja,'имена једног родитеља '); 
-     $greska5=$ValidacijaObjekt->DaLiJeVeliko($ClanJePorodice,'члана породице'); 
-     $greska6=$ValidacijaObjekt->DaLiIma13brojeva($JMBG);
-     $greska7=$ValidacijaObjekt->DaLiSuSamoBrojevi($JMBG,'ЈМБГ');
-     $greska9=$ValidacijaObjekt->DaLiSuSamoBrojevi($Telefon,'Телефон');
+   //   $greska3=$ValidacijaObjekt->DaLiJeVeliko($Ime,'имена'); 
+   //   $greska4=$ValidacijaObjekt->DaLiJeVeliko($ImeJednogRoditelja,'имена једног родитеља '); 
+   //   $greska5=$ValidacijaObjekt->DaLiJeVeliko($ClanJePorodice,'члана породице'); 
+   //   $greska6=$ValidacijaObjekt->DaLiIma13brojeva($JMBG);
+   //   $greska7=$ValidacijaObjekt->DaLiSuSamoBrojevi($JMBG,'ЈМБГ');
+   //   $greska9=$ValidacijaObjekt->DaLiSuSamoBrojevi($Telefon,'Телефон');
      $xml=dirname(__DIR__)."/klase/BaznaParametriKonekcije.xml";
      $KonekcijaObject = new Konekcija($xml);
 	   $KonekcijaObject->connect();
@@ -49,8 +49,8 @@
       } 
       $greska8=$ValidacijaObjekt->DaLiJeJedinstvenBrojBolesti($SviBrojeviBolesti,$BrojIstorijeBolesti);
 
-      $greskaValidacije=$greska3."<br>".$greska4."<br>".$greska5."<br>".$greska6."<br>".$greska7."<br>".$greska8;
-      
+     // $greskaValidacije=$greska3."<br>".$greska4."<br>".$greska5."<br>".$greska6."<br>".$greska7."<br>".$greska8;
+    $greskaValidacije=$greska8;
    if($greskaValidacije){
       echo $greskaValidacije;
     }

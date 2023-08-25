@@ -28,5 +28,17 @@ public function InkrementirajBrojPacijenata($ID)
 	return $greska;
 }
 // ------- konstruktor - uzima se iz klase roditelja - Tabela
+public function DajKolekcijuSvihOdeljenja()
+{
+	$SQL = "select * from odeljenje";
+	$this->UcitajSvePoUpitu($SQL);
+	return $this->Kolekcija;
+}
+
+
+public function DajUkupanBrojSvihOdeljenja($KolekcijaZapisa)
+{
+return $this->BrojZapisa;
+}
 }
 ?>

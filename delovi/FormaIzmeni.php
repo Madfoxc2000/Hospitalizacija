@@ -23,13 +23,29 @@
             
 <div class="input-container">
     <label for="OdeljenjeNaPrijemu">Одељење на пријему:<span aria-label="required">*</span></label>
-    <input type="text" name="OdeljenjeNaPrijemu" required value="<?php echo $OdeljenjeNaPrijemu; ?>">
+	<select name="OdeljenjeNaPrijemu">		
+    <?php
+	echo "<option value=\"$OdeljenjeNaPrijemu\">$OdeljenjeNaPrijemu</option>";
+    // PREDSTAVLJANJE U OPTION KROZ FOR CIKLUS
+	if ($UkupanBrojZapisaOdeljenja>0) 
+	{					
+		for ($RBZapisa = 0; $RBZapisa < $UkupanBrojZapisaOdeljenja; $RBZapisa++) 
+			{
+				$Oznaka=$OdeljenjeObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisaOdeljenja, $RBZapisa, 0);		
+                $Naziv=$OdeljenjeObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisaOdeljenja, $RBZapisa, 1);															
+			
+                echo "<option value=\"$Oznaka\">$Oznaka $Naziv</option>";			
+			} //for
+										
+	} // $num_rowsTipoviVozila
+    ?>
+    </select>
 </div>   
 
 
 <div class="input-container">
     <label for="DatumPrijema">Датум пријема:<span aria-label="required">*</span></label>
-    <input type="text" name="DatumPrijema" required value="<?php echo $DatumPrijema; ?>">
+    <input type="date" name="DatumPrijema" required value="<?php echo $DatumPrijema; ?>">
 </div>   
 
 <div class="input-container">
@@ -52,14 +68,40 @@
 </div>
 
 <div class="input-container">
-    <label for="Povreda">Повреда:<span aria-label="required">*</span></label>
-    <input type="text" name="Povreda" required value="<?php echo $Povreda; ?>">
+	<fieldset>
+		<legend>Повреда:</legend>
+		<div>
+			<input type="radio" id ="Povredjen" name="Povreda" value="1">
+			<label>Да</label>
+			</div>
+		
+			<div>
+			<input type="radio" id ="NePovredjen" name="Povreda" value="2" checked>
+			<label>Не</label>
+			</div>
+	</fieldset>
 </div>
 
 
 <div class="input-container">
     <label for="SpoljniUzrokPovrede">Спољни узрок повреде:<span aria-label="required">*</span></label>
-    <input type="text" name="SpoljniUzrokPovrede" required value="<?php echo $SpoljniUzrokPovrede; ?>">
+	<select name="SpoljniUzrokPovrede" id="UzrokPovrede" required disabled>		
+	<?php
+	 echo "<option value=\"$SpoljniUzrokPovrede\">$SpoljniUzrokPovrede</option>";	
+	// PREDSTAVLJANJE U OPTION KROZ FOR CIKLUS
+	if ($UkupanBrojZapisaUzroka>0) 
+	{					
+		for ($RBZapisa = 0; $RBZapisa < $UkupanBrojZapisaUzroka; $RBZapisa++) 
+			{
+				$Sifra=$SpoljniUzrokPovredeObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisaUzroka, $RBZapisa, 0);		
+				$Naziv=$SpoljniUzrokPovredeObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisaUzroka, $RBZapisa, 1);																
+				 echo "<option value=\"$Sifra\">$Sifra $Naziv</option>";			
+			} //for
+										
+	} // $num_rowsTipoviVozila
+	
+	?>
+</select>
 </div>   
 
 <div class="input-container">
@@ -83,8 +125,8 @@
 
 
 <div class="input-container">
-    <label for="PrateceDijagnoze">Пратеће дијагнозе:<span aria-label="required">*</span></label>
-    <input type="text" name="PrateceDijagnoze" required value="<?php echo $PrateceDijagnoze; ?>">
+    <label for="PrateceDijagnoze">Пратеће дијагнозе:</label>
+    <input type="text" name="PrateceDijagnoze" value="<?php echo $PrateceDijagnoze; ?>">
 </div>   
 
 <div class="input-container">
@@ -104,7 +146,7 @@
 </div> 
 <div class="input-container">
     <label for="DatumOtpusta">Датум отпуста:<span aria-label="required">*</span></label>
-    <input type="text" name="DatumOtpusta" required value="<?php echo $DatumOtpusta; ?>">
+    <input type="date" name="DatumOtpusta" required value="<?php echo $DatumOtpusta; ?>">
 </div> 
 <div class="input-container">
     <label for="BrojDanaHospitalizacije">Број дана хоспитализације:<span aria-label="required">*</span></label>
@@ -112,34 +154,78 @@
 </div> 
 <div class="input-container">
     <label for="OdeljenjeSaKojegJeOtpustIzvrsen">Одељење са којег је отпуст извршен:<span aria-label="required">*</span></label>
-    <input type="text" name="OdeljenjeSaKojegJeOtpustIzvrsen" required value="<?php echo $OdeljenjeSaKojegJeOtpustIzvrsen; ?>">
-</div> 
-<div class="input-container">
-    <label for="Obdukovan">Врсте отпуста:<span aria-label="required">*</span></label>
-    <input type="text" name="Obdukovan" required value="<?php echo $VrstaOtpusta; ?>">
-</div> 
-<div class="input-container">
-    <label for="TezinaNaPrijemu">Обдукован:<span aria-label="required">*</span></label>
-    <input type="text" name="TezinaNaPrijemu" value="<?php echo $Obdukovan; ?>">
-</div> 
-<div class="input-container">
-    <label for="OsnovniUzrokSmrti">Основни узрок смрти:<span aria-label="required">*</span></label>
-	
-	<select name="OsnovniUzrokHospitalizacije" >
-	<?php  	 
-	echo "<option value=\"$OsnovniUzrokHospitalizacije\">$OsnovniUzrokHospitalizacije</option>";
-	if ($UkupanBrojZapisa1>0) 
+    <select name="OdeljenjeSaKojegJeOtpustIzvrsen">		
+    <?php
+	echo "<option value=\"$OdeljenjeSaKojegJeOtpustIzvrsen\">$OdeljenjeSaKojegJeOtpustIzvrsen</option>";		
+    // PREDSTAVLJANJE U OPTION KROZ FOR CIKLUS
+	if ($UkupanBrojZapisaOdeljenja>0) 
 	{					
-		for ($RBZapisa = 0; $RBZapisa < $UkupanBrojZapisa1; $RBZapisa++) 
+		for ($RBZapisa = 0; $RBZapisa < $UkupanBrojZapisaOdeljenja; $RBZapisa++) 
 			{
-				$Sifra=$MKBObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa1, $RBZapisa, 0);		
-				$Naziv=$MKBObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa1, $RBZapisa, 1);															
-				 echo "<option value=\"$Sifra\">$Sifra</option>";			
+				$Oznaka=$OdeljenjeObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisaOdeljenja, $RBZapisa, 0);		
+                $Naziv=$OdeljenjeObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisaOdeljenja, $RBZapisa, 1);															
+			
+                echo "<option value=\"$Oznaka\">$Oznaka $Naziv</option>";			
 			} //for
 										
-	};	
+	} // $num_rowsTipoviVozila
+    ?>
+    </select>
+</div> 
+<div class="input-container">
+    <label for="VrstaOtpusta">Врсте отпуста:<span aria-label="required">*</span></label>
+	<select name="VrstaOtpusta" id="VrstaOtpusta">		
+	<?php
+	echo "<option value=\"$VrstaOtpusta\">$VrstaOtpusta</option>";
+	// PREDSTAVLJANJE U OPTION KROZ FOR CIKLUS
+	if ($UkupanBrojZapisaOtpusta>0) 
+	{					
+		for ($RBZapisa = 0; $RBZapisa < $UkupanBrojZapisaOtpusta; $RBZapisa++) 
+			{
+				$Sifra=$VrstaOtpustaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisaOtpusta, $RBZapisa, 0);		
+				$Naziv=$VrstaOtpustaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisaOtpusta, $RBZapisa, 1);																
+				 echo "<option value=\"$Sifra\">$Sifra $Naziv</option>";			
+			} //for
+										
+	} // $num_rowsTipoviVozila
+	
 	?>
 </select>
+</div> 
+<div class="input-container">
+    <!-- <input type="text" name="Obdukovan" value="<?php// echo $Obdukovan; ?>"> -->
+	<fieldset>
+		<legend>Обдукован:</legend>
+		<div>
+			<input type="radio" id ="Obdukovan" name="Obdukovan" value="1" disabled>
+			<label>Да</label>
+			</div>
+		
+			<div>
+			<input type="radio" id ="NeObdukovan" name="Obdukovan" value="2" checked disabled>
+			<label>Не</label>
+			</div>
+	</fieldset>
+</div> 
+<div class="input-container">
+    <label for="OsnovniUzrokSmrti">Основни узрок смрти:</label>
+	<select name="OsnovniUzrokSmrti" id="OsnovniUzrokSmrti" disabled>		
+	<?php
+	 echo "<option value=\"$OsnovniUzrokSmrti\">$OsnovniUzrokSmrti</option>";
+	$UkupanBrojZapisa =$MKBObject->DajUkupanBrojSvihSifri($KolekcijaZapisa);	
+	if ($UkupanBrojZapisa>0) 
+	{					
+		for ($RBZapisa = 0; $RBZapisa < $UkupanBrojZapisa; $RBZapisa++) 
+			{
+				$Sifra=$MKBObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $RBZapisa, 0);		
+				$Naziv=$MKBObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $RBZapisa, 1);															
+				 echo "<option value=\"$Sifra\">$Sifra $Naziv</option>";			
+			} //for
+										
+	} // $num_rowsTipoviVozila
+	
+	?>
+	</select>
 	
 </div> 
 <div id="save-btn">

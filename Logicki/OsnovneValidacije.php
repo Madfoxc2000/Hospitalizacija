@@ -3,7 +3,10 @@ class Validacije{
 // Omogućava funkcije za osnovne validacije podataka
 public function DaLiJeVeliko($string,$NazivPolja)
 {
-    if (ctype_upper($string[0])) {    
+    $firstCharacter = mb_substr($string, 0, 1, 'UTF-8');
+    $uppercaseVersion = mb_strtoupper($firstCharacter, 'UTF-8');
+
+    if ($firstCharacter === $uppercaseVersion) {    
     
     }
     else {
@@ -67,5 +70,5 @@ public function DaLiJeJedinstvenBrojBolesti($BrojeviBolesti,$NoviBrojBolesti){
  }
 
 }
-
+// LBO ima 11 cifara
 ?>
