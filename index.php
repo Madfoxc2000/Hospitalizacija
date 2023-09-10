@@ -21,24 +21,10 @@ session_destroy();
 		require "klase/DBHospitalizacija.php";
 		$HospitalizacijaObject = new Hospitalizacija($KonekcijaObject, 'hospitalizacija');
 		
-		if (isset($_GET["filtriraj"]))
-			{
-			// filtrirano
-			$filterVrednost=$_GET["filter"];
-			$filterPolje="OSNOVNIUZROKHOSPITALIZACIJE";
-			$nacinFiltriranja="like";
-			$Sortiranje="DATUMPRIJEMA DESC";
-            $KolekcijaZapisa = $HospitalizacijaObject->DajKolekcijuHospitalizacijaFiltrirano($filterPolje, $filterVrednost, $nacinFiltriranja, $Sortiranje);
-			}
-			else
-			{
 			// prikaz svih - PRVO UCITAVANJE INDEX.PHP, dugme "SVI"
-			$KolekcijaZapisa = $HospitalizacijaObject->DajKolekcijuSvihHospitalizacija();
-			}
-        		
+			$KolekcijaZapisa = $HospitalizacijaObject->DajPogledHospitalizacija();
 			$UkupanBrojZapisa = $HospitalizacijaObject->DajUkupanBrojSvihHospitalizacija($KolekcijaZapisa);
-
-            }
+	}
 
 ?>
 
@@ -49,7 +35,8 @@ session_destroy();
 <head>
 <title>Болница</title>
 <meta charset="UTF-8">
-<link rel="stylesheet"  href="css/style.css?v=1" media="screen">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet"  href="css/style.css" media="screen">
 </head>
 <body>
 <div class="main-index">

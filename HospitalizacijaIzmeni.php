@@ -15,7 +15,7 @@
 	   }  
 	   
 	    // preuzimanje vrednosti sa forme iz hidden polja
-		$idHospitalizacije=$_POST['IdHospitalizacije'];
+		$IdHospitalizacije=$_POST['IdHospitalizacije'];
 	   
       // koristimo klasu za poziv procedure za konekciju
 		require "klase/BaznaKonekcija.php";
@@ -25,8 +25,8 @@
 		if ($KonekcijaObject->konekcijaDB) // uspesno realizovana konekcija ka DBMS i bazi podataka
 		{	
 			require "klase/DBHospitalizacija.php";
-			$HospitalizacijaObject = new Hospitalizacija($KonekcijaObject, 'vozilo');
-			$KolekcijaZapisa=$HospitalizacijaObject->DajKolekcijuHospitalizacijaFiltrirano("ID", $idHospitalizacije, "=", "DATUMPRIJEMA");
+			$HospitalizacijaObject = new Hospitalizacija($KonekcijaObject, 'pacijent');
+			$KolekcijaZapisa=$HospitalizacijaObject->DajKolekcijuHospitalizacijaFiltrirano("ID", $IdHospitalizacije, "=", "DATUMOTPUSTA");
 			$UkupanBrojZapisa =$HospitalizacijaObject->DajUkupanBrojSvihHospitalizacija($KolekcijaZapisa);
 			require "klase/DBMKB.php";
 			$MKBObject = new MKB($KonekcijaObject, 'mkb');
@@ -36,10 +36,6 @@
 			$OdeljenjeObject = new Odeljenje($KonekcijaObject,'odeljenje');
 			$KolekcijaZapisaOdeljenja = $OdeljenjeObject->DajKolekcijuSvihOdeljenja();
 			$UkupanBrojZapisaOdeljenja = $OdeljenjeObject->DajUkupanBrojSvihOdeljenja($KolekcijaZapisaOdeljenja);
-			require "klase/DBSpoljniUzrokPovrede.php";
-			$SpoljniUzrokPovredeObject = new SpoljniUzrokPovrede($KonekcijaObject, 'spoljasnji_uzrok_povrede');
-			$KolekcijaZapisaUzroka =$SpoljniUzrokPovredeObject->DajKolekcijuSvihSpoljnihUzroka();
-			$UkupanBrojZapisaUzroka =$SpoljniUzrokPovredeObject->DajUkupanBrojSvihSpoljnihUzroka($KolekcijaZapisaUzroka);	
 			// IZDVAJANJE PODATAKA KORISTECI KLASU mkb
 			require "klase/DBOtpust.php";
 			$VrstaOtpustaObject = new VrstaOtpusta($KonekcijaObject, 'vrsta_otpusta');
@@ -48,24 +44,16 @@
 			if ($UkupanBrojZapisa>0) 
 			{
 				$row=0;  // prvi i jedini red ima taj idvesti 
-				$BrojIstorijeBolesti=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 1);
-				$NazivZdravstveneUstanove=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 2);
-				$OdeljenjeNaPrijemu=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 3);
-				$DatumPrijema=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 4);
-				$UputnaDijagnoza=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 5);
-				$Povreda=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 6);
-				$SpoljniUzrokPovrede=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 7);
-				$OsnovniUzrokHospitalizacije=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 8);
-				$PrateceDijagnoze=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 9);
-				$SifraProcedurePoNomenklaturi=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 10);
-				$TezinaNaPrijemu=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 11);
-				$BrojSatiVentilatornePodrske=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 12);
-				$DatumOtpusta=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 13);
-				$BrojDanaHospitalizacije=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 14);
-				$OdeljenjeSaKojegJeOtpustIzvrsen=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 15);
-				$VrstaOtpusta=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 16);
-				$Obdukovan=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 17);
-				$OsnovniUzrokSmrti=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 18);
+				$IDPrijema=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 1);
+				$OsnovniUzrokHospitalizacije=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 2);
+				$PrateceDijagnoze=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 3);
+				$BrojSatiVentilatornePodrske=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 4);
+				$DatumOtpusta=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 5);
+				$BrojDanaHospitalizacije=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 6);
+				$OdeljenjeSaKojegJeOtpustIzvrsen=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 7);
+				$VrstaOtpusta=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 8);
+				$Obdukovan=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 9);
+				$OsnovniUzrokSmrti=$HospitalizacijaObject->DajVrednostPoRednomBrojuZapisaPoRBPolja ($KolekcijaZapisa, $row, 10);
 				
 			}         
 		} // od if uspeh konekcije
@@ -81,8 +69,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
 <link rel="stylesheet" href="css/administrator.css">
-<script src="script.js" async></script>
-<script src="UnosHospitalizacije.js" async></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<script src="JS/script.js" async></script>
+<script src="JS/UnosHospitalizacije.js" async></script>
 </head>
 <body>
 
@@ -101,7 +90,7 @@
 <!-- footer panel starts here -->
 
 <?php include 'delovi/footer.php';?>
-
+<script src="JS/script.js" ></script>
 </div>
 </body>
 </html>

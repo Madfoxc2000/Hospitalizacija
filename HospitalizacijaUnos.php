@@ -13,6 +13,7 @@
 		header ('Location:index.php');
 	   }
 	   
+	   $IDPrijema = $_POST['IdPrijema'];
       		
 ?>
 
@@ -24,9 +25,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <link rel="stylesheet" href="css/administrator.css" media="screen">
-<script src="script.js" async></script>
-<script src="UnosHospitalizacije.js" async></script>
+<script src="JS/UnosHospitalizacije.js" type="module" async></script>
 </head>
 <body>
 <!-------------------------- ZAGLAVLJE ------->
@@ -40,6 +41,6 @@
 	
 	<?php include 'delovi/footer.php';?>
 </div>
-
+<script src="JS/script.js" ></script>
 </body>
 </html>

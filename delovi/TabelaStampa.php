@@ -3,7 +3,6 @@
 <!-- Omogućava tabelarni prikaz podataka na stranici prilagodjenoj za štampu.
 Saradjuje sa klasama BaznaKonekcija, Hospitalizacija -->
 <!--==================================== SADRZAJ STRANICE DESNO pocinje ovde ------------------------------>
-<img src="" width="100%" height="3" alt="" class="flt1 rp_topcornn" /> 
 
 <table style="width:100%;style="width:100%; padding:0" align="center" cellspacing="0" cellpadding="0" border="0"  bgcolor="white">
 

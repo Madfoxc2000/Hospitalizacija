@@ -4,20 +4,11 @@
 		session_start();  
 	   // citanje vrednosti iz sesije -  da bismo uvek proverili da li je to prijavljeni korisnik
 	   $idkorisnika=$_SESSION["idkorisnika"];
-	   $idHospitalizacije=$_POST['IdHospitalizacije'];
-	   
-	   // preuzimanje vrednosti sa forme
-	   $BrojIstorijeBolesti=$_POST['BrojIstorijeBolesti'];
-	   $NazivZdravstveneUstanove=$_POST['NazivZdravstveneUstanove'];
-	   $OdeljenjeNaPrijemu=$_POST['OdeljenjeNaPrijemu'];
-	   $DatumPrijema=$_POST['DatumPrijema'];
-	   $UputnaDijagnoza=$_POST['UputnaDijagnoza'];
-	   $Povreda=$_POST['Povreda'];
-	   $SpoljniUzrokPovrede=$_POST['SpoljniUzrokPovrede'];
+	   $IdHospitalizacije=$_POST['IdHospitalizacije'];
+	   $IDPrijema=$_POST['IDPrijema'];
 	   $OsnovniUzrokHospitalizacije=$_POST['OsnovniUzrokHospitalizacije'];
 	   $PrateceDijagnoze=$_POST['PrateceDijagnoze'];
-	   $SifraProcedurePoNomenklaturi=$_POST['SifraProcedurePoNomenklaturi'];
-	   $TezinaNaPrijemu=$_POST['TezinaNaPrijemu'];
+	//    $SifraProcedurePoNomenklaturi=$_POST['SifraProcedurePoNomenklaturi'];
 	   $BrojSatiVentilatornePodrske=$_POST['BrojSatiVentilatornePodrske'];
 	   $DatumOtpusta=$_POST['DatumOtpusta'];
 	   $BrojDanaHospitalizacije=$_POST['BrojDanaHospitalizacije'];
@@ -25,6 +16,7 @@
 	   $VrstaOtpusta=$_POST['VrstaOtpusta'];
 	   $Obdukovan=$_POST['Obdukovan'];
 	   $OsnovniUzrokSmrti=$_POST['OsnovniUzrokSmrti'];
+
 
 	   // koristimo klasu za poziv procedure za konekciju
 	require dirname(__DIR__)."/klase/BaznaKonekcija.php";
@@ -34,9 +26,18 @@
 	$KonekcijaObject->connect();
 	if ($KonekcijaObject->konekcijaDB) // uspesno realizovana konekcija ka DBMS i bazi podataka
     {	
+		
+		require dirname(__DIR__)."/klase/DBPrijem.php";
+		$PrijemObject = new Prijem($KonekcijaObject,'Prijem');
+		$DatumPrijema = $PrijemObject->DajDatumPrijema($IDPrijema);
+
+    	require dirname(__DIR__)."/Logicki/PoslovnaLogika.php";
+		$PoslovnaObject = new PoslovnaLogika();
+		$BrojDanaHospitalizacije = $PoslovnaObject->DajBrojDana($DatumPrijema,$DatumOtpusta);
+		
 		require dirname(__DIR__)."/klase/DBHospitalizacija.php";
 		$HospitalizacijaObject = new Hospitalizacija($KonekcijaObject, 'hospitalizacija');
-		$greska=$HospitalizacijaObject->IzmeniHospitalizaciju($idHospitalizacije,$BrojIstorijeBolesti, $NazivZdravstveneUstanove, $OdeljenjeNaPrijemu, $DatumPrijema, $UputnaDijagnoza, $Povreda, $SpoljniUzrokPovrede, $OsnovniUzrokHospitalizacije, $PrateceDijagnoze, $SifraProcedurePoNomenklaturi, $TezinaNaPrijemu, $BrojSatiVentilatornePodrske, $DatumOtpusta, $BrojDanaHospitalizacije, $OdeljenjeSaKojegJeOtpustIzvrsen, $VrstaOtpusta, $Obdukovan, $OsnovniUzrokSmrti);
+		$greska=$HospitalizacijaObject->IzmeniHospitalizaciju($IdHospitalizacije, $OsnovniUzrokHospitalizacije, $PrateceDijagnoze, $BrojSatiVentilatornePodrske, $DatumOtpusta, $BrojDanaHospitalizacije, $OdeljenjeSaKojegJeOtpustIzvrsen, $VrstaOtpusta, $Obdukovan, $OsnovniUzrokSmrti);
 	}
 	else
 	{
@@ -49,7 +50,7 @@
 	//echo "Ukupno procesirano $retval zapisa";
 	//echo "Greska $greska";	
 	
-	header ('Location:http://localhost/Hospitalizacija/HospitalizacijaListaAdministrator.php');	
+	header ('Location:http://localhost/Hospitalizacija/HospitalizacijaListaFilter.php');	
 		
 	  
       ?>

@@ -24,11 +24,12 @@ private $Odeljenje;
 
 // ------- preostale metode
 
-public function UcitajSvePacijente()
+public function DajKolekcijuSvihPacijenata()
 {
 //Ucitava sve vrednosti iz eniteta pacijent
 		$SQL = "select * from Pacijent";
 		$this->UcitajSvePoUpitu($SQL);
+		return $this->Kolekcija;
 } // kraj metode
 
 public function UcitajSveBrojeveBolesti()
@@ -36,6 +37,13 @@ public function UcitajSveBrojeveBolesti()
 //Ucitava sve vrednosti iz eniteta pacijent
 		$SQL = "select BrojIstorijebolesti from Pacijent";
 	    $this->UcitajSvePoUpitu($SQL);
+		return $this->Kolekcija;
+} // kraj metode
+public function UcitajSveIdPacijenataPrijema()
+{
+//Ucitava sve vrednosti iz eniteta pacijent
+		$SQL = "select BrojIstorijebolesti from prijem";
+		$this->UcitajSvePoUpitu($SQL);
 		return $this->Kolekcija;
 } // kraj metode
 
@@ -87,13 +95,47 @@ return $this->BrojZapisa;
 }
 
 
- public function DodajNovogPacijenta($BrojIstorijeBolesti, $JMBG, $ImeJednogRoditelja, $LBO, $OsnovOsiguranja, $ClanJePorodice, $Ime, $Prezime, $Telefon, $DatumRodjenja, $Odeljenje)
+ public function DodajNovogPacijenta($BrojIstorijeBolesti, $JMBG, $ImeJednogRoditelja, $LBO, $OsnovOsiguranja, $ClanJePorodice, $Ime, $Prezime, $Telefon, $DatumRodjenja, $Drzavljanstvo, $Pol, $Adresa,$Maloletan)
  {
 	//insert upitom dodaje novog pacijenta
- 	$SQL = "INSERT INTO `pacijent` (BrojIstorijeBolesti, JMBG, ImeJednogRoditelja,LBO, OsnovOsiguranja, ClanJePorodice, Ime, Prezime, Telefon, DatumRodjenja, Odeljenje) VALUES ('$BrojIstorijeBolesti', '$JMBG', '$ImeJednogRoditelja', '$LBO', '$OsnovOsiguranja', '$ClanJePorodice', '$Ime', '$Prezime', '$Telefon', '$DatumRodjenja','$Odeljenje')";
+ 	$SQL = "INSERT INTO `pacijent` (BrojIstorijeBolesti, JMBG, ImeJednogRoditelja,LBO, OsnovOsiguranja, ClanJePorodice, Ime, Prezime, Telefon, DatumRodjenja, Drzavljanstvo, Pol, Adresa, Maloletan) VALUES ('$BrojIstorijeBolesti', '$JMBG', '$ImeJednogRoditelja', '$LBO', '$OsnovOsiguranja', '$ClanJePorodice', '$Ime', '$Prezime', '$Telefon', '$DatumRodjenja','$Drzavljanstvo', '$Pol', '$Adresa','$Maloletan')";
 	$greska=$this->IzvrsiAktivanSQLUpit($SQL);
 	
  	return $greska;
  }
+
+ public function ObrisiPacijenta($IdZaBrisanje)
+ {
+//Brise vrednost iz entiteta hospitalizacija na mestu gde se nalazi zadati ID
+ 	$SQL = "DELETE FROM `pacijent` where BROJISTORIJEBOLESTI='$IdZaBrisanje'" ;
+ 	$greska=$this->IzvrsiAktivanSQLUpit($SQL);
+ 	return $greska;
+ }
+
+public function IzmeniPacijenta($BrojIstorijeBolesti, $JMBG, $ImeJednogRoditelja, $LBO, $OsnovOsiguranja, $ClanJePorodice, $Ime, $Prezime, $Telefon, $DatumRodjenja, $Drzavljanstvo, $Pol, $Adresa, $Maloletan)
+{
+//Menja vrednosti u entitetu hospitalizacija na mestu gde se nalazi zadati ID
+	$SQL = "UPDATE `pacijent` SET  BrojIstorijeBolesti='".$BrojIstorijeBolesti."',JMBG='".$JMBG."', ImeJednogRoditelja='".$ImeJednogRoditelja."', LBO='".$LBO."',OsnovOsiguranja='".$OsnovOsiguranja."',ClanJePorodice='".$ClanJePorodice."',Ime='".$Ime."',Prezime='".$Prezime."',Telefon='".$Telefon."',DatumRodjenja='".$DatumRodjenja."',Drzavljanstvo='".$Drzavljanstvo."',Pol='".$Pol."',Adresa='".$Adresa."',Maloletan='".$Maloletan."' WHERE BrojIstorijeBolesti='$BrojIstorijeBolesti'";
+	$greska=$this->IzvrsiAktivanSQLUpit($SQL);
+	
+	return $greska;
+}
+
+
+public function DajKolekcijuPacijenataFiltrirano($filterPolje, $filterVrednost, $nacinFiltriranja, $Sortiranje)
+//Vraca filtriranu kolekciju svih vrednosti iz entiteta hospitalizacija
+{
+if ($nacinFiltriranja=="like")
+{
+$SQL = "select * from `pacijent` WHERE $filterPolje like '%".$filterVrednost."%' ORDER BY $Sortiranje";
+}
+else
+{
+$SQL = "select * from `pacijent` WHERE $filterPolje ='".$filterVrednost."' ORDER BY $Sortiranje";
+}
+$this->UcitajSvePoUpitu($SQL);
+return $this->Kolekcija; // uzima iz baznek klase vrednost atributa
+}
+
 }
 ?>

@@ -3,6 +3,13 @@
 <!-- Vrši tabelarni prikaz podataka o hospitalizacijiama za administratora. 
 Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija,  -->
 <!--==================================== SADRZAJ STRANICE DESNO pocinje ovde ------------------------------>
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <p>Да ли сте сигурни да желите да обришете запис?</p>
+    <button id="confirmDelete">Да</button>
+    <button id="cancelDelete">Nе</button>
+  </div>
+</div>
 <div class="administrator-table-content">
 	<h1>Хоспитализације</h1>
 <?php
@@ -81,9 +88,9 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija,  -->
 				echo "<input type=\"hidden\" name=\"IdHospitalizacije\" value=\"$ID\">";
 				echo "<b><input TYPE=\"submit\" class=\"table-button\" name=\"izmenivozilo\" value=\"Измени\" /></font></b>";
 				echo "</form>";
-				echo "<form ACTION=\"Logicki\AkcijaObrisi.php\" METHOD=\"POST\">";
+				echo "<form id=\"$ID\" class =\"deleteForm\" ACTION=\"Logicki\AkcijaObrisi.php\" METHOD=\"POST\" onsubmit=\"return showConfirmationPopup();\">";
 				echo "<input type=\"hidden\" name=\"IdHospitalizacije\" value=\"$ID\">";
-				echo "<b><input TYPE=\"submit\" class=\"table-button\" name=\"obrisiHospitalizaciju\" value=\"Обриши\"  onclick=\"return confirm('Da li ste sigurni da zelite da obrisete zapis?')\"/></font></b>";
+				echo "<b><input TYPE=\"submit\"  class=\"table-button delete-button\" name=\"obrisiHospitalizaciju\" data-submit-form=\"$ID\" value=\"Обриши\"/></font></b>";
 				echo "</form>";
 				echo "</td>";
 				echo "</tr>";
@@ -106,12 +113,9 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija,  -->
 
 </div>
 
-</td>
 
-<td style="width:5%;">
-</td>
 
-</tr>
-</table>
+
+
 
     

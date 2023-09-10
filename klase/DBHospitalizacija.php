@@ -52,7 +52,16 @@ $this->UcitajSvePoUpitu($SQL);
 return $this->Kolekcija; // uzima iz baznek klase vrednost atributa
 }
 
-
+public function DajPogledHospitalizacija() {
+	$SQL ="SELECT * FROM `hospitalizacijapogled`";
+	$this->UcitajSvePoUpitu($SQL);
+	return $this->Kolekcija;
+}
+public function DajRadniPogledHospitalizacija() {
+	$SQL ="SELECT * FROM `hospitalizacijaradnipogled`";
+	$this->UcitajSvePoUpitu($SQL);
+	return $this->Kolekcija;
+}
 public function DajUkupanBrojSvihHospitalizacija($KolekcijaZapisa)
 {
 //Vraca ukpan broj vrednosti iz entiteta hospitalizacija
@@ -71,24 +80,24 @@ public function DodajNovuHospitalizaciju()
  public function ObrisiHospitalizaciju($IdZaBrisanje)
  {
 //Brise vrednost iz entiteta hospitalizacija na mestu gde se nalazi zadati ID
- 	$SQL = "DELETE FROM `hospitalizacija` where ID='$IdZaBrisanje'" ;
+ 	$SQL = "DELETE  FROM `hospitalizacija` where ID='$IdZaBrisanje'" ;
  	$greska=$this->IzvrsiAktivanSQLUpit($SQL);
  	return $greska;
  }
 
-public function IzmeniHospitalizaciju($ID,$BrojIstorijeBolesti, $NazivZdravstveneUstanove, $OdeljenjeNaPrijemu, $DatumPrijema, $UputnaDijagnoza, $Povreda, $SpoljniUzrokPovrede, $OsnovniUzrokHospitalizacije, $PrateceDijagnoze, $SifraProcedurePoNomenklaturi, $TezinaNaPrijemu, $BrojSatiVentilatornePodrske, $DatumOtpusta, $BrojDanaHospitalizacije, $OdeljenjeSaKojegJeOtpustIzvrsen, $VrstaOtpusta, $Obdukovan, $OsnovniUzrokSmrti)
+public function IzmeniHospitalizaciju($ID, $OsnovniUzrokHospitalizacije, $PrateceDijagnoze, $BrojSatiVentilatornePodrske, $DatumOtpusta, $BrojDanaHospitalizacije, $OdeljenjeSaKojegJeOtpustIzvrsen, $VrstaOtpusta, $Obdukovan, $OsnovniUzrokSmrti)
 {
 //Menja vrednosti u entitetu hospitalizacija na mestu gde se nalazi zadati ID
-	$SQL = "UPDATE `hospitalizacija` SET  BrojIstorijeBolesti='".$BrojIstorijeBolesti."',NazivZdravstveneUstanove='".$NazivZdravstveneUstanove."', OdeljenjeNaPrijemu='".$OdeljenjeNaPrijemu."', DatumPrijema='".$DatumPrijema."',UputnaDijagnoza='".$UputnaDijagnoza."',Povreda='".$Povreda."',SpoljniUzrokPovrede='".$SpoljniUzrokPovrede."',OsnovniUzrokHospitalizacije='".$OsnovniUzrokHospitalizacije."',PrateceDijagnoze='".$PrateceDijagnoze."',SifraProcedurePoNomenklaturi='".$SifraProcedurePoNomenklaturi."',TezinaNaPrijemu='".$TezinaNaPrijemu."',BrojSatiVentilatornePodrske='".$BrojSatiVentilatornePodrske."',DatumOtpusta='".$DatumOtpusta."',BrojDanaHospitalizacije='".$BrojDanaHospitalizacije."',OdeljenjeSaKojegJeOtpustIzvrsen='".$OdeljenjeSaKojegJeOtpustIzvrsen."',VrstaOtpusta='".$VrstaOtpusta."',Obdukovan='".$Obdukovan."',OsnovniUzrokSmrti='".$OsnovniUzrokSmrti."' WHERE ID='$ID'";
+if ($OsnovniUzrokSmrti == "") {
+    // konstruišite SQL upit sa postavljanjem na NULL
+	$SQL = "UPDATE `hospitalizacija` SET OsnovniUzrokHospitalizacije='".$OsnovniUzrokHospitalizacije."',PrateceDijagnoze='".$PrateceDijagnoze."',BrojSatiVentilatornePodrske='".$BrojSatiVentilatornePodrske."',DatumOtpusta='".$DatumOtpusta."',BrojDanaHospitalizacije='".$BrojDanaHospitalizacije."',OdeljenjeSaKojegJeOtpustIzvrsen='".$OdeljenjeSaKojegJeOtpustIzvrsen."',VrstaOtpusta='".$VrstaOtpusta."',Obdukovan='".$Obdukovan."',OsnovniUzrokSmrti= NULL WHERE ID='$ID'";
+}else{
+	$SQL = "UPDATE `hospitalizacija` SET OsnovniUzrokHospitalizacije='".$OsnovniUzrokHospitalizacije."',PrateceDijagnoze='".$PrateceDijagnoze."',BrojSatiVentilatornePodrske='".$BrojSatiVentilatornePodrske."',DatumOtpusta='".$DatumOtpusta."',BrojDanaHospitalizacije='".$BrojDanaHospitalizacije."',OdeljenjeSaKojegJeOtpustIzvrsen='".$OdeljenjeSaKojegJeOtpustIzvrsen."',VrstaOtpusta='".$VrstaOtpusta."',Obdukovan='".$Obdukovan."',OsnovniUzrokSmrti='".$OsnovniUzrokSmrti."' WHERE ID='$ID'";
+}
 	$greska=$this->IzvrsiAktivanSQLUpit($SQL);
 	
 	return $greska;
 }
-
 // ostale metode 
-
-
-
-
 }
 ?>

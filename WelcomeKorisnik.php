@@ -19,13 +19,13 @@
 <head>
 <title>Болница</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
-<link rel="stylesheet" href="css/korisnik.css">
-<script src="script.js" async></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<script src="JS/script.js" async></script>
 </head>
 <body>
 
 
-<div class="main-korisnik">
+<div class="main-message">
 	
 	<!-------------------------- ZAGLAVLJE ------->
 	<?php include 'delovi/ZaglavljeKorisnik.php';?>

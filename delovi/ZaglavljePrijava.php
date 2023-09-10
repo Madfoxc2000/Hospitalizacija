@@ -5,10 +5,10 @@
     </div>
     <div class="nav-bar">
         <div class="logo">
-        Logo
+       <img src="images/logoHospital.png" alt="Logo">
         </div>
-    <div class="menu-index">
-        <a class="myButton" href="index.php" >Почетна</a>
+    <div class="menu-index" style="background-color: #ffff; border-radius:20px; padding:3px; opacity:0.7;">
+    <span class="material-symbols-outlined nav"  onclick="window.location.href='Index.php';">home</span>
     </div>
     </div>
 

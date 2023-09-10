@@ -18,14 +18,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <head>
 <title>Болница</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
-<link rel="stylesheet" href="css/administrator.css" media="screen">
-<script src="script.js" async></script>
+<script src="JS/script.js" async></script>
 </head>
 <body>
 
 
-<div class="main-administrator">
+<div class="main-message">
 	<!-------------------------- ZAGLAVLJE ------->
 	<?php include 'delovi/ZaglavljeAdministrator.php';?>
 	

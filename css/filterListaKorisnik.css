@@ -79,15 +79,7 @@ background-color: var(--bright-green);
         height: 40vh;
     }
 }
-.nav-bar-korisnik{
-    align-self: start;
-    width: 100vw;
-    height: 10vh;
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-    background-color: rgb(66, 135, 245, 0.2);
-}
+
 
 .table-spisak-hospitalizacija-korisnik th{
     padding: 0.5vw;

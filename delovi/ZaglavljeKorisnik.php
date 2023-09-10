@@ -12,7 +12,7 @@ if(session_id() == '') {
       		
 ?>
 <meta charset="UTF-8">
-<nav class="nav-bar-korisnik">
+<nav class="nav-bar">
         <div class="logo"><font color="black" size="2px">Корисник: <b><?php echo $korisnik ;?></b></font></div>
     <ul class="menu">
         <li><a class="myButton" href="Stampa.php" >Штампа</a></li>

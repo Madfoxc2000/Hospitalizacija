@@ -26,19 +26,12 @@ session_destroy();
 			{
 			// filtrirano
 			$filterVrednost=$_GET["filter"];
-			$greska3=$ValidacijaObjekt->DaLiIma7karaktera($filterVrednost,'Филтер вредност'); 
-			// $greska4=$ValidacijaObjekt->DaLiSuOdgovarajućiTipoviPodataka($filterVrednost, ' за филтрирање '); 
-			$GreskaValidacije=$greska3;
-			if($GreskaValidacije){
-				echo "<script>alert('.$GreskaValidacije.');</script>";
-					}
-			else{
 			$filterPolje="OSNOVNIUZROKHOSPITALIZACIJE";
 			$nacinFiltriranja="like";
-			$Sortiranje="DATUMPRIJEMA DESC";
+			$Sortiranje="DATUMOTPUSTA DESC";
             $KolekcijaZapisa = $HospitalizacijaObject->DajKolekcijuHospitalizacijaFiltrirano($filterPolje, $filterVrednost, $nacinFiltriranja, $Sortiranje);
 			}
-		}
+
 			else
 			{
 			// prikaz svih - PRVO UCITAVANJE INDEX.PHP, dugme "SVI"
@@ -46,9 +39,7 @@ session_destroy();
 			}
         		
 			$UkupanBrojZapisa = $HospitalizacijaObject->DajUkupanBrojSvihHospitalizacija($KolekcijaZapisa);
-
-            }
-
+		}
 ?>
 
 <!DOCTYPE html>
