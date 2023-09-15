@@ -5,17 +5,10 @@ class Hospitalizacija extends Tabela
 private $bazapodataka;
 private $UspehKonekcijeNaDBMS;
 //
-public $BrojIstorijeBolesti;
-public $NazivZdravstveneUstanove; 
-public $OdeljenjeNaPrijemu;
-public $DatumPrijema;
-public $UputnaDijagnoza;
-public $Povreda;
-public $SpoljniUzrokPovrede;
+
 public $OsnovniUzrokHospitalizacije;
 public $PrateceDijagnoze;
 public $SifraProcedurePoNomenklaturi;
-public $TezinaNaPrijemu;
 public $BrojSatiVentilatornePodrske;
 public $DatumOtpusta;
 public $BrojDanaHospitalizacije;
@@ -37,19 +30,18 @@ $this->UcitajSvePoUpitu($SQL); // puni atribut bazne klase Kolekcija
 return $this->Kolekcija; // uzima iz baznek klase vrednost atributa
 }
 
-public function DajKolekcijuHospitalizacijaFiltrirano($filterPolje, $filterVrednost, $nacinFiltriranja, $Sortiranje)
-//Vraca filtriranu kolekciju svih vrednosti iz entiteta hospitalizacija
-{
-if ($nacinFiltriranja=="like")
-{
-$SQL = "select * from `hospitalizacija` WHERE $filterPolje like '%".$filterVrednost."%' ORDER BY $Sortiranje";
-}
-else
-{
-$SQL = "select * from `hospitalizacija` WHERE $filterPolje ='".$filterVrednost."' ORDER BY $Sortiranje";
-}
+public function DajKolekcijuHospitalizacijaFiltrirano($filterPolje, $filterVrednost, $nacinFiltriranja, $Sortiranje){
+//Vraca filtriranu kolekciju svih vrednosti iz pogleda hospitalizacijaradnipogled
+$SQL ="SELECT * FROM `hospitalizacijaradnipogled` WHERE $filterPolje ='".$filterVrednost."' ORDER BY $Sortiranje";
 $this->UcitajSvePoUpitu($SQL);
 return $this->Kolekcija; // uzima iz baznek klase vrednost atributa
+}
+
+public function DajKolekcijuHospitalizacijaFiltriranoIzmena($filterPolje, $filterVrednost, $nacinFiltriranja, $Sortiranje){
+	//Vraca filtriranu kolekciju svih vrednosti iz pogleda hospitalizacijaradnipogled
+	$SQL ="SELECT * FROM `hospitalizacija` WHERE $filterPolje ='".$filterVrednost."' ORDER BY $Sortiranje";
+	$this->UcitajSvePoUpitu($SQL);
+	return $this->Kolekcija; // uzima iz baznek klase vrednost atributa
 }
 
 public function DajPogledHospitalizacija() {
@@ -68,16 +60,7 @@ public function DajUkupanBrojSvihHospitalizacija($KolekcijaZapisa)
 return $this->BrojZapisa;
 }
 
-public function DodajNovuHospitalizaciju()
- {
-//Unosi vrednosti u entitet hospitalizacija
- 	$SQL = "INSERT INTO `hospitalizacija` (BrojIstorijeBolesti, NazivZdravstveneUstanove, OdeljenjeNaPrijemu, DatumPrijema, UputnaDijagnoza, Povreda, SpoljniUzrokPovrede,OsnovniUzrokHospitalizacije, PrateceDijagnoze, SifraProcedurePoNomenklaturi, TezinaNaPrijemu, BrojSatiVentilatornePodrske, DatumOtpusta, BrojDanaHospitalizacije, OdeljenjeSaKojegJeOtpustIzvrsen, VrstaOtpusta, Obdukovan, OsnovniUzrokSmrti, Maloletan) VALUES ('$this->BrojIstorijeBolesti', '$this->NazivZdravstveneUstanove', '$this->OdeljenjeNaPrijemu', '$this->DatumPrijema', '$this->UputnaDijagnoza', '$this->Povreda', '$this->SpoljniUzrokPovrede','$this->OsnovniUzrokHospitalizacije', '$this->PrateceDijagnoze', '$this->SifraProcedurePoNomenklaturi', '$this->TezinaNaPrijemu', '$this->BrojSatiVentilatornePodrske', '$this->DatumOtpusta', '$this->BrojDanaHospitalizacije', '$this->OdeljenjeSaKojegJeOtpustIzvrsen', '$this->VrstaOtpusta', '$this->Obdukovan', '$this->OsnovniUzrokSmrti', '$this->Maloletan')";
-	$greska=$this->IzvrsiAktivanSQLUpit($SQL);
-	
- 	return $greska;
- }
-
- public function ObrisiHospitalizaciju($IdZaBrisanje)
+public function ObrisiHospitalizaciju($IdZaBrisanje)
  {
 //Brise vrednost iz entiteta hospitalizacija na mestu gde se nalazi zadati ID
  	$SQL = "DELETE  FROM `hospitalizacija` where ID='$IdZaBrisanje'" ;

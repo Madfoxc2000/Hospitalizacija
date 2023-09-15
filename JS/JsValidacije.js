@@ -50,10 +50,16 @@ function containsOnlyLettersAndNumbers(value) {
   }
 
   function isPhoneNumberOk(string){
-    let firstPart = string.slice(0,4)
+    let firstPart = string.slice(0,4);
+    let secondPart = string.slice(3);
     let pattern =/[+381]/;
     if(string.length>12 && string.length<16){
-        return pattern.test(firstPart);
+         if (pattern.test(firstPart)){
+          return containsOnlyNumbers(secondPart);
+         }
+         else{
+          return false;
+         }
     }
     else {
         return false;

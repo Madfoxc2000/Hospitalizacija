@@ -2,7 +2,7 @@
 //Proverava unete kredencijale za korisnika koji pokusa da se uloguje.
 //Saradjuje sa klasama Konekcija, Tabela, Korisnik
 session_start();
-       $loginUserName=$_POST['korisnickoime'];
+       $loginUserName=$_POST['korisnickoIme'];
        $loginPassword=$_POST['sifra'];
 
 	// zato sto se prilikom require uradi copy paste u ovaj fajl, 
@@ -36,10 +36,10 @@ if ($KonekcijaObject->konekcijaDB)
 			}
 		}
 		else
-		{
+		{ 
+			$_SESSION['login_error'] = "Invalid username or password";
 			// neuspeh izaziva ponovo ucitavanje stranice za prijavu
-			header ('Location:http://localhost/Hospitalizacija/Prijava.php');	
-		
+			 header ('Location:http://localhost/Hospitalizacija/Prijava.php');	
 		}
 	}
 	else

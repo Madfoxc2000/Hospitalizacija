@@ -3,9 +3,9 @@
 
 
    
-<h1 class="form-header-hospitalizacija">Измена Хоспитализације</h1>
+<h1 class="form-header-hospitalizacija">Измена отпуста</h1>
 
-<form ACTION="./Logicki/AkcijaIzmeni.php" METHOD="POST">
+<form name="hospitalizacijaForm" id="hospitalizacijaForm" ACTION="./Logicki/AkcijaIzmeni.php" METHOD="POST">
 
 <div class="form-container-hospitalizacija">
 <?php echo "<input type=\"hidden\" name=\"IdHospitalizacije\" value=\"$IdHospitalizacije\">";

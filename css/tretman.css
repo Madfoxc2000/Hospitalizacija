@@ -16,18 +16,22 @@ input, select {
 
 } 
 .input-container{
-
     display: grid;
     padding: 2vw;
 }
-
+.input-container-tipAktivnosti{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 2vw;
+}
 textarea{
     border-radius: 10px;
 }
 form{
     padding: 20px;
     border-radius: 10px;
-    background-color: var(--bright-green);
+    background-color: var(--form-color);
     display: grid;
     gap: 1vh;
 }

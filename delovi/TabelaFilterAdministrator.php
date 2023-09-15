@@ -13,7 +13,7 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 <div class="administrator-table-content">
 
 	<h1>Списак хоспитализација</h1>
-	<div class="table-form-container">
+	<div class="table-form-container"> 
 
 	<div class="filter-form-container">
 	
@@ -26,8 +26,8 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 	
 	
 		<form class="filter-form-lower" action="Stampa.php" method="GET">
-		<input type="text" name="filter" required />
-		<button type="submit" name="filtriraj" value="Штампај по филтеру">Штампај по филтеру</button>
+		<input type="hidden" name="filter" value="<?php echo $filterVrednost?>"/>
+		<button type="submit" name="filtriraj" value="Штампај по филтеру">Штампај </button>
 		</form>
 	</div>
 	
@@ -104,6 +104,7 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 							echo "</tr>";
 						}  //za for
 							echo "</table>";
+							echo "</div>";
 					}
 					else
 					{
@@ -117,5 +118,4 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 				</div>
 		</div>
 	
-</div>
 </div>

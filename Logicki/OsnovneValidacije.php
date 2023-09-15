@@ -72,7 +72,7 @@ public function DaLiJePacijentPrimljen($BrojeviBolesti,$NoviBrojBolesti){
 
 public function DaLiJeJedinstvenBrojBolesti($BrojeviBolesti,$NoviBrojBolesti){
     if (stripos($BrojeviBolesti, $NoviBrojBolesti) !== false) {
-        return ' Примарни кључ већ постоји, молимо унесите други ';
+        return ' Пацијент са овим бројем болести се већ налази у бази болнице, проверите да ли сте унели исправан број, уколико јесте потражите пацијента у листи пацијената ';
     } 
     else {
       

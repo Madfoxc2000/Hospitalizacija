@@ -1,14 +1,14 @@
 <h1>Списак активних пацијенат</h1>
 	<div class="table-form-container">
    
-	<div class="filter-form-container">
-	
-		<form  class="filter-form-upper" action="" method="GET">
-		<label for="filter">Основни узрок хоспитализације:</label>
-		<input type="text" name="filter" />
+	<div class="filter-form-container pacijent">
+		<form  class="filter-form-upper" id="filter-form-upper" action="" method="GET">
+		<label for="filter">Број историје болести:</label>
+		<input type="text" id="filter" name="filter"/>
 		<button type="submit" name="filtriraj" value="Филтрирај">Филтрирај</button>
+		<span class="ValidationMessage" id = "filterMessage"></span>
 		<button type="submit" name="svi" value="СВИ">СВИ</button>
-		</form>
+		 </form>
 	</div>
 	
 	
@@ -81,6 +81,7 @@
                             	
 						}  //za for
                         echo "</table>";
+						echo "</div>";
                 }
                 else
                 {
@@ -92,8 +93,5 @@
         
         ?>
             </div>
-    </div>
-
-</div>
-</div>
+ </div>
 

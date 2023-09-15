@@ -78,7 +78,7 @@
 </div>   
 
 
-<div class="input-container">
+<div class="input-container-radio">
     <fieldset>
 		<legend>Повреда:</legend>
 		<div>

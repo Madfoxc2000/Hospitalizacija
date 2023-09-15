@@ -34,12 +34,9 @@ const DatumPrijema = document.forms["prijemForm"]["DatumPrijema"];
 const UputnaDijagnoza = document.forms["prijemForm"]["UputnaDijagnoza"];
 const TezinaNaPrijemu = document.forms["prijemForm"]["TezinaNaPrijemu"];
 
-OdeljenjeNaPrijemu.oninvalid = invalid;
-OdeljenjeNaPrijemu.oninput = invalid;
 DatumPrijema.oninvalid = invalid;
 DatumPrijema.oninput = invalid;
-UputnaDijagnoza.oninvalid = invalid;
-UputnaDijagnoza.oninput = invalid;
+
 TezinaNaPrijemu.oninvalid = invalid;
 TezinaNaPrijemu.oninput = invalid;
 

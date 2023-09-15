@@ -29,6 +29,7 @@
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <link rel="stylesheet" href="css/tretman.css">
+<script src="JS/UnosAktivnosti.js" type="module"  async></script>
 </head>
 <body>
 <!-------------------------- ZAGLAVLJE ------->

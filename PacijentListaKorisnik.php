@@ -61,16 +61,15 @@
 <link rel="stylesheet" href="css/filterListaAdministrator.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" async/>
 <script src="JS/script.js" async></script>
-<script src="JS/ValidacijaFiltera.js" type="module" async></script>
 <script src="JS/PacijentLista.js" async></script>
 </head>
 <body>
 <!-------------------------- ZAGLAVLJE ------->
 <div class="main-administrator">
-	<?php include 'delovi/ZaglavljeAdministrator.php';?>
+	<?php include 'delovi/ZaglavljeKorisnik.php';?>
 	
 	<!------- GLAVNI SADRZAJ desno ----------->
-	<?php include 'delovi/TabelaPacijent.php';?>
+	<?php include 'delovi/TabelaPacijentKorisnik.php';?>
 	
 	
 	<!-- footer panel starts here -->

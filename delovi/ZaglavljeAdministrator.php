@@ -12,11 +12,10 @@ if(session_id() == '') {
 	   $korisnik=$_SESSION["korisnik"];
       		
 ?>
-<meta charset="UTF-8">
+
 <nav class="nav-bar-administrator">
         <div class="logo"><h3>Корисник: <b><?php echo $korisnik ;?></b></h3></div>
     <div class="menu">
-                <!-- <img src="images/addPatient.png" id="U" onclick="window.location.href='PacijentUnos.php';" alt="Hospitalizacije"> -->
                 
                 <picture onclick="window.location.href='PacijentUnos.php';">
                 <source media="(max-width: 799px)" srcset="images/addPatientS.png"   />
@@ -52,8 +51,3 @@ if(session_id() == '') {
     
 </nav>
 
-        <!-- <li><a class="myButton" href="Stampa.php" >Штампа</a></li> -->
-        <!-- <li><a class="myButton" href="index.php" >Одјава</a></li> -->
-        <!-- <li><span class="material-symbols-outlined nav" onclick="window.location.href='HospitalizacijaListaFilter.php';">clinical_notes</span></li> -->
-        <!-- <li><span class="material-symbols-outlined nav" onclick="window.location.href='PacijentUnos.php';">person_add</span></li> -->
-        <!--<li><span class="material-symbols-outlined nav" onclick="window.location.href='index.php';">logout</span></li> -->

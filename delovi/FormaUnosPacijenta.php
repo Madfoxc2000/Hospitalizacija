@@ -78,7 +78,7 @@
 	} 
      ?>
 </select>
-<span class="ValidationMessage" id = "OsnovOsigurnanjaMessage"></span>
+<span class="ValidationMessage" id = "OsnovOsiguranjaMessage"></span>
 </div>   
 
 <div class="input-container">
@@ -103,7 +103,7 @@
 <div class="input-container">
     <label for="Drzavljanstvo">Држављанство</label>
     <input type="text" name="Drzavljanstvo" placeholder="Srpsko" >
-    <span class="ValidationMessage" id="Drzavljanstvo"></span>
+    <span class="ValidationMessage" id="DrzavljanstvoMessage"></span>
 </div> 
 
 <div class="input-container">

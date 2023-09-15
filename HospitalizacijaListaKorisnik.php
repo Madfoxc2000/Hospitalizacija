@@ -21,8 +21,7 @@
 	require "klase/BaznaTabela.php";
 	$KonekcijaObject = new Konekcija('klase/BaznaParametriKonekcije.xml');
 	$KonekcijaObject->connect();
-	require "Logicki/OsnovneValidacije.php";
-	$ValidacijaObjekt= new Validacije();
+	$filterVrednost="";
 	if ($KonekcijaObject->konekcijaDB) // uspesno realizovana konekcija ka DBMS i bazi podataka
     {	
 		require "klase/DBHospitalizacija.php";
@@ -32,29 +31,20 @@
 			{
 			// filtrirano
 			$filterVrednost=$_GET["filter"];
-			$greska3=$ValidacijaObjekt->DaLiIma7karaktera($filterVrednost,'Филтер вредност'); 
-			$greska4=$ValidacijaObjekt->DaLiSuOdgovarajućiTipoviPodataka($filterVrednost, ' за филтрирање '); 
-			$GreskaValidacije=$greska3.$greska4;
-				if($GreskaValidacije){
-					echo "<script>alert('.$GreskaValidacije.');</script>";
-				}
-				else{
 			$filterPolje="OSNOVNIUZROKHOSPITALIZACIJE";
 			$nacinFiltriranja="like";
-			$Sortiranje="DATUMPRIJEMA DESC";
+			$Sortiranje="DATUMOTPUSTA DESC";
             $KolekcijaZapisa = $HospitalizacijaObject->DajKolekcijuHospitalizacijaFiltrirano($filterPolje, $filterVrednost, $nacinFiltriranja, $Sortiranje);
-				}
-		}
-		
+			}
 		else
 			{
 			// prikaz svih - PRVO UCITAVANJE INDEX.PHP, dugme "SVI"
-			$KolekcijaZapisa = $HospitalizacijaObject->DajKolekcijuSvihHospitalizacija();
+			$KolekcijaZapisa = $HospitalizacijaObject->DajPogledHospitalizacija();
 			}
         		
 			$UkupanBrojZapisa = $HospitalizacijaObject->DajUkupanBrojSvihHospitalizacija($KolekcijaZapisa);
 
-            }
+		}
 
 ?>
 

@@ -1,8 +1,8 @@
 
 <meta charset="UTF-8">
-<!-- Vrši prikaz podataka o hospitalizacijama za neprijavljenog korisnika.
-Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
-<!--==================================== SADRZAJ STRANICE DESNO pocinje ovde ------------------------------>
+<!-- Vrši prikaz podataka o pacijentima neprijavljenog korisnika.
+Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Pacijent -->
+<!--==================================== SADRZAJ STRANICE pocinje ovde ------------------------------>
 <div class="popup" id="popup">
   <div class="popup-content">
     <p>Да ли сте сигурни да желите да обришете запис?</p>
@@ -15,23 +15,20 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 	<h1 >Списак пацијената</h1>
 	<div class="table-form-container">
 
-	<div class="filter-form-container">
-	
-		<form  class="filter-form-upper" action="" method="GET">
+	<div class="filter-form-container pacijent">
+		<form  class="filter-form-upper" id="filter-form-upper" action="" method="GET">
 		<label for="filter">Број историје болести:</label>
-		<input type="text" name="filter" />
+		<input type="text" id="filter" name="filter"/>
 		<button type="submit" name="filtriraj" value="Филтрирај">Филтрирај</button>
+		<span class="ValidationMessage" id = "filterMessage"></span>
 		<button type="submit" name="svi" value="СВИ">СВИ</button>
 		 </form>
 	</div>
 	
-	
-	
 		<div class="table-container-main">
-			
 			<?php
 			
-			// PRETHODNI KOD PREUZIMA PODATKE I TO JE NA INDEX.PHP
+			// Ispisuje tabelu sa pacijentima
 			
 					if ($UkupanBrojZapisa>0) {
 						//$rbvesti=0;
@@ -100,6 +97,7 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 							echo "</tr>";	
 						}  //za for
 							echo "</table>";
+							echo "</div>";
 					}
 					else
 					{
@@ -114,4 +112,3 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 		</div>
 	
 	</div>	
-</div>

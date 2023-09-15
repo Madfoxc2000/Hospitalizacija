@@ -50,6 +50,7 @@
 <link rel="stylesheet" href="css/filterListaAdministrator.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="JS/script.js" async></script>
+<script src="JS/ValidacijaFiltera.js" type="module" async></script>
 <script src="JS/PrimljeniLista.js" async></script>
 </head>
 <body>

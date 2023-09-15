@@ -1,11 +1,11 @@
 ﻿<?php
 //Prikaz liste na stranici optimizovanoj za štampač.
-// OVO JE SUSTINSKO ODJAVLJIVANJE KORISNIKA
-session_start();
-// remove all session variables
-session_unset(); 
-// destroy the session 
-session_destroy(); 
+// // OVO JE SUSTINSKO ODJAVLJIVANJE KORISNIKA
+// session_start();
+// // remove all session variables
+// session_unset(); 
+// // destroy the session 
+// session_destroy(); 
 
 // REALIZACIJA CITANJA SVIH I FILTRIRANIH PODATAKA
 //KONEKCIJA KA SERVERU
@@ -26,18 +26,16 @@ session_destroy();
 			{
 			// filtrirano
 			$filterVrednost=$_GET["filter"];
+				if (empty($filterVrednost)){
+					$KolekcijaZapisa = $HospitalizacijaObject->DajPogledHospitalizacija();
+				}
+				else{
 			$filterPolje="OSNOVNIUZROKHOSPITALIZACIJE";
 			$nacinFiltriranja="like";
 			$Sortiranje="DATUMOTPUSTA DESC";
             $KolekcijaZapisa = $HospitalizacijaObject->DajKolekcijuHospitalizacijaFiltrirano($filterPolje, $filterVrednost, $nacinFiltriranja, $Sortiranje);
-			}
-
-			else
-			{
-			// prikaz svih - PRVO UCITAVANJE INDEX.PHP, dugme "SVI"
-			$KolekcijaZapisa = $HospitalizacijaObject->DajKolekcijuSvihHospitalizacija();
-			}
-        		
+				}
+			}        		
 			$UkupanBrojZapisa = $HospitalizacijaObject->DajUkupanBrojSvihHospitalizacija($KolekcijaZapisa);
 		}
 ?>
@@ -58,7 +56,6 @@ session_destroy();
 
 <!-------------------------- ZAGLAVLJE ------->
 <?php include 'delovi/ZaglavljeStampa.php';?>
-
 
 <!-------------------------- DONJI DEO  ------->
 <tr style="padding:0px;">

@@ -4,7 +4,7 @@
 
 
    
-<h1 class="form-header-hospitalizacija">Унос Хоспитализације</h1>
+<h1 class="form-header-hospitalizacija">Унос отпуста</h1>
 
 <form name="hospitalizacijaForm" id="hospitalizacijaForm" ACTION="./Logicki/AkcijaSnimi.php" METHOD="POST">
 
@@ -108,7 +108,7 @@
 </select>
 <span class="ValidationMessage" id = "VrstaOtpustaMessage"></span>
 </div> 
-<div class="input-container">
+<div class="input-container-radio">
 	<fieldset>
 		<legend>Обдукован:</legend>
 		<div>
@@ -124,7 +124,7 @@
 </div> 
 <div class="input-container">
     <label for="OsnovniUzrokSmrti">Основни узрок смрти:</label>
-	<select name="OsnovniUzrokSmrti" id="OsnovniUzrokSmrti" >		
+	<select name="OsnovniUzrokSmrti" id="OsnovniUzrokSmrti" disabled>		
 	<option value="">изаберите</option>
 	<?php
 	$UkupanBrojZapisa =$MKBObject->DajUkupanBrojSvihSifri($KolekcijaZapisa);	

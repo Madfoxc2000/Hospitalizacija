@@ -1,7 +1,7 @@
 
 // Podesavanje tastera koji okidaju akcije na listi  
-/* ====================================================== Delete section =====================================*/
-// Add event listeners to all form submit buttons
+/* ====================================================== Brisanje sekcija =====================================*/
+// Dodaje event listener svim tasterima za zeljeni element
 const submitButtons = document.querySelectorAll("[data-submit-form]");
 submitButtons.forEach(button => {
   button.addEventListener("click", function(e) {
@@ -12,7 +12,7 @@ submitButtons.forEach(button => {
 });
 
 
- // Get references to elements
+ // Preuzima refernce elemenata
  function showConfirmationPopup(formId) {
  const popup = document.getElementById("popup");
  const confirmDelete = document.getElementById("confirmDelete");
@@ -20,22 +20,22 @@ submitButtons.forEach(button => {
 
  popup.style.display = "flex";
 
- // Hide the popup when the cancel button is clicked
+ // Sakriva popup prozor ukoliko je dugme "cancel" pritisnuto
  cancelDelete.addEventListener("click", function() {
    popup.style.display = "none";
  });
 
- // Handle the form submission when the confirm button is clicked
- confirmDelete.addEventListener("click", function() {// Submit the form
+ // Salje formu ukoliko je dugme "confirm" pritisnuto
+ confirmDelete.addEventListener("click", function() {
    popup.style.display = "none";
-   document.getElementById(formId).submit();   // Submit the specific form
+   document.getElementById(formId).submit();   // Prosledjuje specificnu formu
  });
 
 return false;
 }
 
-/* ====================================================== Update section =====================================*/
-// Add event listeners to all form submit buttons
+/* ====================================================== Azuriranje sekcija =====================================*/
+// Dodaje event listener svim tasterima za zeljeni element
 const updateButtons = document.querySelectorAll("[update]");
 updateButtons.forEach(button => {
   button.addEventListener("click", function() {
@@ -45,12 +45,13 @@ updateButtons.forEach(button => {
 });
 
 
- // Get references to elements
+// Preuzima refernce elemenata
  function sendUpdateForm(formId) {
-   document.getElementById(formId).submit(); // Submit the specific form
+   document.getElementById(formId).submit(); // Prosledjuje specificnu formu
  }
 
-/* ====================================================== Print section =====================================*/
+/* ====================================================== Stampanje sekcija =====================================*/
+// Dodaje event listener svim tasterima za zeljeni element
 const printButtons = document.querySelectorAll("[print]");
 printButtons.forEach(button => {
   button.addEventListener("click", function() {
@@ -60,7 +61,7 @@ printButtons.forEach(button => {
 });
 
 
- // Get references to elements
+// Preuzima refernce elemenata
  function submitPrintForm(formId) {
-   document.getElementById(formId).submit(); // Submit the specific form
+   document.getElementById(formId).submit(); // Prosledjuje specificnu formu
  }

@@ -39,7 +39,7 @@ class Prijem extends Tabela{
 
     public function ObrisiPrijem($IdZaBrisanje)
     {
-   //Brise vrednost iz entiteta hospitalizacija na mestu gde se nalazi zadati ID
+   //Brise vrednost iz entiteta prijem na mestu gde se nalazi zadati ID
         $SQL = "DELETE  FROM `prijem` where ID='$IdZaBrisanje'";
         $greska=$this->IzvrsiAktivanSQLUpit($SQL);
         return $greska;
@@ -47,7 +47,7 @@ class Prijem extends Tabela{
 
    
     public function DajDatumPrijema($ID)
-    //Vraca filtriranu kolekciju svih vrednosti iz entiteta hospitalizacija
+    //Vraca filtriranu kolekciju svih vrednosti iz entiteta prijem
     {
     $SQL = "select `datumprijema` from `prijem` WHERE `ID` = '$ID'";    
     $this->UcitajSvePoUpitu($SQL);

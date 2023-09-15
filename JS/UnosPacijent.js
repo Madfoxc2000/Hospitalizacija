@@ -24,13 +24,13 @@ const Ime = document.forms["pacijentForm"]["Ime"];
 const Prezime = document.forms["pacijentForm"]["Prezime"];
 const ImeJednogRoditelja = document.forms["pacijentForm"]["ImeJednogRoditelja"];
 const LBO = document.forms["pacijentForm"]["LBO"];
-const OsnovOsiguranja = document.forms["pacijentForm"]["LBO"];
+const OsnovOsiguranja = document.forms["pacijentForm"]["OsnovOsiguranja"];
 const ClanJePorodice = document.forms["pacijentForm"]["ClanJePorodice"];
 const Telefon = document.forms["pacijentForm"]["Telefon"];
 const DatumRodjenja = document.forms["pacijentForm"]["DatumRodjenja"];
 const Adresa = document.forms["pacijentForm"]["Adresa"];
-// const Odeljenje = document.forms["pacijentForm"]["Odeljenje"];
 
+const Drzavljanstvo = document.forms["pacijentForm"]["Drzavljanstvo"];
 
 BrojIstorijeBolesti.oninvalid = invalid;
 BrojIstorijeBolesti.oninput = invalid;
@@ -66,6 +66,7 @@ const ClanJePorodiceMessage = document.getElementById("ClanJePorodiceMessage");
 const TelefonMessage = document.getElementById("TelefonMessage");
 const OsnovOsiguranjaMessage = document.getElementById("OsnovOsiguranjaMessage");
 const DatumRodjenjaMessage = document.getElementById("DatumRodjenjaMessage");
+const DrzavljanstvoMessage = document.getElementById("DrzavljanstvoMessage");
 
 // Validacija vrednosti podataka
 function validateForm(){
@@ -161,12 +162,26 @@ else{
     TelefonMessage.textContent = "";
 }
 if(OsnovOsiguranja.value==""){
-    OsnovOsiguranjaMessage.textContent="Морате одабрати основни узрок хоспитализације";
+    OsnovOsiguranjaMessage.textContent="Морате одабрати основ осигурања";
     return false;
    }
    else{
     OsnovOsiguranjaMessage.textContent ="";
    }
+   if(!containsOnlyLettersAndNumbers(Drzavljanstvo.value)){
+    DrzavljanstvoMessage.textContent = "Држављанство мора садржати само слова и бројеве";
+    return false;
+}
+else{
+    BrojIstorijeBolestiMessage.textContent = "";
+}
+if(!isLetterUppercase(Drzavljanstvo.value[0])){
+    DrzavljanstvoMessage.textContent ="Држављанство мора почети великим словом";
+    return false;
+}
+else{
+    DrzavljanstvoMessage.textContent = "";
+}
 return true;
 }
 

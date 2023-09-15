@@ -21,8 +21,7 @@
 	require "klase/BaznaTabela.php";
 	$KonekcijaObject = new Konekcija('klase/BaznaParametriKonekcije.xml');
 	$KonekcijaObject->connect();
-	require "Logicki/OsnovneValidacije.php";
-	$ValidacijaObjekt= new Validacije();
+	$filterVrednost="";
 	if ($KonekcijaObject->konekcijaDB) // uspesno realizovana konekcija ka DBMS i bazi podataka
     {	
 		require "klase/DBHospitalizacija.php";
@@ -31,7 +30,7 @@
 		if (isset($_GET["filtriraj"]))
 			{
 			// // filtrirano
-			 $filterVrednost=$_GET["filter"];
+			$filterVrednost=$_GET["filter"];
 			$filterPolje="OSNOVNIUZROKHOSPITALIZACIJE";
 			$nacinFiltriranja="like";
 			$Sortiranje="DATUMOTPUSTA DESC";

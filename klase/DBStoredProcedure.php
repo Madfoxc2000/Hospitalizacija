@@ -3,18 +3,11 @@ class SPHospitalizacija
 //“SPHospitalizacija” služi da obezbedi korisniku sigurniji unos hospitalizacije preko stored procedure,
 // takodje čita vrednosti iz pogleda.
 {
-public $BrojIstorijeBolesti;
+
 public $IDPrijema;
-public $NazivZdravstveneUstanove; 
-public $OdeljenjeNaPrijemu;
-public $DatumPrijema;
-public $UputnaDijagnoza;
-public $Povreda;
-public $SpoljniUzrokPovrede;
 public $OsnovniUzrokHospitalizacije;
 public $PrateceDijagnoze;
 public $SifraProcedurePoNomenklaturi;
-public $TezinaNaPrijemu;
 public $BrojSatiVentilatornePodrske;
 public $DatumOtpusta;
 public $BrojDanaHospitalizacije;
@@ -22,7 +15,6 @@ public $OdeljenjeSaKojegJeOtpustIzvrsen;
 public $VrstaOtpusta;
 public $Obdukovan;
 public $OsnovniUzrokSmrti;
-public $Maloletan;
 
 public $OtvorenaKonekcija;
 public $NazivBazePodataka;
@@ -78,26 +70,12 @@ public function DodajNovuHospitalizaciju()
 	else // mysql
 	{
 	
-		$rezultatPar1 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @BrojIstorijeBolesti=".$this->BrojIstorijeBolesti);
-		$GreskarezultatPar1 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB); 
-		$rezultatPar2 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @NazivZdravstveneUstanove=".$this->NazivZdravstveneUstanove);
-		$GreskarezultatPar2 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
-		$rezultatPar3 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @OdeljenjeNaPrijemu=".$this->OdeljenjeNaPrijemu);
-		$GreskarezultatPar3 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
-		$rezultatPar4 = mysql_query($this->OtvorenaKonekcija->konekcijaDB,  "SET @DatumPrijema=".$this->DatumPrijema);
-		$GreskarezultatPar4 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
-		$rezultatPar5 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @UputnaDijagnoza=".$this->UputnaDijagnoza);
-		$GreskarezultatPar5 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
-        $rezultatPar6 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @Povreda=".$this->Povreda);
-		$GreskarezultatPar6 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
-        $rezultatPar7 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @SpoljniUzrokPovrede=".$this->SpoljniUzrokPovrede);
-		$GreskarezultatPar7 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
+		$rezultatPar10 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @IDPrijema=".$this->IDPrijema);
+		$GreskarezultatPar10 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
         $rezultatPar8 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @OsnovniUzrokHospitalizacije=".$this->OsnovniUzrokHospitalizacije);
 		$GreskarezultatPar8 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
         $rezultatPar9 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @SifraProcedurePoNomenklaturi=".$this->SifraProcedurePoNomenklaturi);
 		$GreskarezultatPar9 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
-        $rezultatPar10 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @TezinaNaPrijemu=".$this->TezinaNaPrijemu);
-		$GreskarezultatPar10 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
         $rezultatPar11 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @BrojSatiVentilatornePodrske=".$this->BrojSatiVentilatornePodrske);
 		$GreskarezultatPar11 =  mysql_error($this->OtvorenaKonekcija->konekcijaDB);
         $rezultatPar12 = mysql_query($this->OtvorenaKonekcija->konekcijaDB, "SET @DatumOtpusta=".$this->DatumOtpusta);
@@ -117,68 +95,8 @@ public function DodajNovuHospitalizaciju()
 	
 	}
 	
-	$greska=$GreskarezultatPar11.$GreskarezultatPar12.$GreskarezultatPar13.$GreskarezultatPar14.$GreskarezultatPar15.$GreskarezultatPar16.$GreskarezultatPar17.$GreskarezultatCall;
+	$greska=$GreskarezultatPar8.$GreskarezultatPar9.$GreskarezultatPar10.$GreskarezultatPar11.$GreskarezultatPar12.$GreskarezultatPar13.$GreskarezultatPar14.$GreskarezultatPar15.$GreskarezultatPar16.$GreskarezultatPar17.$GreskarezultatCall;
 	return $greska;
 }
-public function UcitajSvePoUpitu($Upit)
-{
-        $this->Kolekcija = mysqli_query($this->OtvorenaKonekcija->konekcijaDB, $Upit);
-        $this->BrojZapisa = mysqli_num_rows($this->Kolekcija); 
-
-}
-
-public function DajKolekcijuSvihHospitalizacijaPacijent($BrojIstorijeBolesti)
-{
-$SQL ="SELECT * FROM `pacijentpogled` WHERE BrojIstorijebolesti='$BrojIstorijeBolesti'";
-$this->UcitajSvePoUpitu($SQL); // puni atribut bazne klase Kolekcija
-return $this->Kolekcija; // uzima iz baznek klase vrednost atributa
-}
-
-public function DajUkupanBrojSvihHospitalizacija($KolekcijaZapisa)
-{
-return $this->BrojZapisa;
-}
-
-public function PrebaciKolekcijuUListu($Kolekcija) //kolekcija je result
-{
-    $ListaZapisa = array();
-    if ($this->TipMYSQL=="mysqli")
-    {
-        while($RedZapisa = mysqli_fetch_array($Kolekcija,MYSQLI_NUM)) 
-            {
-                $this->ListaZapisa[] = $RedZapisa;
-            }
-    }
-    else // mysql
-    {
-        while($RedZapisa = mysql_fetch_array($Kolekcija,MYSQLI_NUM)) 
-            {
-                $this->ListaZapisa[] = $RedZapisa;
-            }
-    }
-        
-    return $ListaZapisa; 
-}
-
-
-public function DajVrednostPoRednomBrojuZapisaPoRBPolja ($Kolekcija, $RBZapisa, $RBPolja)
-{
-    if ($this->TipMYSQL=="mysqli")
-    {
-        $ListaZapisa = array();
-        $ListaZapisa= $this->PrebaciKolekcijuUListu($Kolekcija);
-        $RedZapisa=$this->ListaZapisa[$RBZapisa];
-        $Vrednost=$RedZapisa [$RBPolja];
-    }
-    else // mysql
-    {
-        $Vrednost=mysql_result($Kolekcija,$RBZapisa, $RBPolja);   //$NazivPolja);
-    }
-
-    return $Vrednost;
-}
-
-
-
 }
 ?>

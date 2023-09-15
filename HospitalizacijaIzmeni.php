@@ -26,7 +26,7 @@
 		{	
 			require "klase/DBHospitalizacija.php";
 			$HospitalizacijaObject = new Hospitalizacija($KonekcijaObject, 'pacijent');
-			$KolekcijaZapisa=$HospitalizacijaObject->DajKolekcijuHospitalizacijaFiltrirano("ID", $IdHospitalizacije, "=", "DATUMOTPUSTA");
+			$KolekcijaZapisa=$HospitalizacijaObject->DajKolekcijuHospitalizacijaFiltriranoIzmena("ID", $IdHospitalizacije, "=", "DATUMOTPUSTA");
 			$UkupanBrojZapisa =$HospitalizacijaObject->DajUkupanBrojSvihHospitalizacija($KolekcijaZapisa);
 			require "klase/DBMKB.php";
 			$MKBObject = new MKB($KonekcijaObject, 'mkb');
@@ -65,13 +65,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="sr-RS" xml:lang="sr-RS">
 <meta charset="UTF-8">
 <head>
-<title>Општина Зрењанин</title>
+<title>Болница</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
 <link rel="stylesheet" href="css/administrator.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <script src="JS/script.js" async></script>
-<script src="JS/UnosHospitalizacije.js" async></script>
+<script src="JS/UnosHospitalizacije.js" type="module" async></script>
 </head>
 <body>
 
@@ -90,7 +90,6 @@
 <!-- footer panel starts here -->
 
 <?php include 'delovi/footer.php';?>
-<script src="JS/script.js" ></script>
 </div>
 </body>
 </html>

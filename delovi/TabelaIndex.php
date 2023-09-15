@@ -11,7 +11,7 @@ Saradjuje sa klasama BaznaKonekcija, BaznaTabela, Hospitalizacija -->
 			if ($UkupanBrojZapisa>0) {
 				//$rbvesti=0;
 				// ------------ zaglavlje ----------------
-				echo "<table class =\"table-spisak-hospitalizacija\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\" border=\"1\"  bgcolor=\"\">";
+				echo "<table class =\"table-spisak-hospitalizacija\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\"  bgcolor=\"\">";
 					echo "<tr>";
 					echo "<th style=\"width:23%;\">";
 					echo "<font face=\"Trebuchet MS\" >Број историје болести</font><br/>";

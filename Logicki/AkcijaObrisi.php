@@ -16,17 +16,21 @@
 	$KonekcijaObject->connect();
 	if ($KonekcijaObject->konekcijaDB) // uspesno realizovana konekcija ka DBMS i bazi podataka
     {	
+		// Putem transakcije brise sve podatke vezane za hospitalizaciju
 		require dirname(__DIR__)."/klase/BaznaTransakcija.php";
 		$TransakcijaObject = new Transakcija($KonekcijaObject,$m);
 		$TransakcijaObject->ZapocniTransakciju();
 
 		require dirname(__DIR__)."/klase/DBHospitalizacija.php";
 		$HospitalizacijaObject = new Hospitalizacija($KonekcijaObject, 'hospitalizacija');
+		
 		require dirname(__DIR__)."/klase/DBPrijem.php";
 		$PrijemObject = new Prijem($KonekcijaObject, 'prijem');
-
 		$IDPrijema = $PrijemObject->DajIDPrijemaHospitalizacije($idHospitalizacije);
-		
+
+		// Brise hospitalizaciju, zatim sve aktivnosti hospitalizacije i na kraju prijem za datu hospitalizaciju
+
+		$greska1=$HospitalizacijaObject->ObrisiHospitalizaciju($idHospitalizacije);
 
 		require dirname(__DIR__)."/klase/DBAktivnost.php";
 		$AktivnostObject = new Aktivnost($KonekcijaObject, 'aktivnost');
@@ -39,11 +43,11 @@
 			 $IDAktivnosti=$AktivnostObject->DajVrednostPoRednomBrojuZapisaPoRBPolja($KolekcijaZapisa1, $RBZapisa, 0)."|";
 			 $AktivnostObject->ObrisiAktivnost($IDAktivnosti);
 			}
-		}             
-		$UtvrdjenaGreska='';
-		 $greska2=$PrijemObject->ObrisiPrijem($idHospitalizacije);
-		 $greska1=$HospitalizacijaObject->ObrisiHospitalizaciju($idHospitalizacije);
+		}         
+
+		$greska2=$PrijemObject->ObrisiPrijem($IDPrijema);
 		
+		$UtvrdjenaGreska=$greska1.$greska2;
 		$TransakcijaObject->ZavrsiTransakciju($UtvrdjenaGreska);
 	}
 		
@@ -57,7 +61,7 @@
 		echo $greska;
 	}
 	else{
-	// header ('Location:http://localhost/Hospitalizacija/HospitalizacijaListaFilter.php');	
+	header ('Location:http://localhost/Hospitalizacija/HospitalizacijaListaFilter.php');	
 	} 
  ?>
 

@@ -1,10 +1,10 @@
 <div class="form-container-tretman">
 <h1 class="form-header-hospitalizacija">Унос Активности</h1>
-<form name="aktivnosForm" id="aktivnostForm" ACTION="./Logicki/AkcijaSnimiAktivnost.php" METHOD="POST">
+<form name="aktivnostForm" id="aktivnostForm" ACTION="./Logicki/AkcijaSnimiAktivnost.php" METHOD="POST">
 <input type="hidden" name="IdPrijema" value="<?php echo $IdPrijema; ?>">
-<div class="input-container">
+<div class="input-container-tipAktivnosti">
     <label for="TipAktivnosti">Тип Активности<span aria-label="required">*</span></label>
-    <select name="TipAktivnosti" >
+    <select name="TipAktivnosti" id="TipAktivnosti" >
     <option value="">изаберите</option>
     <?php
     	require dirname(__DIR__)."/klase/BaznaKonekcija.php";
@@ -30,8 +30,9 @@
 	} // $num_rowsTipoviVozila
 	?>
     </select>
-	<span class="TipAktivnostiMessage" id = "TipAktivnostiMessage"></span>
+	<span class="ValidationMessage" id = "TipAktivnostiMessage"></span>
 </div>   
+
 
 <div class="input-container">
     <label for="DatumIzvrsenja">Датум извршења:<span aria-label="required">*</span></label>

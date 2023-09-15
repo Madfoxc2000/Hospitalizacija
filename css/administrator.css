@@ -35,7 +35,7 @@ form {
 .form-container-pacijent {
     padding-top: 2vw;
     padding-bottom: 2vw;
-    background-color: var(--bright-green);
+    background-color: var(--form-color);
     border-radius: 7px;
     margin-right: 4vw;
     margin-left: 4vw;
@@ -43,6 +43,11 @@ form {
     display: grid;
     grid-template-columns: repeat(auto-fit, 250px); 
     justify-content: center;
+}
+@media (max-width: 600px) {
+    .form-container-pacijent {
+        width: 90vw;
+    }
 }
 
 .form-header-pacijent {
@@ -89,17 +94,18 @@ form {
     outline: none;
 }
 
-.form-container-pacijent .input-container select{
+.form-container-pacijent .input-container select,fieldset{
     width:80%
 } 
 .form-container-pacijent .ValidationMessage{
-    font-size: 0.5rem;
-    color: rgb(255, 0, 0);
+    font-size: 0.7rem;
+    color: rgba(255, 147, 147, 1);
+    font-weight: 600;
 }
 /* ======================================================  End Form pacijent =====================================*/
 /* ======================================================  Form Hospitalizacija =====================================*/
 .form-container-hospitalizacija {
-    background-color: rgb(76, 139, 164);
+    background-color:var(--form-color);
     margin-right: 3vw;
     margin-left: 3vw;
     margin-bottom: 3vh;
@@ -110,9 +116,19 @@ form {
 }
 .form-container-hospitalizacija .input-container{
     display: grid;
+    height: 12vh;
+    grid-template-rows: 1fr 1fr;
     padding: 2vw;
 }
-
+.form-container-hospitalizacija .input-container-radio{
+    display: grid;
+    padding: 2vw;
+}
+@media  (max-width: 940px) {
+    .form-container-hospitalizacija .input-container{
+        height: auto;
+    }
+}
 
 .form-container-hospitalizacija input, select {
     border-radius: 4px;
@@ -124,8 +140,10 @@ form {
     transition: all .5s ease-in;
     justify-self: center;
     align-self: flex-end;
-
 } 
+.form-container-hospitalizacija select, input[type="date"], input[type="number"] {
+width: 200px;
+}
 .form-container-hospitalizacija input:disabled{
     background-color: rgba(255, 255, 255, 0.2);
 }
@@ -180,7 +198,8 @@ form {
 
 /* ======================================================  Table section =====================================*/
 /* ======================================================  Table Hospitalizacija section =====================================*/
-.table-spisak-hospitalizacija-administrator th{
+.table-spisak-hospitalizacija-korisnik th{
+    border: 1px solid black;
     font-size: 1rem;
     padding: 0.5vw;
     text-align: center;
@@ -247,6 +266,7 @@ background-color: var(--bright-green);
 /* ====================================================== PopUp section =====================================*/
   /* Styles for popup */
   .popup {
+    color: black;
     display: none;
     position: fixed;
     top: 0;
