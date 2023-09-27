@@ -1,0 +1,297 @@
+
+.main-administrator{
+    display: grid;
+    grid-template-rows: 10vh minmax(86vh, auto) 4vh;
+    background-color: var(--dark-blue);
+}
+
+/* ======================================================  Form section =====================================*/
+.save-btn{
+    display: grid;
+    border: 0;
+    background-color :rgb(0, 183, 255);
+    color: white;
+    padding: 10px 50px;
+    letter-spacing: .05em;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 1rem;
+    outline: none;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.save-btn:hover {
+    color: black;
+    background: #00CCFF; }
+
+    .save-btn-clicked {
+        color: black;
+        background: #00CCFF; }
+
+form {
+    width: auto;
+    display: grid;
+}
+/* ======================================================  Form pacijent =====================================*/
+.form-container-pacijent {
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+    background-color: var(--form-color);
+    border-radius: 7px;
+    margin-right: 4vw;
+    margin-left: 4vw;
+    margin-bottom: 4vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px); 
+    justify-content: center;
+}
+@media (max-width: 600px) {
+    .form-container-pacijent {
+        width: 90vw;
+    }
+}
+
+.form-header-pacijent {
+    padding: 2vw;
+    letter-spacing: .06em;
+    font-size: 2rem;
+}
+
+
+@media (max-width: 500px) {
+    .form-header-pacijent {
+        text-align: center;
+    }
+
+    form{
+        padding-bottom: 1vw;
+    }
+}
+
+.form-container-pacijent input,select {
+    display: block;
+    border-radius: 4px;
+    border: 0;
+    border-bottom: 1px solid rgb(0,0,0,.4);
+    padding: 6px 6px 6px 10px;
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all .5s ease-in;
+} 
+
+
+.form-container-pacijent span {
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .4s;
+}
+
+
+.form-container-pacijent input:focus,
+.form-container-pacijent input:focus-visible {
+    border: 1px solid  rgb(33, 250, 131);
+    box-shadow: 0 0 5px rgb(0,0,0,.3);
+    outline: none;
+}
+
+.form-container-pacijent .input-container select,fieldset{
+    width:80%
+} 
+.form-container-pacijent .ValidationMessage{
+    font-size: 0.7rem;
+    color: rgba(255, 147, 147, 1);
+    font-weight: 600;
+}
+/* ======================================================  End Form pacijent =====================================*/
+/* ======================================================  Form Hospitalizacija =====================================*/
+.form-container-hospitalizacija {
+    background-color:var(--form-color);
+    margin-right: 3vw;
+    margin-left: 3vw;
+    margin-bottom: 3vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px); 
+    border-radius: 10px;
+    justify-content: center;
+}
+.form-container-hospitalizacija .input-container{
+    display: grid;
+    height: 12vh;
+    grid-template-rows: 1fr 1fr;
+    padding: 2vw;
+}
+.form-container-hospitalizacija .input-container-radio{
+    display: grid;
+    padding: 2vw;
+}
+@media  (max-width: 940px) {
+    .form-container-hospitalizacija .input-container{
+        height: auto;
+    }
+}
+
+.form-container-hospitalizacija input, select {
+    border-radius: 4px;
+    border: 0;
+    border-bottom: 1px solid rgb(0,0,0,.4);
+    padding: 6px 6px 6px 10px;
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all .5s ease-in;
+    justify-self: center;
+    align-self: flex-end;
+} 
+.form-container-hospitalizacija select, input[type="date"], input[type="number"] {
+width: 200px;
+}
+.form-container-hospitalizacija input:disabled{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.form-container-hospitalizacija span {
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .4s;
+}
+
+
+
+
+.form-container-hospitalizacija input:focus,
+.form-container-hospitalizacija input:focus-visible {
+    border: 1px solid  rgb(33, 250, 131);
+    box-shadow: 0 0 5px rgb(0,0,0,.3);
+    outline: none;
+}
+/* .form-container-hospitalizacija input:valid {
+    border: 1px solid rgb(47, 33, 250);  
+} */
+
+.form-header-hospitalizacija {
+    padding: 1vw;
+    letter-spacing: .06em;
+    font-size: 2rem;
+}
+@media (max-width: 600px){
+    
+    .form-container-hospitalizacija{
+        padding-bottom: 2vw;
+    }
+    select{
+        max-height: 10vw;
+    }
+}
+
+.form-container-hospitalizacija fieldset {
+    display: flex;
+    gap: 5vw;
+}
+
+.form-container-hospitalizacija .ValidationMessage{
+    font-size: 0.5rem;
+    color: rgb(255, 0, 0);
+}
+
+/* ====================================================== End Form Hospitalizacija =====================================*/
+/* ====================================================== End Form section =====================================*/
+
+/* ======================================================  Table section =====================================*/
+/* ======================================================  Table Hospitalizacija section =====================================*/
+.table-spisak-hospitalizacija-korisnik th{
+    border: 1px solid black;
+    font-size: 1rem;
+    padding: 0.5vw;
+    text-align: center;
+    background-color:var(--dark-blue);
+    color: white;
+}
+.table-spisak-hospitalizacija-administrator td{
+    font-size: 0.8rem;
+}
+.table-spisak-hospitalizacija-administrator tr:nth-child(even){background-color: #f2f2f2;}
+
+.table-spisak-hospitalizacija-administrator tr:hover {background-color: #ddd;}
+
+
+.administrator-table-content h1{
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+}
+.table-button{
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    width: 100%;
+    border-radius: 4px;
+    border: 0;
+    background-color: var(--dusky-green);
+    color: aliceblue;
+    padding: 1px 1px 1px 3px;
+}
+.table-button:hover{
+background-color: var(--bright-green);
+}
+/* ======================================================  End Table Hospitalizacija section =====================================*/
+/* ======================================================  Table pacijent section =====================================*/
+.table-pacijent{
+    width: 60vw;
+}
+
+.table-pacijent th{
+    font-size: 1rem;
+    padding: 0.5vw;
+    text-align: center;
+    background-color:var(--dark-blue);
+    color: white;
+}
+.table-pacijent td{
+    font-size: 0.8rem;
+}
+@media (max-width: 400px) {
+    .table-pacijent th {
+     font-size: 0.9rem;
+    } 
+    .table-pacijent td{
+     font-size: 0.5rem;
+ }
+ }
+.table-pacijent tr:nth-child(even){background-color: #f2f2f2;}
+
+.form-container-pacijent fieldset{
+    display: flex;
+    gap: 1vw;
+}
+/* ====================================================== End Table section =====================================*/
+/* ====================================================== PopUp section =====================================*/
+  /* Styles for popup */
+  .popup {
+    color: black;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: start;
+    justify-content: center;
+  }
+  .popup-content {
+    font-size: 1rem;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  #confirmDelete,#cancelDelete{
+    color: #ffff;
+    background-color:rgb(76, 139, 164);
+    font-size: 1rem;
+    width: 3rem;
+    padding: 0.2rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 0px 0px rgb(76,108,164,0.5);
+  }
+  /* ====================================================== PopUp section =====================================*/

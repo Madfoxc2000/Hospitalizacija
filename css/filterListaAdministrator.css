@@ -1,0 +1,244 @@
+
+
+/* ====================================================== Form section =====================================*/
+
+.main-administrator{
+    display: grid;
+    grid-template-rows: 10vh minmax(86vh, auto) 4vh;
+    background-color: var(--dark-blue);
+}
+
+.main-korisnik h1{
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+.main-administrator h1{
+    margin-left: 1rem;
+    font-size: 1.5rem;
+}
+.filter-form-container{
+    z-index: 1; 
+    display: grid;
+    gap: 0.3rem;
+    padding: 1vw;
+    height: 18vh;
+    background-color:  rgb(0,181,226,0.1);
+    border-radius: 10px;
+    margin-bottom: 2vh;
+}
+.filter-form-container.pacijent {
+    z-index: 1; 
+    display: grid;
+    gap: 0.3rem;
+    padding: 1vw;
+    height: 18vh;
+    background-color:  rgb(0,181,226,0.1);
+    border-radius: 10px;
+}
+.filter-form-upper{
+    justify-items: center;
+    display: grid;
+    gap: 0.3rem;
+}
+.filter-form-lower{
+    justify-items: center;
+    display: grid;
+    gap: 0.3rem;
+}
+.filter-form-container input{
+    border-radius: 4px;
+    border: 0;
+    border-bottom: 1px solid rgb(0,0,0,.4);
+    padding: 2px 2px 2px 3px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all .5s ease-in;
+}
+
+.table-form-container{
+    margin-left: 5vw;
+    margin-right: 5vw; 
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10vh;
+}
+.table-form-container button{
+    width: 80%;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: var(--form-color);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem; 
+    border-radius: 2px; 
+    box-shadow: var(--bright-blue) 2px 2px 5px;
+    border: 0px solid rgb(28, 110, 164);
+}
+.table-form-container button:hover{
+color: black;
+background-color: var(--bright-blue);
+}
+
+@media (max-width: 600px) {
+    .table-form-container{
+        grid-template-columns: 1fr;
+        margin-left: 0;
+        margin-right: 0;
+        gap: 0; 
+    }
+    .filter-form-container{
+        position: relative;
+        top: 0;
+    }
+}
+/* ====================================================== End Form section =====================================*/
+/* ====================================================== Table section =====================================*/
+.table-container{
+    height: 45vh;
+    overflow-x:auto;
+}
+@media (min-height: 800px){
+    .table-container{
+        height: 40vh;
+    }
+}
+.table-spisak-hospitalizacija-korisnik{
+    
+}
+.table-spisak-hospitalizacija-korisnik th{
+    border: solid 1px black;
+    text-align: center;
+    font-size: 1rem;
+    background-color:rgb(2, 160, 199);
+    color: white;
+}
+.table-spisak-hospitalizacija-korisnik {
+    width: 100%;
+}
+.table-spisak-hospitalizacija-korisnik td{
+    font-size: 0.8rem;
+    text-align: center;
+}
+.table-spisak-hospitalizacija-korisnik tr:nth-child(even){background-color: var(--dark-blue-table-nth);}
+
+
+.main-index-table-content h1{
+    font-weight: 400;
+    text-align: center;
+    
+}
+.table-button{
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    width: 100%;
+    border-radius: 4px;
+    border: 0;
+    background-color: var(--dusky-green);
+    color: aliceblue;
+    padding: 1px 1px 1px 3px;
+}
+.table-button:hover{
+background-color: var(--bright-green);}
+
+#thHiden{
+background-color: transparent;
+border: 0;
+width: 20%;
+}
+
+#th1{
+    height: 5vh;
+    width: 20%;
+}
+
+#th2{
+    height: 5vh;
+    width: 20%;
+}
+#th3{
+    height: 5vh;
+    width: 20%;
+}
+#th4{
+    height: 5vh;
+    width: 20%;
+}
+#th5{
+    height: 5vh;
+    width: 20%;
+    
+}
+
+
+ td form{
+    margin-right: 0.5vw;
+    margin-left: 0.5vw;
+    display: inline-block;
+} 
+.material-symbols-outlined:hover{
+    color: var(--bright-green);
+    cursor: pointer;
+}
+.material-symbols-outlined{
+font-size: 1.5rem ;
+}
+
+@media (max-width: 940px){
+    #th1{
+        width: 23%;
+    }
+    #th2{
+        width: 23%;
+    }
+    #th3{
+        width: 23%;
+    }
+    #th4{
+        width: 23%;
+    }
+    #th5{
+        width: 8%;
+    }
+    #thHiden{
+        width: 8%;
+    }
+    td form{
+      
+        display: block;
+    }
+   
+}
+/* ====================================================== End Table section =====================================*/
+/* ====================================================== PopUp section =====================================*/
+  /* Styles for popup */
+  .popup {
+    color: black;
+    z-index: 202;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: start;
+    justify-content: center;
+  }
+  .popup-content {
+    font-size: 1rem;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  #confirmDelete,#cancelDelete{
+    color: #ffff;
+    background-color:rgb(76, 139, 164);
+    font-size: 1rem;
+    width: 3rem;
+    padding: 0.2rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 0px 0px rgb(76,108,164,0.5);
+  }
+  /* ====================================================== PopUp section =====================================*/
