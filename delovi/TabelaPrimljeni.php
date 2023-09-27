@@ -1,4 +1,4 @@
-<h1>Списак активних пацијенат</h1>
+<h1>Списак активних пацијената</h1>
 	<div class="table-form-container">
    
 	<div class="filter-form-container pacijent">

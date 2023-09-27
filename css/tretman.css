@@ -4,6 +4,12 @@ grid-template-rows: 1fr 5fr ;
 justify-self: center;
 margin-bottom: 2vh;
 }
+@media (max-width:600px) {
+    .form-container-tretman{
+        margin-left: 1vh;
+        margin-right: 1vh;
+    }
+}
 input, select {
     height: 1.5rem;
     border-radius: 4px;

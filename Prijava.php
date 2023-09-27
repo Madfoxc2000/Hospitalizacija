@@ -21,13 +21,13 @@
    
         <?php include 'delovi/footer.php';?>
 </div>
-
+<!-- Omogucava prikaz poruke o neuspelom prijavljivanju -->
 <script> function updateKorisnickoMessage( message) {
     let KorisnickoMessage = document.getElementById("KorisnickoMessage");
     KorisnickoMessage.textContent = message;
 }
 </script>
-
+<!-- Omogucava poziv javascript funkcije ukoliko je prijava korisnika neuspela -->
 <?php
 session_start();
 

@@ -67,26 +67,6 @@ class Prijem extends Tabela{
 	}
 	return $DatumPrijema;
 }
-// public function DajIDPrijemaHospitalizacije($ID){
-// //Vraca datum rodjenja kojeg cita iz entiteta pacijent za zeljeni Broj istorije bolesti 
-// $SQLPrijem = "SELECT * FROM `".$this->OtvorenaKonekcija->KompletanNazivBazePodataka."`.`hospitalizacija` WHERE IDPrijema='$ID'";
-// $this->UcitajSvePoUpitu($SQLPrijem);
-// $this->PrebaciKolekcijuUListu($this->Kolekcija);
-// if ($this->BrojZapisa>0)
-// {
-//     // postoji zapis
-//     foreach ($this->ListaZapisa as $VrednostCvoraListe)
-//     {
-//         $IDPrijema=$VrednostCvoraListe[0];
-        
-//     }
-// }  			
-// else 
-// {
-//     $IDPrijema='Nema zapisa';
-// }
-// return   $IDPrijema;
-// }
 
 public function DajIDPrijemaHospitalizacije($ID){
     //Vraca ID prijema za prosledjeni ID hospitalizacije

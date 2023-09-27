@@ -71,11 +71,11 @@
 	<?php include 'delovi/ZaglavljeAdministrator.php';?>
 	
 	
-	<!------- GLAVNI SADRZAJ desno ----------->
+	<!------- GLAVNI SADRŽAJ desno ----------->
 	<div><?php include 'delovi/TabelaFilterAdministrator.php';?></div>
 
 	
-	<!-- footer panel starts here -->
+	<!-- Footer počinje ovde  -->
 	
 	<?php include 'delovi/footer.php';?>
 </div>
