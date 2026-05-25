@@ -1,5 +1,5 @@
 
-// Podesavanje tastera koji okidaju akcije na listi  
+// Podesavanje tastera koji okidaju akcije na listi
 /* ====================================================== Brisanje sekcija =====================================*/
 // Delegated handler to support dynamically rendered rows
 document.addEventListener("click", function (e) {
@@ -26,26 +26,24 @@ document.addEventListener("click", function (e) {
 });
 
 
- // Preuzima refernce elemenata
- function showConfirmationPopup(formId) {
- const popup = document.getElementById("popup");
- const confirmDelete = document.getElementById("confirmDelete");
- const cancelDelete = document.getElementById("cancelDelete");
+function showConfirmationPopup(formId) {
+  const popup = document.getElementById("popup");
+  const confirmDelete = document.getElementById("confirmDelete");
+  const cancelDelete = document.getElementById("cancelDelete");
 
- popup.style.display = "flex";
+  const bsModal = new bootstrap.Modal(popup);
+  bsModal.show();
 
- // Sakriva popup prozor ukoliko je dugme "cancel" pritisnuto
- cancelDelete.addEventListener("click", function() {
-   popup.style.display = "none";
- });
+  cancelDelete.addEventListener("click", function () {
+    bsModal.hide();
+  }, { once: true });
 
- // Salje formu ukoliko je dugme "confirm" pritisnuto
- confirmDelete.addEventListener("click", function() {
-   popup.style.display = "none";
-   sendDeleteForm(formId);
- });
+  confirmDelete.addEventListener("click", function () {
+    bsModal.hide();
+    sendDeleteForm(formId);
+  }, { once: true });
 
-return false;
+  return false;
 }
 
 function sendDeleteForm(formId) {
@@ -95,16 +93,14 @@ document.addEventListener("submit", function (e) {
 // Handled by delegated click listener above.
 
 
-// Preuzima refernce elemenata
- function sendUpdateForm(formId) {
-   document.getElementById(formId).submit(); // Prosledjuje specificnu formu
- }
+function sendUpdateForm(formId) {
+  document.getElementById(formId).submit();
+}
 
 /* ====================================================== Stampanje sekcija =====================================*/
 // Handled by delegated click listener above.
 
 
-// Preuzima refernce elemenata
- function submitPrintForm(formId) {
-   document.getElementById(formId).submit(); // Prosledjuje specificnu formu
- }
+function submitPrintForm(formId) {
+  document.getElementById(formId).submit();
+}

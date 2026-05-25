@@ -1,28 +1,27 @@
 <?php $korisnik = $_SESSION['korisnik'] ?? ''; ?>
-<meta charset="UTF-8">
-<nav class="nav-bar">
-    <div class="logo"><font color="black" size="2px">Корисник: <b><?php echo htmlspecialchars($korisnik); ?></b></font></div>
-    <div class="menu">
+<nav class="navbar navbar-dark py-0 sticky-top" style="background-color: rgba(66,135,245,0.2); height: 10vh;">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 small">Корисник: <b><?php echo htmlspecialchars($korisnik); ?></b></span>
+        <div class="d-flex gap-3 align-items-center">
 
-        <picture onclick="window.location.href='pacijent-lista-korisnik';">
-            <source media="(max-width: 799px)" srcset="images/personS.png" />
-            <source media="(min-width: 800px)" srcset="images/person.png" />
-            <img src="images/person.png" alt="PatientList">
-        </picture>
+            <picture style="cursor:pointer;" onclick="window.location.href='pacijent-lista-korisnik';">
+                <source media="(max-width: 799px)" srcset="images/personS.png" />
+                <source media="(min-width: 800px)" srcset="images/person.png" />
+                <img src="images/person.png" alt="PatientList" class="rounded nav-icon-hover" />
+            </picture>
 
-        <picture onclick="window.location.href='hospitalizacija-lista-korisnik';">
-            <source media="(max-width: 799px)" srcset="images/hospitalizacijeListaS.png" />
-            <source media="(min-width: 800px)" srcset="images/hospitalizacijeLista.png" />
-            <img src="images/hospitalizacijeLista.png" alt="HospitalizationList">
-        </picture>
+            <picture style="cursor:pointer;" onclick="window.location.href='hospitalizacija-lista-korisnik';">
+                <source media="(max-width: 799px)" srcset="images/hospitalizacijeListaS.png" />
+                <source media="(min-width: 800px)" srcset="images/hospitalizacijeLista.png" />
+                <img src="images/hospitalizacijeLista.png" alt="HospitalizationList" class="rounded nav-icon-hover" />
+            </picture>
 
-        <div class="log-out">
-            <picture id="M" onclick="window.location.href='/Hospitalizacija/';">
+            <picture style="cursor:pointer;" onclick="window.location.href='/Hospitalizacija/';">
                 <source media="(max-width: 799px)" srcset="images/logoutS.png" />
                 <source media="(min-width: 800px)" srcset="images/logout.png" />
-                <img src="images/logout.png" alt="LogOut" />
+                <img src="images/logout.png" alt="LogOut" class="rounded nav-icon-hover" />
             </picture>
+
         </div>
     </div>
-    <div class="mobile-menu-icon">&#9776;</div>
 </nav>

@@ -68,6 +68,22 @@ public function ObrisiHospitalizaciju($IdZaBrisanje)
  	return $greska;
  }
 
+public function DodajOtpust($idPrijema, $osnUzrok, $pratece, $satiVent, $datumOtpusta, $brojDana, $odeljenje, $vrstaOtp, $obdukovan, $uzrokSmrti)
+{
+    $prateceSQL = empty($pratece)    ? 'NULL' : "'$pratece'";
+    $satiSQL    = empty($satiVent)   ? 'NULL' : "'$satiVent'";
+    $obdukSQL   = empty($obdukovan)  ? 'NULL' : "'$obdukovan'";
+    $uzrokSQL   = empty($uzrokSmrti) ? 'NULL' : "'$uzrokSmrti'";
+
+    $SQL = "INSERT INTO `hospitalizacija`
+        (IDPrijema, OsnovniUzrokHospitalizacije, PrateceDijagnoze, BrojSatiVentilatornePodrske,
+         DatumOtpusta, BrojDanaHospitalizacije, OdeljenjeSaKojegJeOtpustIzvrsen, VrstaOtpusta, Obdukovan, OsnovniUzrokSmrti)
+        VALUES ('$idPrijema', '$osnUzrok', $prateceSQL, $satiSQL,
+                '$datumOtpusta', '$brojDana', '$odeljenje', '$vrstaOtp', $obdukSQL, $uzrokSQL)";
+
+    return $this->IzvrsiAktivanSQLUpit($SQL);
+}
+
 public function IzmeniHospitalizaciju($ID, $OsnovniUzrokHospitalizacije, $PrateceDijagnoze, $BrojSatiVentilatornePodrske, $DatumOtpusta, $BrojDanaHospitalizacije, $OdeljenjeSaKojegJeOtpustIzvrsen, $VrstaOtpusta, $Obdukovan, $OsnovniUzrokSmrti)
 {
 //Menja vrednosti u entitetu hospitalizacija na mestu gde se nalazi zadati ID

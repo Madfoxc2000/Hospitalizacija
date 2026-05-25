@@ -1,11 +1,12 @@
-<meta charset="UTF-8">
 <div class="banner"></div>
 <div class="banner-container"></div>
-<div class="nav-bar">
-    <div class="logo">
-        <img src="images/logoHospital.png" alt="Logo">
+<nav class="navbar navbar-dark py-0 sticky-top" style="background-color: rgba(66,135,245,0.2); height: 10vh;">
+    <div class="container-fluid">
+        <span class="navbar-brand">
+            <img src="images/logoHospital.png" alt="Logo" height="40">
+        </span>
+        <div class="d-flex align-items-center" style="border-radius:20px; padding:3px; opacity:0.7;">
+            <span class="material-symbols-outlined nav" onclick="window.location.href='/Hospitalizacija/';">home</span>
+        </div>
     </div>
-    <div class="menu-index" style="border-radius:20px; padding:3px; opacity:0.7;">
-        <span class="material-symbols-outlined nav" onclick="window.location.href='/Hospitalizacija/';">home</span>
-    </div>
-</div>
+</nav>

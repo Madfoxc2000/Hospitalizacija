@@ -1,44 +1,51 @@
-<div class="popup" id="popup">
-  <div class="popup-content">
-    <p>Да ли сте сигурни да желите да обришете запис?</p>
-    <button id="confirmDelete">Да</button>
-    <button id="cancelDelete">Nе</button>
-  </div>
+<div class="modal fade" id="popup" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <p>Да ли сте сигурни да желите да обришете запис?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-danger" id="confirmDelete">Да</button>
+                <button class="btn btn-secondary" id="cancelDelete">Не</button>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="administrator-table-content">
 
+<div class="administrator-table-content">
     <h1>Списак пацијената</h1>
     <div class="table-form-container">
 
         <div class="filter-form-container pacijent">
             <form class="filter-form-upper" id="filter-form-upper" action="" method="GET">
-                <label for="filter">Број историје болести:</label>
-                <input type="text" id="filter" name="filter"/>
-                <button type="submit" name="filtriraj" value="Филтрирај">Филтрирај</button>
+                <label class="form-label" for="filter">Број историје болести:</label>
+                <input type="text" class="form-control form-control-sm" id="filter" name="filter"/>
                 <span class="ValidationMessage" id="filterMessage"></span>
-                <button type="submit" name="svi" value="СВИ">СВИ</button>
+                <div class="d-flex gap-2 mt-1">
+                    <button type="submit" class="btn btn-sm btn-outline-light" name="filtriraj" value="Филтрирај">Филтрирај</button>
+                    <button type="submit" class="btn btn-sm btn-outline-secondary" name="svi" value="СВИ">СВИ</button>
+                </div>
             </form>
         </div>
 
         <div class="table-container-main">
             <div id="pacijenti-status">Учитавање...</div>
-            <table class="table-spisak-hospitalizacija-korisnik" align="center" cellspacing="0" cellpadding="0" bgcolor="">
+            <table class="table table-dark table-bordered table-sm w-100">
                 <thead>
                     <tr>
-                        <th id="th1"><b><font face="Trebuchet MS">Број историје болести</font><br/></th>
-                        <th id="th2"><b><font face="Trebuchet MS">Име</font><br/></th>
-                        <th id="th3"><b><font face="Trebuchet MS">Презиме</font><br/></th>
-                        <th id="th4"><b><font face="Trebuchet MS">Датум рођења</font><br/></th>
-                        <th id="thHiden"><b><font></font><br/></th>
+                        <th id="th1">Број историје болести</th>
+                        <th id="th2">Име</th>
+                        <th id="th3">Презиме</th>
+                        <th id="th4">Датум рођења</th>
+                        <th id="thHiden"></th>
                     </tr>
                 </thead>
             </table>
-            <div class="table-container">
-                <table class="table-spisak-hospitalizacija-korisnik" align="center" cellspacing="0" cellpadding="0" bgcolor="">
+            <div class="table-responsive table-container">
+                <table class="table table-dark table-striped table-hover table-sm w-100">
                     <tbody id="pacijenti-body"></tbody>
                 </table>
             </div>
         </div>
     </div>
-
 </div>

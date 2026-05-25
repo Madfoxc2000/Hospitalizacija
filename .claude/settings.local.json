@@ -9,7 +9,11 @@
       "Bash(ConvertTo-Csv -NoTypeInformation)",
       "Bash(Out-String)",
       "PowerShell(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Hospitalizacija\" -Recurse -Force | Select-Object FullName | ForEach-Object { $_.FullName })",
-      "Bash(Get-Content \"C:\\\\xampp\\\\apache\\\\logs\\\\error.log\" -Tail 30)"
+      "Bash(Get-Content \"C:\\\\xampp\\\\apache\\\\logs\\\\error.log\" -Tail 30)",
+      "Bash(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Hospitalizacija\" -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Hospitalizacija\\\\public\" -Recurse -File | Where-Object { $_.Extension -in @\\('.js', '.json'\\) } | Select-Object -ExpandProperty FullName | head -20)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Hospitalizacija\\\\public\" -Recurse -File | Where-Object { $_.Extension -in @\\('.js', '.json'\\) } | Select-Object -ExpandProperty FullName | Select-Object -First 20)"
     ]
   }
 }

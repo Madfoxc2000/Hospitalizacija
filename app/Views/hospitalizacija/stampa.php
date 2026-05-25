@@ -1,38 +1,36 @@
-<table style="width:100%; padding:0" align="center" cellspacing="0" cellpadding="0" border="0" bgcolor="white">
+<table style="width:100%; padding:0;" cellspacing="0" cellpadding="0" border="0">
 <tr>
 <td style="width:5%;"></td>
-<td></td>
-<td style="width:5%;"></td>
-</tr>
-
-<tr>
-<td style="width:5%;"></td>
-<td align="left">
+<td>
 <br/>
-<font face="Trebuchet MS" color="darkblue" size="4px">
+<span style="color: darkblue; font-size: 1rem;">
 
 <?php if ($ukupanBroj > 0): ?>
-<table style="width:90%; padding:0" align="center" cellspacing="0" cellpadding="0" border="1" bgcolor="white">
+<table style="width:90%; border-collapse: collapse;" border="1">
+<thead>
 <tr>
-    <td style="width:10%;"><font face="Trebuchet MS" size="3px">Број историје болести</font><br/></td>
-    <td style="width:20%;"><b><font face="Trebuchet MS" size="3px">Основни узрок хоспитализације</font><br/></td>
-    <td style="width:50%;"><b><font face="Trebuchet MS" size="3px">Датум пријема</font><br/></td>
-    <td style="width:20%;"><b><font face="Trebuchet MS" size="3px">Датум отпуста</font><br/></td>
+    <th style="width:10%; padding: 4px;">Број историје болести</th>
+    <th style="width:20%; padding: 4px;">Основни узрок хоспитализације</th>
+    <th style="width:50%; padding: 4px;">Датум пријема</th>
+    <th style="width:20%; padding: 4px;">Датум отпуста</th>
 </tr>
+</thead>
+<tbody>
 <?php foreach ($items as $row): ?>
 <tr>
-    <td><font face="Trebuchet MS" size="2px"><?= htmlspecialchars($row['brojIstorijeBolesti']) ?></font><br/></td>
-    <td><font face="Trebuchet MS" size="2px"><?= htmlspecialchars($row['osnovniUzrokHospitalizacije']) ?></font><br/></td>
-    <td><font face="Trebuchet MS" size="2px"><?= htmlspecialchars($row['datumPrijema']) ?></font><br/></td>
-    <td><font face="Trebuchet MS" size="2px"><?= htmlspecialchars($row['datumOtpusta']) ?></font><br/></td>
+    <td style="padding: 3px;"><?= htmlspecialchars($row['brojIstorijeBolesti']) ?></td>
+    <td style="padding: 3px;"><?= htmlspecialchars($row['osnovniUzrokHospitalizacije']) ?></td>
+    <td style="padding: 3px;"><?= htmlspecialchars($row['datumPrijema']) ?></td>
+    <td style="padding: 3px;"><?= htmlspecialchars($row['datumOtpusta']) ?></td>
 </tr>
 <?php endforeach; ?>
+</tbody>
 </table><br/><br/>
 <?php else: ?>
 НЕМА ПОДАТАКА
 <?php endif; ?>
 
-</font>
+</span>
 </td>
 <td style="width:5%;"></td>
 </tr>

@@ -3,32 +3,34 @@
 
     <div class="filter-form-container">
         <form class="filter-form-upper" id="filter-form-upper" action="" method="GET">
-            <label for="filter">Основни узрок хоспитализације:</label>
-            <input type="text" name="filter" id="filter"/>
+            <label class="form-label" for="filter">Основни узрок хоспитализације:</label>
+            <input type="text" class="form-control form-control-sm" name="filter" id="filter"/>
             <span class="ValidationMessage" id="filterMessage"></span>
-            <button type="submit" name="filtriraj" value="Филтрирај">Филтрирај</button>
-            <button type="submit" name="svi" value="СВИ">СВИ</button>
+            <div class="d-flex gap-2 mt-1">
+                <button type="submit" class="btn btn-sm btn-outline-light" name="filtriraj" value="Филтрирај">Филтрирај</button>
+                <button type="submit" class="btn btn-sm btn-outline-secondary" name="svi" value="СВИ">СВИ</button>
+            </div>
         </form>
-        <form class="filter-form-lower" action="stampa" method="GET">
+        <form class="filter-form-lower mt-2" action="stampa" method="GET">
             <input type="hidden" name="filter" id="filter-print" value=""/>
-            <button type="submit" name="filtriraj" value="Штампај по филтеру">Штампај</button>
+            <button type="submit" class="btn btn-sm btn-outline-warning w-100" name="filtriraj" value="Штампај по филтеру">Штампај</button>
         </form>
     </div>
 
     <div class="table-container-main">
         <div id="hospitalizacije-korisnik-status">Учитавање...</div>
-        <table class="table-spisak-hospitalizacija-korisnik" align="center" cellspacing="0" cellpadding="0">
+        <table class="table table-dark table-bordered table-sm w-100">
             <thead>
                 <tr>
-                    <th id="th1"><b><font face="Trebuchet MS">Број историје болести</font><br/></th>
-                    <th id="th2"><b><font face="Trebuchet MS">Основни узрок хоспитализације</font><br/></th>
-                    <th id="th3"><b><font face="Trebuchet MS">Датум пријема</font><br/></th>
-                    <th id="th4"><b><font face="Trebuchet MS">Датум отпуста</font><br/></th>
+                    <th id="th1">Број историје болести</th>
+                    <th id="th2">Основни узрок хоспитализације</th>
+                    <th id="th3">Датум пријема</th>
+                    <th id="th4">Датум отпуста</th>
                 </tr>
             </thead>
         </table>
-        <div class="table-container">
-            <table class="table-spisak-hospitalizacija-korisnik" align="center" cellspacing="0" cellpadding="0" border="1">
+        <div class="table-responsive table-container">
+            <table class="table table-dark table-striped table-hover table-sm w-100">
                 <tbody id="hospitalizacije-korisnik-body"></tbody>
             </table>
         </div>

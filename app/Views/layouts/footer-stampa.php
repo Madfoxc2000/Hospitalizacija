@@ -1,5 +1,7 @@
-<tr style="padding:0px;">
+<tr>
 <td style="width:10%;"></td>
-<td align="center" valign="middle" bgcolor="#FFFFFF"><font face="Trebuchet MS" color="black" size="2px">Болница Зрењанин</font></td>
+<td class="text-center" style="background-color: #FFFFFF; color: black; font-size: 0.9rem;">
+    Болница Зрењанин
+</td>
 <td style="width:10%;"></td>
 </tr>

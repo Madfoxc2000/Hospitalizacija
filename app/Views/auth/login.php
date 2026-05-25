@@ -1,21 +1,19 @@
-<div class="form-container-prijava">
-    <div>
-        <h1 class="form-header">Пријави се</h1>
+<div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+    <div class="form-container-login">
+        <h1 class="mb-4 fs-3">Пријави се</h1>
+        <form name="prijavaForm" id="prijavaForm">
+            <div class="mb-3">
+                <label for="korisnickoIme" class="form-label">Корисник<span aria-label="required">*</span></label>
+                <input type="text" class="form-control" name="korisnickoIme" placeholder="Унесите корисничко име" required>
+            </div>
+            <div class="mb-3">
+                <label for="sifra" class="form-label">Шифра<span aria-label="required">*</span></label>
+                <input type="password" class="form-control" name="sifra" placeholder="Унесите шифру" required>
+            </div>
+            <div class="d-flex flex-column align-items-center gap-2 mt-3">
+                <span class="ValidationMessage" id="KorisnickoMessage"></span>
+                <button type="submit" class="btn btn-primary w-100" name="loginuser" value="Пријави се">Пријави се</button>
+            </div>
+        </form>
     </div>
-    <form name="prijavaForm" id="prijavaForm">
-        <div class="form-content">
-            <div class="input-container">
-                <label for="korisnickoIme">Корисник<span aria-label="required">*</span></label>
-                <input type="text" name="korisnickoIme" placeholder="Унесите корисничко име" required>
-            </div>
-            <div class="input-container">
-                <label for="sifra">Шифра<span aria-label="required">*</span></label>
-                <input type="password" name="sifra" placeholder="Унесите шифру" required>
-            </div>
-        </div>
-        <div class="signup-btn-container">
-            <span class="ValidationMessage" id="KorisnickoMessage"></span>
-            <button type="submit" class="signup-btn" name="loginuser" value="Пријави се">Пријави се</button>
-        </div>
-    </form>
 </div>

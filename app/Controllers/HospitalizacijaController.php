@@ -289,26 +289,20 @@ class HospitalizacijaController extends BaseController {
         $poslovnaObj = new PoslovnaLogika();
         $brojDana    = $poslovnaObj->DajBrojDana($datumPrijema, $datumOtpusta);
 
-        $hObj = new SPHospitalizacija($db, 'hospitalizacija');
-        $hObj->BrojDanaHospitalizacije         = $brojDana;
-        $hObj->IDPrijema                       = $idPrijema;
-        $hObj->OsnovniUzrokHospitalizacije     = $osnUzrok;
-        $hObj->PrateceDijagnoze                = $pratece;
-        $hObj->BrojSatiVentilatornePodrske     = $satiVent;
-        $hObj->DatumOtpusta                    = $datumOtpusta;
-        $hObj->OdeljenjeSaKojegJeOtpustIzvrsen = $odeljenje;
-        $hObj->VrstaOtpusta                    = $vrstaOtp;
-        $hObj->Obdukovan                       = $obdukovan;
-        $hObj->OsnovniUzrokSmrti               = $uzrokSmrti;
-
-        $greska1 = $hObj->DodajNovuHospitalizaciju();
+        $hObj    = new Hospitalizacija($db, 'hospitalizacija');
+        $greska1 = $hObj->DodajOtpust(
+            $idPrijema, $osnUzrok, $pratece, $satiVent,
+            $datumOtpusta, $brojDana, $odeljenje,
+            $vrstaOtp, $obdukovan, $uzrokSmrti
+        );
         $greska2 = $prijemObj->ArhivirajPrijem($idPrijema);
         $greska  = $greska1 . $greska2;
         $tr->ZavrsiTransakciju($greska);
         $db->disconnect();
 
         if ($greska) {
-            $this->json(['error' => 'store_failed', 'details' => $greska], 500);
+            error_log('[hospitalizacija-unos] ' . $greska);
+            $this->json(['error' => 'Грешка при чувању: ' . $greska], 500);
         }
 
         $this->json(['ok' => true]);

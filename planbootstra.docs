@@ -1,0 +1,67 @@
+Bootstrap Migration Plan
+Overview
+The project has no Bootstrap currently. It uses 6 custom CSS files (~1,241 lines total), 164 inline style instances, and deprecated HTML (<font>, bgcolor, align, etc.) across 40+ view files.
+
+Phase 0 — Bootstrap Setup (1 file)
+Add Bootstrap 5 CDN to all layout headers in app/Views/layouts/. There are 5 nav files and 2 footer files that form the page shells. Every page gets Bootstrap via these layouts.
+
+Files: nav-administrator.php, nav-korisnik.php, nav-index.php, nav-prijava.php, nav-stampa.php
+
+Phase 1 — Navigation Bars (3 files)
+Replace the custom .nav-bar / .nav-bar-administrator / .dropdown / .mobile-menu-icon patterns with Bootstrap's navbar component.
+
+Gains: Responsive hamburger collapse for free, no custom JS needed, removes ~80 lines from style.css.
+
+Files: nav-administrator.php, nav-korisnik.php, nav-index.php
+
+Phase 2 — Forms (7 files)
+Replace CSS Grid auto-fit form layouts with Bootstrap's row / col-* grid + form-control, form-label, form-select, input-group. Replace custom .save-btn with btn btn-primary.
+
+Files:
+
+pacijent/unos.php, pacijent/izmeni.php
+hospitalizacija/unos.php, hospitalizacija/izmeni.php
+prijem/unos.php
+tretmani/unos.php
+auth/login.php
+Phase 3 — Tables & Filter Lists (4 files)
+Replace custom .table-container, .table-pacijent, .table-spisak-hospitalizacija with Bootstrap table table-striped table-hover table-responsive. Replace .table-button action buttons with btn btn-sm btn-outline-*.
+
+Files:
+
+pacijent/lista.php, pacijent/lista-korisnik.php
+hospitalizacija/lista-filter.php, hospitalizacija/lista-korisnik.php
+prijem/lista.php
+Phase 4 — Modals / Popups (inline in list files)
+Replace custom .popup overlay CSS with Bootstrap modal component. The popup is used on list pages to confirm delete or show details.
+
+Files: Wherever .popup appears (hospitalizacija and pacijent lists).
+
+Phase 5 — Cards & Welcome Pages (4 files)
+Replace .card-image / .card-body custom overlay cards with Bootstrap card component. Replace layout containers with Bootstrap container / d-flex / align-items-center.
+
+Files: home/index.php, pages/home.php, pages/welcome-administrator.php, pages/welcome-korisnik.php
+
+Phase 6 — Print Templates (2 files)
+Remove all <font> tags, bgcolor, align, valign, cellspacing, cellpadding deprecated HTML. Use Bootstrap's print utilities (d-print-*) and table classes. Keep izvestaj.css only for print-specific overrides Bootstrap can't cover.
+
+Files: pages/izvestaj-stampa.php, layouts/footer-stampa.php
+
+Phase 7 — CSS Cleanup
+After all views are migrated, audit each CSS file and delete rules that are now redundant:
+
+File	Expected reduction
+style.css (465 lines)	~60% removable
+administrator.css (298 lines)	~80% removable
+filterListaAdministrator.css (244 lines)	~75% removable
+filterListaKorisnik.css (117 lines)	~90% removable
+tretman.css (69 lines)	~80% removable
+izvestaj.css (48 lines)	keep most (print-specific)
+Keep only the CSS variables (--dusky-green, --dark-blue, etc.) in a small theme.css to override Bootstrap's default color palette.
+
+What Bootstrap cannot replace (keep custom)
+Print certificate layout in izvestaj-stampa.php (pixel-precise table widths)
+Material Design Icons wiring (.material-icons sizing in style.css)
+Any Serbian-language ValidationMessage positioning tied to specific form layouts
+Suggested execution order
+0 → 1 → 2 → 3 → 4 → 5 → 6 → 7, testing each phase in the browser before moving on. Phases 2–4 can overlap since they touch different files.

@@ -119,15 +119,22 @@ document.getElementById('hospitalizacijaForm').addEventListener('submit', functi
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formData).toString(),
     })
-        .then(r => { if (!r.ok) throw new Error('Request failed'); return r.json(); })
-        .then(data => {
-            if (data && data.ok) {
+        .then(r => r.text().then(text => {
+            let data;
+            try { data = JSON.parse(text); } catch (e) {
+                if (statusEl) statusEl.textContent = 'Одговор сервера: ' + text.substring(0, 400);
+                throw new Error('invalid_json');
+            }
+            return { ok: r.ok, data };
+        }))
+        .then(({ ok, data }) => {
+            if (ok && data && data.ok) {
                 window.location.href = 'hospitalizacija-lista-filter';
             } else {
-                if (statusEl) statusEl.textContent = data.error || 'Грешка при чувању';
+                if (statusEl) statusEl.textContent = (data && data.error) || 'Грешка при чувању';
             }
         })
-        .catch(() => {
-            if (statusEl) statusEl.textContent = 'Грешка при чувању';
+        .catch(e => {
+            if (e.message !== 'invalid_json' && statusEl) statusEl.textContent = 'Грешка при чувању';
         });
 });

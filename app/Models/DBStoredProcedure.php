@@ -40,7 +40,6 @@ public function DodajNovuHospitalizaciju()
 
 	if ($this->TipMYSQL=="mysqli")
 	{
-		echo "MYSQLI";
 		$rezultatPar11 = mysqli_query($this->OtvorenaKonekcija->konekcijaDB, "SET @IDPrijema='$this->IDPrijema'");
 		$GreskarezultatPar11 =  mysqli_error($this->OtvorenaKonekcija->konekcijaDB);
         $rezultatPar8 = mysqli_query($this->OtvorenaKonekcija->konekcijaDB, "SET @OsnovniUzrokHospitalizacije='$this->OsnovniUzrokHospitalizacije'");
@@ -64,7 +63,14 @@ public function DodajNovuHospitalizaciju()
         $rezultatPar18 = mysqli_query($this->OtvorenaKonekcija->konekcijaDB, "SET @OsnovniUzrokSmrti='$this->OsnovniUzrokSmrti'");
 		$GreskarezultatPar18 =  mysqli_error($this->OtvorenaKonekcija->konekcijaDB);
 		$rezultatCall = mysqli_query($this->OtvorenaKonekcija->konekcijaDB, "CALL `DodajHospitalizaciju` (@IDPrijema, @OsnovniUzrokHospitalizacije, @PrateceDijagnoze, @BrojSatiVentilatornePodrske, @DatumOtpusta, @BrojDanaHospitalizacije, @OdeljenjeSaKojegJeOtpustIzvrsen, @VrstaOtpusta, @Obdukovan, @OsnovniUzrokSmrti);");
-		$GreskarezultatCall =  mysqli_error($this->OtvorenaKonekcija->konekcijaDB);	
+		$GreskarezultatCall =  mysqli_error($this->OtvorenaKonekcija->konekcijaDB);
+
+		// Consume all result sets left by the CALL to prevent "Commands out of sync"
+		if ($rezultatCall instanceof mysqli_result) { mysqli_free_result($rezultatCall); }
+		while (mysqli_next_result($this->OtvorenaKonekcija->konekcijaDB)) {
+			$extra = mysqli_use_result($this->OtvorenaKonekcija->konekcijaDB);
+			if ($extra instanceof mysqli_result) { mysqli_free_result($extra); }
+		}
 
 	}
 	else // mysql

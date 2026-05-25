@@ -1,14 +1,11 @@
 <tr>
 <td style="width:10%;"></td>
-<td align="center" valign="middle">
-<b><font face="Trebuchet MS" color="darkblue" size="5px">Болница</font></b></br>
-</br>
-<b><font face="Trebuchet MS" color="darkblue" size="4px">Списак обављених хоспитализација</font></b>
-</br>
+<td class="text-center">
+    <strong class="d-block fs-4" style="color: darkblue;">Болница</strong>
+    <strong class="d-block fs-5" style="color: darkblue;">Списак обављених хоспитализација</strong>
 </td>
 <td style="width:10%;"></td>
 </tr>
-
 <tr>
 <td style="width:10%;"></td>
 <td>&nbsp;</td>
