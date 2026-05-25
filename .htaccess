@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Serve existing files or directories from /public
+RewriteCond %{DOCUMENT_ROOT}/Hospitalizacija/public/$1 -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/Hospitalizacija/public/$1 -d
+RewriteRule ^(.*)$ /Hospitalizacija/public/$1 [END]
+
+# Otherwise route everything through the single entry point
+RewriteRule ^(.*)$ /Hospitalizacija/public/index.php [END]
