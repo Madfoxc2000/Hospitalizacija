@@ -10,11 +10,12 @@
 <link rel="stylesheet" href="css/filterListaAdministrator.css">
 <script src="JS/script.js" async></script>
 <script src="JS/ValidacijaFiltera.js" type="module" defer></script>
+<script src="JS/StampaListe.js"></script>
 <script src="JS/PrimljeniLista.js" defer></script>
 </head>
-<body>
+<body data-uloga="<?php echo htmlspecialchars($_SESSION['uloga'] ?? ''); ?>">
 <div class="main-administrator">
-    <?php include APP_DIR . '/Views/layouts/nav-administrator.php'; ?>
+    <?php include APP_DIR . '/Views/layouts/nav-auto.php'; ?>
     <div><?php include APP_DIR . '/Views/prijem/lista.php'; ?></div>
     <?php include APP_DIR . '/Views/layouts/footer.php'; ?>
 </div>

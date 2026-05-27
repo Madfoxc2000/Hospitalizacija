@@ -8,28 +8,35 @@ document.addEventListener('DOMContentLoaded', () => {
             ? `api/pacijent-lista?filter=${encodeURIComponent(filter)}`
             : 'api/pacijent-lista';
 
-        fetch(url)
-            .then(r => r.json())
+        fetch(url, { credentials: 'same-origin' })
+            .then(r => {
+                if (!r.ok) {
+                    if (statusDiv) statusDiv.textContent = 'Грешка: HTTP ' + r.status;
+                    return Promise.reject(new Error('HTTP ' + r.status));
+                }
+                return r.json();
+            })
             .then(data => {
                 if (statusDiv) statusDiv.textContent = '';
                 tbody.innerHTML = '';
-                if (!data.pacijenti || data.pacijenti.length === 0) {
+                if (!data.items || data.items.length === 0) {
                     tbody.innerHTML = '<tr><td colspan="4">НЕМА ПОДАТАКА</td></tr>';
                     return;
                 }
-                data.pacijenti.forEach(p => {
+                data.items.forEach(p => {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td id="th1"><b><font>${p.BrojIstorijeBolesti}</font></b></td>
-                        <td id="th2"><b><font>${p.Ime}</font></b></td>
-                        <td id="th3"><b><font>${p.Prezime}</font></b></td>
-                        <td id="th4"><b><font>${p.DatumRodjenja}</font></b></td>
+                        <td><b>${p.brojIstorijeBolesti}</b></td>
+                        <td><b>${p.ime}</b></td>
+                        <td><b>${p.prezime}</b></td>
+                        <td><b>${p.datumRodjenja}</b></td>
                     `;
                     tbody.appendChild(tr);
                 });
             })
-            .catch(() => {
-                if (statusDiv) statusDiv.textContent = 'Грешка при учитавању.';
+            .catch(err => {
+                if (statusDiv && !statusDiv.textContent.startsWith('Грешка:'))
+                    statusDiv.textContent = 'Грешка при учитавању: ' + err.message;
             });
     }
 

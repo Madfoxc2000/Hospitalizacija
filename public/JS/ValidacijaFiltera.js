@@ -8,6 +8,8 @@ import{
     const filter = document.getElementById("filter");
     const filterMessage = document.getElementById("filterMessage");
 
+    const charLimit = parseInt(filter?.dataset.maxChars ?? '5', 10);
+
     if (formUpper && filter) {
         filter.oninvalid = invalid;
         filter.oninput = invalid;
@@ -35,9 +37,9 @@ import{
                     filterMessage.textContent="";
                 }
                 }
-            if(!isNumberOfCharacters(filter.value, 5)){
+            if(!isNumberOfCharacters(filter.value, charLimit)){
                     if (filterMessage) {
-                        filterMessage.textContent ="Поље мора садржати 5 карактера";
+                        filterMessage.textContent =`Поље мора садржати ${charLimit} карактера`;
                     }
                     return false;
                     }

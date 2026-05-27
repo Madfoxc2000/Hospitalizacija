@@ -13,6 +13,10 @@
             <div class="d-flex flex-column align-items-center gap-2 mt-3">
                 <span class="ValidationMessage" id="KorisnickoMessage"></span>
                 <button type="submit" class="btn btn-primary w-100" name="loginuser" value="Пријави се">Пријави се</button>
+                <a href="<?= APP_BASE ?>/registracija"
+                   style="font-size:0.85rem; color:rgba(255,255,255,0.6);">
+                    Нема налога? Региструј се
+                </a>
             </div>
         </form>
     </div>

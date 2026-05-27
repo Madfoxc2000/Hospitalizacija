@@ -7,14 +7,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
-<link rel="stylesheet" href="css/administrator.css">
-<script src="JS/script.js" async></script>
-<script src="JS/IzmeniPacijenta.js" defer></script>
 </head>
 <body>
-<div class="main-administrator">
-    <?php include APP_DIR . '/Views/layouts/nav-auto.php'; ?>
-    <div><?php include APP_DIR . '/Views/pacijent/izmeni.php'; ?></div>
+<div class="main-message">
+    <?php include APP_DIR . '/Views/layouts/nav-lekar.php'; ?>
+    <?php include APP_DIR . '/Views/welcome/message.php'; ?>
     <?php include APP_DIR . '/Views/layouts/footer.php'; ?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

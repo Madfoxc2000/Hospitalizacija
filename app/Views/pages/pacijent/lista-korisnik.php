@@ -9,11 +9,12 @@
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
 <link rel="stylesheet" href="css/filterListaAdministrator.css">
 <script src="JS/script.js" async></script>
+<script src="JS/StampaListe.js"></script>
 <script src="JS/PacijentListaKorisnik.js" defer></script>
 </head>
 <body>
 <div class="main-administrator">
-    <?php include APP_DIR . '/Views/layouts/nav-korisnik.php'; ?>
+    <?php include APP_DIR . '/Views/layouts/nav-auto.php'; ?>
     <div><?php include APP_DIR . '/Views/pacijent/lista-korisnik.php'; ?></div>
     <?php include APP_DIR . '/Views/layouts/footer.php'; ?>
 </div>

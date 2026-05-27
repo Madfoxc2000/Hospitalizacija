@@ -122,6 +122,19 @@ public function IzmeniPacijenta($BrojIstorijeBolesti, $JMBG, $ImeJednogRoditelja
 }
 
 
+public function DaLiPostojiBrojBolesti($broj)
+{
+    $conn = $this->OtvorenaKonekcija->konekcijaDB;
+    $db   = $this->OtvorenaKonekcija->KompletanNazivBazePodataka;
+    $stmt = mysqli_prepare($conn, "SELECT 1 FROM `{$db}`.`PACIJENT` WHERE BrojIstorijebolesti = ? LIMIT 1");
+    mysqli_stmt_bind_param($stmt, 's', $broj);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    $exists = mysqli_stmt_num_rows($stmt) > 0;
+    mysqli_stmt_close($stmt);
+    return $exists;
+}
+
 public function DajKolekcijuPacijenataFiltrirano($filterPolje, $filterVrednost, $nacinFiltriranja, $Sortiranje)
 //Vraca filtriranu kolekciju svih vrednosti iz entiteta hospitalizacija
 {

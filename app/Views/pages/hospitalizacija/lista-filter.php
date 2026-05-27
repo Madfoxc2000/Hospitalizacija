@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
 <link rel="stylesheet" href="css/filterListaAdministrator.css">
+<script>window.APP_USER_ROLE = <?= json_encode($_SESSION['uloga'] ?? '') ?>;</script>
 <script src="JS/script.js" async></script>
 <script src="JS/popup.js" async></script>
 <script src="JS/ValidacijaFiltera.js" type="module" defer></script>
@@ -15,7 +16,7 @@
 </head>
 <body>
 <div class="main-administrator">
-    <?php include APP_DIR . '/Views/layouts/nav-administrator.php'; ?>
+    <?php include APP_DIR . '/Views/layouts/nav-auto.php'; ?>
     <div><?php include APP_DIR . '/Views/hospitalizacija/lista-filter.php'; ?></div>
     <?php include APP_DIR . '/Views/layouts/footer.php'; ?>
 </div>

@@ -32,6 +32,13 @@ class Response {
         exit;
     }
 
+    public static function forbidden(): void {
+        http_response_code(403);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['error' => 'forbidden']);
+        exit;
+    }
+
     public static function methodNotAllowed(): void {
         http_response_code(405);
         header('Content-Type: application/json; charset=utf-8');

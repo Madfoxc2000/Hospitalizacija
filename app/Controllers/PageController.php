@@ -3,9 +3,28 @@ require_once APP_DIR . '/Controllers/BaseController.php';
 
 class PageController extends BaseController {
 
+    // Rute stranica preusmeravaju na početnu stranicu umesto da vraćaju 401 JSON.
     protected function requireAuth(): void {
         if (!isset($_SESSION['korisnik'])) {
             $this->redirect(APP_BASE . '/');
+        }
+    }
+
+    protected function requireAdminAuth(): void {
+        if (!isset($_SESSION['korisnik'])) {
+            $this->redirect(APP_BASE . '/');
+        }
+        if ($_SESSION['uloga'] !== self::ROLE_ADMIN) {
+            Response::view(APP_DIR . '/Views/pages/403.php');
+        }
+    }
+
+    protected function requireRole(array $roles): void {
+        if (!isset($_SESSION['korisnik'])) {
+            $this->redirect(APP_BASE . '/');
+        }
+        if (!in_array($_SESSION['uloga'] ?? '', $roles, true)) {
+            Response::view(APP_DIR . '/Views/pages/403.php');
         }
     }
 
@@ -19,28 +38,47 @@ class PageController extends BaseController {
         Response::view(APP_DIR . '/Views/pages/prijava.php');
     }
 
+    public function registracija(): void {
+        Response::view(APP_DIR . '/Views/pages/registracija.php');
+    }
+
+    // ── Početne stranice (dobrodošlica) ───────────────────────────────────────
+
     public function welcomeAdministrator(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN]);
         Response::view(APP_DIR . '/Views/pages/welcome-administrator.php');
     }
 
     public function welcomeKorisnik(): void {
-        $this->requireAuth();
+        $this->requireAuth(); // stara rezervna opcija
         Response::view(APP_DIR . '/Views/pages/welcome-korisnik.php');
     }
 
+    public function welcomeMedicinskaSestra(): void {
+        $this->requireRole([self::ROLE_SESTRA]);
+        Response::view(APP_DIR . '/Views/pages/welcome-medicinska-sestra.php');
+    }
+
+    public function welcomeLekar(): void {
+        $this->requireRole([self::ROLE_LEKAR]);
+        Response::view(APP_DIR . '/Views/pages/welcome-lekar.php');
+    }
+
+    // ── Hospitalizacija ───────────────────────────────────────────────────────
+    // Sve tri uloge mogu pregledati i upravljati hospitalizacijama
+
     public function hospitalizacijaListaFilter(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA, self::ROLE_LEKAR]);
         Response::view(APP_DIR . '/Views/pages/hospitalizacija/lista-filter.php');
     }
 
     public function hospitalizacijaListaKorisnik(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA, self::ROLE_LEKAR]);
         Response::view(APP_DIR . '/Views/pages/hospitalizacija/lista-korisnik.php');
     }
 
     public function hospitalizacijaUnos(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_LEKAR]);
         $idPrijema = $this->request->post('IdPrijema', '') ?: $this->request->get('IdPrijema', '');
         if ($idPrijema === '') {
             $this->redirect(APP_BASE . '/');
@@ -49,7 +87,7 @@ class PageController extends BaseController {
     }
 
     public function hospitalizacijaIzmeni(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_LEKAR]);
         $id = $this->request->post('IdHospitalizacije', '')
             ?: $this->request->get('IdHospitalizacije', '')
             ?: $this->request->get('id', '');
@@ -59,23 +97,26 @@ class PageController extends BaseController {
         Response::view(APP_DIR . '/Views/pages/hospitalizacija/izmeni.php', ['id' => $id]);
     }
 
+    // ── Pacijenti ─────────────────────────────────────────────────────────────
+    // Pun CRUD: medicinska sestra + administrator. Samo čitanje: sve uloge.
+
     public function pacijentUnos(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA]);
         Response::view(APP_DIR . '/Views/pages/pacijent/unos.php');
     }
 
     public function pacijentLista(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA, self::ROLE_LEKAR]);
         Response::view(APP_DIR . '/Views/pages/pacijent/lista.php');
     }
 
     public function pacijentListaKorisnik(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA, self::ROLE_LEKAR]);
         Response::view(APP_DIR . '/Views/pages/pacijent/lista-korisnik.php');
     }
 
     public function pacijentIzmeni(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA]);
         $id = $this->request->post('idPacijenta', '') ?: $this->request->get('idPacijenta', '');
         if ($id === '') {
             $this->redirect(APP_BASE . '/');
@@ -83,8 +124,11 @@ class PageController extends BaseController {
         Response::view(APP_DIR . '/Views/pages/pacijent/izmeni.php');
     }
 
+    // ── Prijem ────────────────────────────────────────────────────────────────
+    // Samo medicinska sestra i administrator
+
     public function pacijentPrijem(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA]);
         $id = $this->request->post('idPacijenta', '') ?: $this->request->get('idPacijenta', '');
         if ($id === '') {
             $this->redirect(APP_BASE . '/');
@@ -92,13 +136,17 @@ class PageController extends BaseController {
         Response::view(APP_DIR . '/Views/pages/prijem/unos.php', ['idPacijenta' => $id]);
     }
 
+    // Sve uloge vide listu primljenih pacijenata
     public function primljeniPacijenti(): void {
         $this->requireAuth();
         Response::view(APP_DIR . '/Views/pages/prijem/lista.php');
     }
 
+    // ── Tretmani i izveštaji ──────────────────────────────────────────────────
+    // Lekar i administrator za tretmane; sve uloge za izveštaje
+
     public function medicinskiTretmaniUnos(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_LEKAR]);
         $idPrijema = $this->request->post('IdPrijema', '') ?: $this->request->get('IdPrijema', '');
         if ($idPrijema === '') {
             $this->redirect(APP_BASE . '/');
@@ -146,5 +194,12 @@ class PageController extends BaseController {
             'items'      => $items,
             'ukupanBroj' => $ukupanBroj,
         ]);
+    }
+
+    // ── Samo administrator ────────────────────────────────────────────────────
+
+    public function zaposleniLista(): void {
+        $this->requireRole([self::ROLE_ADMIN]);
+        Response::view(APP_DIR . '/Views/pages/zaposleni-lista.php');
     }
 }

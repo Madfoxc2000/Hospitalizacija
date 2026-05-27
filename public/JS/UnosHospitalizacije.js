@@ -18,7 +18,7 @@ vrstaOtpustaEl.addEventListener('change', function () {
     setDeathFieldsEnabled(this.value == 6);
 });
 
-// ── Populate dropdowns on load ──────────────────────────────────────────────
+// ── Punjenje padajućih menija pri učitavanju ──────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     fetch('api/hospitalizacija-form-data', { credentials: 'same-origin' })
         .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.json(); })
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-// ── Validation ──────────────────────────────────────────────────────────────
+// ── Validacija ────────────────────────────────────────────────────────────────
 const PrateceDijagnoze = document.forms['hospitalizacijaForm']['PrateceDijagnoze'];
 const DatumOtpusta     = document.forms['hospitalizacijaForm']['DatumOtpusta'];
 
@@ -95,7 +95,7 @@ function validateForm() {
     return true;
 }
 
-// ── Submit via fetch() ───────────────────────────────────────────────────────
+// ── Slanje forme putem fetch() ────────────────────────────────────────────────
 document.getElementById('hospitalizacijaForm').addEventListener('submit', function (event) {
     event.preventDefault();
 

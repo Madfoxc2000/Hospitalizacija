@@ -13,7 +13,9 @@
       "Bash(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Hospitalizacija\" -Recurse -Directory)",
       "Bash(Select-Object -ExpandProperty FullName)",
       "PowerShell(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Hospitalizacija\\\\public\" -Recurse -File | Where-Object { $_.Extension -in @\\('.js', '.json'\\) } | Select-Object -ExpandProperty FullName | head -20)",
-      "PowerShell(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Hospitalizacija\\\\public\" -Recurse -File | Where-Object { $_.Extension -in @\\('.js', '.json'\\) } | Select-Object -ExpandProperty FullName | Select-Object -First 20)"
+      "PowerShell(Get-ChildItem -Path \"c:\\\\xampp\\\\htdocs\\\\Hospitalizacija\\\\public\" -Recurse -File | Where-Object { $_.Extension -in @\\('.js', '.json'\\) } | Select-Object -ExpandProperty FullName | Select-Object -First 20)",
+      "Bash(Select-Object FullName)",
+      "Bash(Sort-Object FullName)"
     ]
   }
 }

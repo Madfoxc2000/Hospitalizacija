@@ -26,6 +26,9 @@
                     <button type="submit" class="btn btn-sm btn-outline-secondary" name="svi" value="СВИ">СВИ</button>
                 </div>
             </form>
+            <div class="mt-2">
+                <button type="button" class="btn btn-sm btn-outline-warning w-100 btn-stampa-print" onclick="stampajListu('pacijenti-body', 'Списак пацијената')">Штампај</button>
+            </div>
         </div>
 
         <div class="table-container-main">

@@ -23,7 +23,7 @@ if (this.validity.valueMissing) {
 
 // Validacija vrednosti podataka
 function containsOnlyLettersAndNumbers(value) {
-    let pattern = /^$|[a-zA-Z0-9АБВГДЂЕЖЗИЈКЛЉМНЊОПРСТЋУФХЦЧЏШабвгдђежзијклљмнњопрстћуфхцчџш\s]+$/;
+    let pattern = /^[a-zA-Z0-9АБВГДЂЕЖЗИЈКЛЉМНЊОПРСТЋУФХЦЧЏШабвгдђежзијклљмнњопрстћуфхцчџш\s]*$/;
     return pattern.test(value);
   }
 

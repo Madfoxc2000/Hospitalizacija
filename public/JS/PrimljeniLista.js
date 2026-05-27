@@ -1,9 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const uloga    = document.body.dataset.uloga || '';
+    const jeSestra = uloga === 'Медицинска сестра';
+
     const statusEl = document.getElementById('primljeni-status');
     const bodyEl   = document.getElementById('primljeni-body');
     const filterInput = document.getElementById('filter');
 
     if (!bodyEl) return;
+
+    if (jeSestra) {
+        const thHiden = document.getElementById('thHiden');
+        if (thHiden) thHiden.style.display = 'none';
+    }
 
     const params      = new URLSearchParams(window.location.search);
     const filterValue = params.get('filter') || '';
@@ -46,61 +54,66 @@ document.addEventListener('DOMContentLoaded', () => {
                 tdDatum.id = 'th4';
                 tdDatum.innerHTML = `<b><font>${item.datumPrijema || ''}</font>`;
 
-                const tdAkcije = document.createElement('td');
-                tdAkcije.id = 'th5';
-
-                const tretmanForm = document.createElement('form');
-                tretmanForm.action = 'medicinski-tretmani-unos';
-                tretmanForm.id     = idTretman;
-                tretmanForm.method = 'GET';
-                const tretmanHidden = document.createElement('input');
-                tretmanHidden.type  = 'hidden';
-                tretmanHidden.name  = 'IdPrijema';
-                tretmanHidden.value = id;
-                const tretmanIcon = document.createElement('span');
-                tretmanIcon.className = 'material-symbols-outlined';
-                tretmanIcon.setAttribute('tretman', idTretman);
-                tretmanIcon.textContent = 'prescriptions';
-                tretmanForm.appendChild(tretmanHidden);
-                tretmanForm.appendChild(tretmanIcon);
-
-                const otpustForm = document.createElement('form');
-                otpustForm.action = 'hospitalizacija-unos';
-                otpustForm.id     = idOtpust;
-                otpustForm.method = 'GET';
-                const otpustHidden = document.createElement('input');
-                otpustHidden.type  = 'hidden';
-                otpustHidden.name  = 'IdPrijema';
-                otpustHidden.value = id;
-                const otpustIcon = document.createElement('span');
-                otpustIcon.className = 'material-symbols-outlined';
-                otpustIcon.setAttribute('otpust', idOtpust);
-                otpustIcon.textContent = 'tab_move';
-                otpustForm.appendChild(otpustHidden);
-                otpustForm.appendChild(otpustIcon);
-
-                tdAkcije.appendChild(tretmanForm);
-                tdAkcije.appendChild(otpustForm);
-
                 row.appendChild(tdBroj);
                 row.appendChild(tdOdel);
                 row.appendChild(tdDij);
                 row.appendChild(tdDatum);
-                row.appendChild(tdAkcije);
+
+                if (!jeSestra) {
+                    const tdAkcije = document.createElement('td');
+                    tdAkcije.id = 'th5';
+
+                    const tretmanForm = document.createElement('form');
+                    tretmanForm.action = 'medicinski-tretmani-unos';
+                    tretmanForm.id     = idTretman;
+                    tretmanForm.method = 'GET';
+                    const tretmanHidden = document.createElement('input');
+                    tretmanHidden.type  = 'hidden';
+                    tretmanHidden.name  = 'IdPrijema';
+                    tretmanHidden.value = id;
+                    const tretmanIcon = document.createElement('span');
+                    tretmanIcon.className = 'material-symbols-outlined';
+                    tretmanIcon.setAttribute('tretman', idTretman);
+                    tretmanIcon.textContent = 'prescriptions';
+                    tretmanForm.appendChild(tretmanHidden);
+                    tretmanForm.appendChild(tretmanIcon);
+
+                    const otpustForm = document.createElement('form');
+                    otpustForm.action = 'hospitalizacija-unos';
+                    otpustForm.id     = idOtpust;
+                    otpustForm.method = 'GET';
+                    const otpustHidden = document.createElement('input');
+                    otpustHidden.type  = 'hidden';
+                    otpustHidden.name  = 'IdPrijema';
+                    otpustHidden.value = id;
+                    const otpustIcon = document.createElement('span');
+                    otpustIcon.className = 'material-symbols-outlined';
+                    otpustIcon.setAttribute('otpust', idOtpust);
+                    otpustIcon.textContent = 'tab_move';
+                    otpustForm.appendChild(otpustHidden);
+                    otpustForm.appendChild(otpustIcon);
+
+                    tdAkcije.appendChild(tretmanForm);
+                    tdAkcije.appendChild(otpustForm);
+                    row.appendChild(tdAkcije);
+                }
+
                 bodyEl.appendChild(row);
             });
 
-            // Wire icon clicks to form submissions
-            document.querySelectorAll('[otpust]').forEach(icon => {
-                icon.addEventListener('click', () => {
-                    document.getElementById(icon.getAttribute('otpust'))?.submit();
+            // Vezivanje klikova na ikonice sa slanjem formi
+            if (!jeSestra) {
+                document.querySelectorAll('[otpust]').forEach(icon => {
+                    icon.addEventListener('click', () => {
+                        document.getElementById(icon.getAttribute('otpust'))?.submit();
+                    });
                 });
-            });
-            document.querySelectorAll('[tretman]').forEach(icon => {
-                icon.addEventListener('click', () => {
-                    document.getElementById(icon.getAttribute('tretman'))?.submit();
+                document.querySelectorAll('[tretman]').forEach(icon => {
+                    icon.addEventListener('click', () => {
+                        document.getElementById(icon.getAttribute('tretman'))?.submit();
+                    });
                 });
-            });
+            }
         })
         .catch(() => {
             if (statusEl) statusEl.textContent = 'Грешка при учитавању';

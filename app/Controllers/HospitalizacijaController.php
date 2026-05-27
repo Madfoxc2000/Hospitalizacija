@@ -123,7 +123,7 @@ class HospitalizacijaController extends BaseController {
 
     // POST/PUT api/hospitalizacija-izmeni
     public function update(): void {
-        $this->requireAdminAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_LEKAR]);
 
         $p   = $this->request->all();
         $idH = trim($p['IdHospitalizacije'] ?? '');
@@ -223,7 +223,7 @@ class HospitalizacijaController extends BaseController {
 
     // POST api/hospitalizacija-obrisi
     public function delete(): void {
-        $this->requireAdminAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_LEKAR]);
 
         $idH = $this->request->post('IdHospitalizacije', '');
         if ($idH === '') {
@@ -262,7 +262,7 @@ class HospitalizacijaController extends BaseController {
 
     // POST api/hospitalizacija-unos
     public function store(): void {
-        $this->requireAdminAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_LEKAR]);
 
         $p            = $this->request->all();
         $idPrijema    = $p['IdPrijema'] ?? '';
@@ -308,7 +308,7 @@ class HospitalizacijaController extends BaseController {
         $this->json(['ok' => true]);
     }
 
-    // GET api/hospitalizacija-form-data — dropdown options for the unos form
+    // GET api/hospitalizacija-form-data — opcije padajućeg menija za formu unosa
     public function formData(): void {
         $this->requireAuth();
 
@@ -353,7 +353,7 @@ class HospitalizacijaController extends BaseController {
 
     // GET api/hospitalizacija-print?id=
     public function printReport(): void {
-        $this->requireAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA, self::ROLE_LEKAR]);
 
         $idH = trim($this->request->get('id', ''));
         if ($idH === '') {
@@ -398,7 +398,7 @@ class HospitalizacijaController extends BaseController {
             'spoljniUzrokPovrede'            => $izv->DajVrednostPoRednomBrojuZapisaPoRBPolja($col, 0, 29),
         ];
 
-        // Consume trailing OK packet from CALL to avoid "Commands out of sync"
+        // Konzumira preostali OK paket iz CALL poziva kako bi se izbegla greška "Commands out of sync"
         if ($col) { mysqli_free_result($col); }
         while (mysqli_next_result($db->konekcijaDB)) {
             $extra = mysqli_use_result($db->konekcijaDB);

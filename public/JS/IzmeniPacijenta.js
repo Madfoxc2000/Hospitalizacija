@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (statusEl) statusEl.textContent = 'Грешка при учитавању';
         });
 
-    // ── Submit via fetch() ────────────────────────────────────────────────
+    // ── Slanje forme putem fetch() ────────────────────────────────────────
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 

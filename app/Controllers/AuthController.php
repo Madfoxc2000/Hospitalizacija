@@ -37,14 +37,111 @@ class AuthController extends BaseController {
         $_SESSION['ime']         = $k->DajImePrijavljenogKorisnika($username, $password);
         $_SESSION['prez']        = $k->DajPrezimePrijavljenogKorisnika($username, $password);
         $_SESSION['idkorisnika'] = $k->DajIDPrijavljenogKorisnika($username, $password);
-        $uloga                   = $k->DajUloguPrijavljenogKorisnika($username, $password);
+        $_SESSION['uloga']       = $k->DajUloguPrijavljenogKorisnika($username, $password);
+        $uloga                   = $_SESSION['uloga'];
         $db->disconnect();
 
-        $redirect = $uloga === 'Администратор'
-            ? APP_BASE . '/welcome-administrator'
-            : APP_BASE . '/welcome-korisnik';
+        if ($uloga === self::ROLE_ADMIN) {
+            $redirect = APP_BASE . '/welcome-administrator';
+        } elseif ($uloga === self::ROLE_LEKAR) {
+            $redirect = APP_BASE . '/welcome-lekar';
+        } elseif ($uloga === self::ROLE_SESTRA) {
+            $redirect = APP_BASE . '/welcome-medicinska-sestra';
+        } else {
+            $redirect = APP_BASE . '/welcome-korisnik'; // stara rezervna opcija
+        }
 
         $this->json(['ok' => true, 'redirect' => $redirect]);
+    }
+
+    // POST api/auth/register
+    public function register(): void {
+        $prezime         = trim($this->request->post('prezime', ''));
+        $ime             = trim($this->request->post('ime', ''));
+        $korisnickoIme   = trim($this->request->post('korisnickoIme', ''));
+        $sifra           = trim($this->request->post('sifra', ''));
+        $telefon         = trim($this->request->post('telefon', ''));
+        $email           = trim($this->request->post('email', ''));
+        $specijalizacija = trim($this->request->post('specijalizacija', ''));
+        $kod             = trim($this->request->post('kodRegistracije', ''));
+
+        if ($prezime === '' || $ime === '' || $korisnickoIme === '' ||
+            $sifra  === '' || $telefon === '' || $email === '' || $kod === '') {
+            $this->json(['error' => 'missing_fields'], 400);
+        }
+
+        // 1xxxx = Медицинска сестра, 2xxxx = Лекар, 3xxxx = Администратор
+        if (!preg_match('/^[123]\d{4}$/', $kod)) {
+            $this->json(['error' => 'invalid_code'], 400);
+        }
+
+        if ($kod[0] === '1') {
+            $statusucesca = self::ROLE_SESTRA;
+        } elseif ($kod[0] === '2') {
+            $statusucesca = self::ROLE_LEKAR;
+        } else {
+            $statusucesca = self::ROLE_ADMIN;
+        }
+
+        $db = $this->db();
+        $k  = new Korisnik($db, 'KORISNIK');
+
+        if ($k->DaLiPostojiKorisnickoIme($korisnickoIme)) {
+            $db->disconnect();
+            $this->json(['error' => 'username_taken'], 409);
+        }
+
+        $newId = $k->RegistrujKorisnika([
+            'prezime'         => $prezime,
+            'ime'             => $ime,
+            'korisnickoIme'   => $korisnickoIme,
+            'sifra'           => $sifra,
+            'telefon'         => $telefon,
+            'email'           => $email,
+            'specijalizacija' => $specijalizacija,
+            'statusucesca'    => $statusucesca,
+        ]);
+        $db->disconnect();
+
+        if ($newId === 0) {
+            $this->json(['error' => 'register_failed'], 500);
+        }
+
+        // Automatska prijava nakon uspešne registracije
+        $_SESSION['korisnik']    = $prezime . ' ' . $ime;
+        $_SESSION['ime']         = $ime;
+        $_SESSION['prez']        = $prezime;
+        $_SESSION['idkorisnika'] = $newId;
+        $_SESSION['uloga']       = $statusucesca;
+
+        if ($statusucesca === self::ROLE_ADMIN) {
+            $redirect = APP_BASE . '/welcome-administrator';
+        } elseif ($statusucesca === self::ROLE_LEKAR) {
+            $redirect = APP_BASE . '/welcome-lekar';
+        } else {
+            $redirect = APP_BASE . '/welcome-medicinska-sestra';
+        }
+
+        $this->json(['ok' => true, 'redirect' => $redirect]);
+    }
+
+    // GET api/zaposleni-lista?uloga=...
+    public function staff(): void {
+        $this->requireRole([self::ROLE_ADMIN]);
+
+        $uloga   = trim($this->request->get('uloga', ''));
+        $allowed = [self::ROLE_SESTRA, self::ROLE_LEKAR];
+
+        if (!in_array($uloga, $allowed, true)) {
+            $this->json(['error' => 'invalid_role'], 400);
+        }
+
+        $db   = $this->db();
+        $k    = new Korisnik($db, 'KORISNIK');
+        $data = $k->DajZaposlenePoStatusu($uloga);
+        $db->disconnect();
+
+        $this->json($data);
     }
 
     // POST api/auth/logout

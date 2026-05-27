@@ -6,7 +6,7 @@ DatumIzvrsenja.oninput   = invalid;
 
 const TipAktivnostiMessage = document.getElementById('TipAktivnostiMessage');
 
-// ── Populate TipAktivnosti on load ──────────────────────────────────────────
+// ── Punjenje TipAktivnosti pri učitavanju ────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     fetch('api/tretmani-tipovi', { credentials: 'same-origin' })
         .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.json(); })
@@ -34,7 +34,7 @@ function validateForm() {
     return true;
 }
 
-// ── Submit via fetch() ───────────────────────────────────────────────────────
+// ── Slanje forme putem fetch() ────────────────────────────────────────────────
 document.getElementById('aktivnostForm').addEventListener('submit', function (event) {
     event.preventDefault();
 

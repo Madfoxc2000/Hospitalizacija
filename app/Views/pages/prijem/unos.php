@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="main-administrator">
-    <?php include APP_DIR . '/Views/layouts/nav-administrator.php'; ?>
+    <?php include APP_DIR . '/Views/layouts/nav-auto.php'; ?>
     <div><?php include APP_DIR . '/Views/prijem/unos.php'; ?></div>
     <?php include APP_DIR . '/Views/layouts/footer.php'; ?>
 </div>

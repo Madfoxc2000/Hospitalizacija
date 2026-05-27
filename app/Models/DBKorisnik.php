@@ -1,162 +1,168 @@
 <?php
-class Korisnik extends Tabela{
-//Klasa “Korisnik” služi da pruži funkcije koje omogućavaju manipulaciju podataka o korisnicima.
-//Nasledjuje klasu tabela
-// ATRIBUTI
-private $IDZaposlenia; // auto increment u bazi podataka
-private $Prezime;
-private $Ime;
-private $Uloga;
-private $Email;
-private $Telefon;
-private $Specijalizacija;
-private $KorisnickoIme;
-private $Sifra;
-private $Stari_IDZaposlenia; // potrebno zbog izmene
+class Korisnik extends Tabela {
 
-// metode
+    private $IDZaposlenia;
+    private $Prezime;
+    private $Ime;
+    private $Uloga;
+    private $Email;
+    private $Telefon;
+    private $Specijalizacija;
+    private $KorisnickoIme;
+    private $Sifra;
+    private $Stari_IDZaposlenia;
 
-// ------- konstruktor - uzima se iz klase roditelja - Tabela
+    // Keširani red iz DaLiPostojiKorisnik — izbegava ponovni upit za svaki geter
+    private $cachedUser = null;
 
-// ------- preostale metode
+    public function UcitajSveZaposlene()
+    {
+        $SQL = "SELECT * FROM zaposleni";
+        $this->UcitajSvePoUpitu($SQL);
+    }
 
-public function UcitajSveZaposlene()
-{
-//Ucitava sve vrednosti iz eniteta zaposleni 
-		$SQL = "select * from zaposleni";
-		$this->UcitajSvePoUpitu($SQL);
-} // kraj metode
+    // Vraća true ako je korisničko ime već zauzeto.
+    public function DaLiPostojiKorisnickoIme($username)
+    {
+        $conn = $this->OtvorenaKonekcija->konekcijaDB;
+        $db   = $this->OtvorenaKonekcija->KompletanNazivBazePodataka;
+        $stmt = mysqli_prepare($conn, "SELECT IDZaposlenog FROM `{$db}`.`ZAPOSLENI` WHERE KORISNICKOIME = ?");
+        mysqli_stmt_bind_param($stmt, 's', $username);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+        $exists = mysqli_stmt_num_rows($stmt) > 0;
+        mysqli_stmt_close($stmt);
+        return $exists;
+    }
 
-public function DaLiPostojiKorisnik($loginusername,$loginpassword)
-{
-//Proverava da li postoji zapis u bazi u entitetu zaposleni za zeljeni username i password
-	$postoji="";
-	$SQLZaposleni = "SELECT * FROM `".$this->OtvorenaKonekcija->KompletanNazivBazePodataka."`.`ZAPOSLENI` WHERE KORISNICKOIME='".$loginusername."' AND SIFRA='".$loginpassword."'";
-    $this->UcitajSvePoUpitu($SQLZaposleni);
-	$this->PrebaciKolekcijuUListu($this->Kolekcija);
-	if ($this->BrojZapisa>0)
-	{
-		$postoji="DA";
-	}  			
-	else 
-	{
-		$postoji="NE";
-	}
-	return $postoji;
+    // Vraća sve zaposlene sa datim statusucesca, sortirane po prezimenu.
+    public function DajZaposlenePoStatusu($statusucesca)
+    {
+        $conn = $this->OtvorenaKonekcija->konekcijaDB;
+        $db   = $this->OtvorenaKonekcija->KompletanNazivBazePodataka;
+        $stmt = mysqli_prepare($conn,
+            "SELECT IDZaposlenog, PREZIME, IME, SPECIJALIZACIJA, Telefon, EMAIL, KORISNICKOIME
+             FROM `{$db}`.`ZAPOSLENI` WHERE statusucesca = ? ORDER BY PREZIME, IME"
+        );
+        mysqli_stmt_bind_param($stmt, 's', $statusucesca);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $rows   = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+        mysqli_stmt_close($stmt);
+        return $rows;
+    }
+
+    // Upisuje novi red zaposlenog. Vraća novi auto-increment ID, ili 0 pri grešci.
+    public function RegistrujKorisnika(array $data)
+    {
+        $conn = $this->OtvorenaKonekcija->konekcijaDB;
+        $db   = $this->OtvorenaKonekcija->KompletanNazivBazePodataka;
+        $hash = password_hash($data['sifra'], PASSWORD_BCRYPT);
+        $stmt = mysqli_prepare($conn,
+            "INSERT INTO `{$db}`.`ZAPOSLENI`
+             (PREZIME, IME, SPECIJALIZACIJA, Telefon, EMAIL, KORISNICKOIME, SIFRA, URLSLike, statusucesca)
+             VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?)"
+        );
+        mysqli_stmt_bind_param($stmt, 'ssssssss',
+            $data['prezime'],
+            $data['ime'],
+            $data['specijalizacija'],
+            $data['telefon'],
+            $data['email'],
+            $data['korisnickoIme'],
+            $hash,
+            $data['statusucesca']
+        );
+        $ok    = mysqli_stmt_execute($stmt);
+        $newId = $ok ? (int)mysqli_insert_id($conn) : 0;
+        mysqli_stmt_close($stmt);
+        return $newId;
+    }
+
+    // Dohvata jedan red po korisničkom imenu koristeći prepared statement. Vraća asocijativni niz ili null.
+    private function fetchUserByUsername($username)
+    {
+        $conn = $this->OtvorenaKonekcija->konekcijaDB;
+        $db   = $this->OtvorenaKonekcija->KompletanNazivBazePodataka;
+        $stmt = mysqli_prepare($conn, "SELECT * FROM `{$db}`.`ZAPOSLENI` WHERE KORISNICKOIME = ?");
+        mysqli_stmt_bind_param($stmt, 's', $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row    = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        return $row ?: null;
+    }
+
+    // Zamenjuje plaintext SIFRA sa bcrypt hešom u bazi.
+    private function rehashPassword($username, $newHash)
+    {
+        $conn = $this->OtvorenaKonekcija->konekcijaDB;
+        $db   = $this->OtvorenaKonekcija->KompletanNazivBazePodataka;
+        $stmt = mysqli_prepare($conn, "UPDATE `{$db}`.`ZAPOSLENI` SET SIFRA = ? WHERE KORISNICKOIME = ?");
+        mysqli_stmt_bind_param($stmt, 'ss', $newHash, $username);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+
+    public function DaLiPostojiKorisnik($loginusername, $loginpassword)
+    {
+        $user = $this->fetchUserByUsername($loginusername);
+        if ($user === null) {
+            return 'NE';
+        }
+
+        $stored = $user['SIFRA'];
+        $info   = password_get_info($stored);
+
+        if ($info['algo'] === 0) {
+            // Lozinka je još u plaintext formatu — proveriti i transparentno migrirati na bcrypt
+            if ($stored !== $loginpassword) {
+                return 'NE';
+            }
+            $newHash = password_hash($loginpassword, PASSWORD_BCRYPT);
+            $this->rehashPassword($loginusername, $newHash);
+            $user['SIFRA'] = $newHash;
+        } elseif (!password_verify($loginpassword, $stored)) {
+            return 'NE';
+        }
+
+        $this->cachedUser = $user;
+        return 'DA';
+    }
+
+    public function DajImePrijavljenogKorisnika($loginusername, $loginpassword)
+    {
+        $user = $this->cachedUser ?? $this->fetchUserByUsername($loginusername);
+        return isset($user['IME']) ? $user['IME'] : 'NEPOZNAT Zaposleni';
+    }
+
+    public function DajPrezimePrijavljenogKorisnika($loginusername, $loginpassword)
+    {
+        $user = $this->cachedUser ?? $this->fetchUserByUsername($loginusername);
+        return isset($user['PREZIME']) ? $user['PREZIME'] : 'NEPOZNAT Zaposleni';
+    }
+
+    public function DajImePrezimePrijavljenogKorisnika($loginusername, $loginpassword)
+    {
+        $user = $this->cachedUser ?? $this->fetchUserByUsername($loginusername);
+        if ($user === null) return 'NEPOZNAT Zaposleni';
+        return $user['PREZIME'] . ' ' . $user['IME'];
+    }
+
+    public function DajIDPrijavljenogKorisnika($loginusername, $loginpassword)
+    {
+        $user = $this->cachedUser ?? $this->fetchUserByUsername($loginusername);
+        return isset($user['IDZaposlenog']) ? (int)$user['IDZaposlenog'] : 0;
+    }
+
+    public function DajUloguPrijavljenogKorisnika($loginusername, $loginpassword)
+    {
+        // statusucesca čuva 'Администратор' ili 'Корисник' — uloga za kontrolu pristupa
+        $user = $this->cachedUser ?? $this->fetchUserByUsername($loginusername);
+        return isset($user['statusucesca']) ? $user['statusucesca'] : 'NEPOZNAT Zaposleni';
+    }
 }
-
-public function DajImePrijavljenogKorisnika($loginusername,$loginpassword)
-{
-//Vraca ime prijavljenog korisnika koje cita iz entinteta zaposleni za zeljeni username i password 
-	$Zaposleni="";
-	$SQLZaposleni = "SELECT * FROM `".$this->OtvorenaKonekcija->KompletanNazivBazePodataka."`.`Zaposleni` WHERE KORISNICKOIME='".$loginusername."' AND SIFRA='".$loginpassword."'";
-    $this->UcitajSvePoUpitu($SQLZaposleni);
-	$this->PrebaciKolekcijuUListu($this->Kolekcija);
-	if ($this->BrojZapisa>0)
-	{
-		// postoji zapis
-		foreach ($this->ListaZapisa as $VrednostCvoraListe)
-		{
-			$ime=$VrednostCvoraListe[2];
-			
-		}
-	}  			
-	else 
-	{
-		$ime='NEPOZNAT Zaposleni';
-	}
-	return $ime;
-}
-
-
-public function DajUloguPrijavljenogKorisnika($loginusername,$loginpassword)
-{
-//Vraca ulogu prijavljenog korisnika koje cita iz entinteta zaposleni za zeljeni username i password 
-	$Zaposleni="";
-	$SQLZaposleni = "SELECT * FROM `".$this->OtvorenaKonekcija->KompletanNazivBazePodataka."`.`Zaposleni` WHERE KORISNICKOIME='".$loginusername."' AND SIFRA='".$loginpassword."'";
-    $this->UcitajSvePoUpitu($SQLZaposleni);
-	$this->PrebaciKolekcijuUListu($this->Kolekcija);
-	if ($this->BrojZapisa>0)
-	{
-		// postoji zapis
-		foreach ($this->ListaZapisa as $VrednostCvoraListe)
-		{
-			$Uloga=$VrednostCvoraListe[10];
-			
-		}
-	}  			
-	else 
-	{
-		$Uloga='NEPOZNAT Zaposleni';
-	}
-	return $Uloga;
-}
-
-public function DajPrezimePrijavljenogKorisnika($loginusername,$loginpassword)
-{
-//Vraca ulogu prijavljenog korisnika koje cita iz entinteta zaposleni za zeljeni username i password 
-	$Zaposleni="";
-	$SQLZaposleni = "SELECT * FROM `".$this->OtvorenaKonekcija->KompletanNazivBazePodataka."`.`Zaposleni` WHERE KORISNICKOIME='".$loginusername."' AND SIFRA='".$loginpassword."'";
-    $this->UcitajSvePoUpitu($SQLZaposleni);
-	$this->PrebaciKolekcijuUListu($this->Kolekcija);
-	if ($this->BrojZapisa>0)
-	{
-		// postoji zapis
-		foreach ($this->ListaZapisa as $VrednostCvoraListe)
-		{
-			$prez=$VrednostCvoraListe[1];
-			
-		}
-	}  			
-	else 
-	{
-		$prez='NEPOZNAT Zaposleni';
-	}
-	return $prez;
-}
-
-public function DajImePrezimePrijavljenogKorisnika($loginusername,$loginpassword)
-{
-//Vraca ime i prezime prijavljenog korisnika koje cita iz entinteta zaposleni za zeljeni username i password 
-	$Zaposleni="";
-	$SQLZaposleni = "SELECT * FROM `".$this->OtvorenaKonekcija->KompletanNazivBazePodataka."`.`Zaposleni` WHERE KORISNICKOIME='".$loginusername."' AND SIFRA='".$loginpassword."'";
-    $this->UcitajSvePoUpitu($SQLZaposleni);
-	$this->PrebaciKolekcijuUListu($this->Kolekcija);
-	if ($this->BrojZapisa>0)
-	{
-		// postoji zapis
-		foreach ($this->ListaZapisa as $VrednostCvoraListe)
-		{
-			$prez=$VrednostCvoraListe[1];
-			$ime=$VrednostCvoraListe[2];
-			$Zaposleni=$prez.' '.$ime;
-		}
-	}  			
-	else 
-	{
-		$Zaposleni='NEPOZNAT Zaposleni';
-	}
-	return $Zaposleni;
-}
-
-public function DajIDPrijavljenogKorisnika($loginusername,$loginpassword)
-{
-//Vraca ID prijavljenog korisnika koje cita iz entinteta zaposleni za zeljeni username i password 
-	$id=0;
-	$SQLZaposleni = "SELECT * FROM `".$this->OtvorenaKonekcija->KompletanNazivBazePodataka."`.`Zaposleni` WHERE KORISNICKOIME='".$loginusername."' AND SIFRA='".$loginpassword."'";
-    $this->UcitajSvePoUpitu($SQLZaposleni);
-	$this->PrebaciKolekcijuUListu($this->Kolekcija);
-	if ($this->BrojZapisa>0)
-	{
-		// postoji zapis
-		foreach ($this->ListaZapisa as $VrednostCvoraListe)
-		{
-			$id=$VrednostCvoraListe[0];
-		}
-	} 
-	// else - ostaje 0
-
-	return $id;
-}
-} // kraj klase
 ?>

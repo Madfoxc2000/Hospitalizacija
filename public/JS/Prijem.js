@@ -9,7 +9,7 @@ const povreda     = document.getElementById('UzrokPovrede');
 povredjen.addEventListener('click',   () => { povreda.disabled = false; });
 nePovredjen.addEventListener('click', () => { povreda.disabled = true;  });
 
-// ── Populate dropdowns on load ──────────────────────────────────────────────
+// ── Punjenje padajućih menija pri učitavanju ──────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     fetch('api/prijem-form-data', { credentials: 'same-origin' })
         .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.json(); })
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-// ── Validation ──────────────────────────────────────────────────────────────
+// ── Validacija ────────────────────────────────────────────────────────────────
 const DatumPrijema      = document.forms['prijemForm']['DatumPrijema'];
 const TezinaNaPrijemu   = document.forms['prijemForm']['TezinaNaPrijemu'];
 
@@ -69,7 +69,7 @@ function validateForm() {
     return true;
 }
 
-// ── Submit via fetch() ───────────────────────────────────────────────────────
+// ── Slanje forme putem fetch() ────────────────────────────────────────────────
 document.getElementById('prijemForm').addEventListener('submit', function (event) {
     event.preventDefault();
 

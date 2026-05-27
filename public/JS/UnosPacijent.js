@@ -8,7 +8,7 @@ import {
     isPhoneNumberOk,
 } from "./JsValidacije.js";
 
-// ── Populate OsnovOsiguranja on load ────────────────────────────────────────
+// ── Punjenje OsnovOsiguranja pri učitavanju ───────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     fetch('api/pacijent-form-data', { credentials: 'same-origin' })
         .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.json(); })
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-// ── Validation refs ──────────────────────────────────────────────────────────
+// ── Reference za validaciju ───────────────────────────────────────────────────
 const BrojIstorijeBolesti  = document.forms['pacijentForm']['BrojIstorijeBolesti'];
 const JMBG                 = document.forms['pacijentForm']['JMBG'];
 const Ime                  = document.forms['pacijentForm']['Ime'];
@@ -152,7 +152,7 @@ function validateForm() {
     return true;
 }
 
-// ── Submit via fetch() ───────────────────────────────────────────────────────
+// ── Slanje forme putem fetch() ────────────────────────────────────────────────
 document.getElementById('pacijentForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -167,9 +167,9 @@ document.getElementById('pacijentForm').addEventListener('submit', function (eve
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(new FormData(this)).toString(),
     })
-        .then(r => { if (!r.ok) throw new Error('Request failed'); return r.json(); })
-        .then(data => {
-            if (data && data.ok) {
+        .then(r => r.json().then(data => ({ ok: r.ok, data })))
+        .then(({ ok, data }) => {
+            if (ok) {
                 window.location.href = 'pacijent-lista';
             } else {
                 if (statusEl) statusEl.textContent = data.error || 'Грешка при чувању';

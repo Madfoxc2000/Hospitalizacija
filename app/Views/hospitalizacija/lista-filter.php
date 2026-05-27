@@ -19,7 +19,7 @@
         <div class="filter-form-container">
             <form class="filter-form-upper" id="filter-form-upper" action="" method="GET">
                 <label class="form-label" for="filter">Основни узрок хоспитализације:</label>
-                <input type="text" class="form-control form-control-sm" name="filter" id="filter" />
+                <input type="text" class="form-control form-control-sm" name="filter" id="filter" data-max-chars="7" />
                 <span class="ValidationMessage" id="filterMessage"></span>
                 <div class="d-flex gap-2 mt-1">
                     <button type="submit" class="btn btn-sm btn-outline-light" name="filtriraj" value="Филтрирај">Филтрирај</button>

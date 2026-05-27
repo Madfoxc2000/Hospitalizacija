@@ -49,7 +49,7 @@ class PrijemController extends BaseController {
         $this->json(['items' => $items]);
     }
 
-    // GET api/prijem-form-data — dropdown options for the prijem form
+    // GET api/prijem-form-data — opcije padajućeg menija za formu prijema
     public function formData(): void {
         $this->requireAuth();
 
@@ -94,7 +94,7 @@ class PrijemController extends BaseController {
 
     // POST api/prijem-unos
     public function store(): void {
-        $this->requireAdminAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA]);
 
         $p             = $this->request->all();
         $idPacijenta   = $p['idPacijenta'] ?? '';

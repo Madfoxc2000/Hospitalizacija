@@ -1,12 +1,16 @@
 <?php
 
-// ── HTML page routes ──────────────────────────────────────────────────────────
+// ── Rute za HTML stranice ────────────────────────────────────────────────────
 require_once APP_DIR . '/Controllers/PageController.php';
 
 $router->any('',                               [PageController::class, 'home']);
 $router->any('welcome-administrator',          [PageController::class, 'welcomeAdministrator']);
 $router->any('welcome-korisnik',               [PageController::class, 'welcomeKorisnik']);
+$router->any('welcome-medicinska-sestra',      [PageController::class, 'welcomeMedicinskaSestra']);
+$router->any('welcome-lekar',                  [PageController::class, 'welcomeLekar']);
+$router->any('zaposleni-lista',                [PageController::class, 'zaposleniLista']);
 $router->any('prijava',                        [PageController::class, 'prijava']);
+$router->any('registracija',                   [PageController::class, 'registracija']);
 $router->any('hospitalizacija-lista-filter',   [PageController::class, 'hospitalizacijaListaFilter']);
 $router->any('hospitalizacija-lista-korisnik', [PageController::class, 'hospitalizacijaListaKorisnik']);
 $router->any('hospitalizacija-unos',           [PageController::class, 'hospitalizacijaUnos']);
@@ -21,13 +25,15 @@ $router->any('medicinski-tretmani-unos',       [PageController::class, 'medicins
 $router->any('izvestaj-stampa',                [PageController::class, 'izvestajStampa']);
 $router->any('stampa',                         [PageController::class, 'stampa']);
 
-// ── API routes — Auth ────────────────────────────────────────────────────
+// ── API rute — Autentifikacija ───────────────────────────────────────────────
 require_once APP_DIR . '/Controllers/AuthController.php';
 
-$router->post('api/auth/login',  [AuthController::class, 'login']);
-$router->post('api/auth/logout', [AuthController::class, 'logout']);
+$router->post('api/auth/login',    [AuthController::class, 'login']);
+$router->post('api/auth/logout',   [AuthController::class, 'logout']);
+$router->post('api/auth/register', [AuthController::class, 'register']);
+$router->get('api/zaposleni-lista', [AuthController::class, 'staff']);
 
-// ── API routes — Pacijent ────────────────────────────────────────────────
+// ── API rute — Pacijent ──────────────────────────────────────────────────────
 require_once APP_DIR . '/Controllers/PacijentController.php';
 
 $router->get('api/pacijent-form-data', [PacijentController::class, 'formData']);
@@ -38,20 +44,20 @@ $router->post('api/pacijent-izmeni', [PacijentController::class, 'update']);
 $router->put('api/pacijent-izmeni',  [PacijentController::class, 'update']);
 $router->post('api/pacijent-obrisi', [PacijentController::class, 'delete']);
 
-// ── API routes — Prijem ──────────────────────────────────────────────────
+// ── API rute — Prijem ────────────────────────────────────────────────────────
 require_once APP_DIR . '/Controllers/PrijemController.php';
 
 $router->get('api/prijem-lista',      [PrijemController::class, 'index']);
 $router->get('api/prijem-form-data',  [PrijemController::class, 'formData']);
 $router->post('api/prijem-unos',      [PrijemController::class, 'store']);
 
-// ── API routes — Tretmani ────────────────────────────────────────────────
+// ── API rute — Tretmani ──────────────────────────────────────────────────────
 require_once APP_DIR . '/Controllers/TretmaniController.php';
 
 $router->get('api/tretmani-tipovi', [TretmaniController::class, 'tipovi']);
 $router->post('api/tretmani-unos',  [TretmaniController::class, 'store']);
 
-// ── API routes — Hospitalizacija ─────────────────────────────────────────
+// ── API rute — Hospitalizacija ───────────────────────────────────────────────
 require_once APP_DIR . '/Controllers/HospitalizacijaController.php';
 
 $router->get('api/hospitalizacija-form-data', [HospitalizacijaController::class, 'formData']);

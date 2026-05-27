@@ -72,44 +72,49 @@ document.addEventListener("DOMContentLoaded", () => {
                 const id = item.id || "";
                 const updateId = `${id}update`;
                 const printId = `${id}print`;
+                const canEdit = window.APP_USER_ROLE !== "Медицинска сестра";
 
-                const editForm = document.createElement("form");
-                editForm.action = "hospitalizacija-izmeni";
-                editForm.method = "GET";
-                editForm.id = updateId;
+                if (canEdit) {
+                    const editForm = document.createElement("form");
+                    editForm.action = "hospitalizacija-izmeni";
+                    editForm.method = "GET";
+                    editForm.id = updateId;
 
-                const editHidden = document.createElement("input");
-                editHidden.type = "hidden";
-                editHidden.name = "IdHospitalizacije";
-                editHidden.value = id;
+                    const editHidden = document.createElement("input");
+                    editHidden.type = "hidden";
+                    editHidden.name = "IdHospitalizacije";
+                    editHidden.value = id;
 
-                const editIcon = document.createElement("span");
-                editIcon.className = "material-symbols-outlined";
-                editIcon.setAttribute("update", updateId);
-                editIcon.textContent = "edit_document";
+                    const editIcon = document.createElement("span");
+                    editIcon.className = "material-symbols-outlined";
+                    editIcon.setAttribute("update", updateId);
+                    editIcon.textContent = "edit_document";
 
-                editForm.appendChild(editHidden);
-                editForm.appendChild(editIcon);
+                    editForm.appendChild(editHidden);
+                    editForm.appendChild(editIcon);
+                    tdAkcije.appendChild(editForm);
 
-                const deleteForm = document.createElement("form");
-                deleteForm.action = "api/hospitalizacija-obrisi";
-                deleteForm.method = "POST";
-                deleteForm.id = id;
-                deleteForm.className = "deleteForm";
-                deleteForm.onsubmit = () => window.showConfirmationPopup && showConfirmationPopup();
+                    const deleteForm = document.createElement("form");
+                    deleteForm.action = "api/hospitalizacija-obrisi";
+                    deleteForm.method = "POST";
+                    deleteForm.id = id;
+                    deleteForm.className = "deleteForm";
+                    deleteForm.onsubmit = () => window.showConfirmationPopup && showConfirmationPopup();
 
-                const deleteHidden = document.createElement("input");
-                deleteHidden.type = "hidden";
-                deleteHidden.name = "IdHospitalizacije";
-                deleteHidden.value = id;
+                    const deleteHidden = document.createElement("input");
+                    deleteHidden.type = "hidden";
+                    deleteHidden.name = "IdHospitalizacije";
+                    deleteHidden.value = id;
 
-                const deleteIcon = document.createElement("span");
-                deleteIcon.className = "material-symbols-outlined delete-button";
-                deleteIcon.setAttribute("data-submit-form", id);
-                deleteIcon.textContent = "delete";
+                    const deleteIcon = document.createElement("span");
+                    deleteIcon.className = "material-symbols-outlined delete-button";
+                    deleteIcon.setAttribute("data-submit-form", id);
+                    deleteIcon.textContent = "delete";
 
-                deleteForm.appendChild(deleteHidden);
-                deleteForm.appendChild(deleteIcon);
+                    deleteForm.appendChild(deleteHidden);
+                    deleteForm.appendChild(deleteIcon);
+                    tdAkcije.appendChild(deleteForm);
+                }
 
                 const printForm = document.createElement("form");
                 printForm.action = "izvestaj-stampa";
@@ -135,8 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 printForm.appendChild(printHiddenBroj);
                 printForm.appendChild(printIcon);
 
-                tdAkcije.appendChild(editForm);
-                tdAkcije.appendChild(deleteForm);
                 tdAkcije.appendChild(printForm);
 
                 row.appendChild(tdBroj);

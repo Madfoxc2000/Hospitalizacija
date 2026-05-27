@@ -17,7 +17,7 @@ class TretmaniController extends BaseController {
         return $db;
     }
 
-    // GET api/tretmani-tipovi — dropdown options for the activity form
+    // GET api/tretmani-tipovi — opcije padajućeg menija za formu aktivnosti
     public function tipovi(): void {
         $this->requireAuth();
 
@@ -40,7 +40,7 @@ class TretmaniController extends BaseController {
 
     // POST api/tretmani-unos
     public function store(): void {
-        $this->requireAdminAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_LEKAR]);
 
         $p              = $this->request->all();
         $idPrijema      = $p['IdPrijema'] ?? '';

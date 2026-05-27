@@ -197,6 +197,22 @@ table.no-spacing {
 }
 table caption { margin-top: 1vw; }
 
+/* ====================================================== Štampanje =====================================*/
+@media print {
+    nav, footer, .filter-form-container, .btn-stampa-print, .modal, .modal-backdrop { display: none !important; }
+    .table-form-container { grid-template-columns: 1fr !important; gap: 0 !important; }
+    .table-container { height: auto !important; overflow: visible !important; }
+    th#thHiden, th#th5 { display: none !important; }
+    #pacijenti-body td:last-child,
+    #primljeni-body td:last-child,
+    #hospitalizacije-filter-body td:last-child { display: none !important; }
+    body { background-color: white !important; color: black !important; }
+    .table-dark { --bs-table-bg: transparent !important; color: black !important; border-color: #999 !important; }
+    td, th { color: black !important; border-color: #999 !important; }
+    .administrator-table-content { padding: 0 !important; }
+    .main-administrator, .main-korisnik, .main-container { display: block !important; }
+}
+
 /* ====================================================== Footer =====================================*/
 footer {
     background: linear-gradient(to right, rgba(54,90,120,0.5), rgba(0,204,250,0.2), rgba(0,204,250,0.5), rgba(0,204,250,0.5), rgba(0,204,250,0.2), rgba(54,90,120,0.5));

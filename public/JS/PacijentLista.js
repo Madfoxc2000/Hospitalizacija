@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 bodyEl.appendChild(row);
             });
 
-            // Wire icon clicks
+            // Vezivanje klikova na ikonice
             document.querySelectorAll('[update]').forEach(icon => {
                 icon.addEventListener('click', () => {
                     document.getElementById(icon.getAttribute('update'))?.submit();

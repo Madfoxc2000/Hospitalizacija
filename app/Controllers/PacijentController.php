@@ -57,7 +57,7 @@ class PacijentController extends BaseController {
         $this->json(['items' => $items]);
     }
 
-    // GET api/pacijent-form-data — dropdown options for the unos form
+    // GET api/pacijent-form-data — opcije padajućeg menija za formu unosa
     public function formData(): void {
         $this->requireAuth();
 
@@ -128,7 +128,7 @@ class PacijentController extends BaseController {
 
     // POST api/pacijent-unos
     public function store(): void {
-        $this->requireAdminAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA]);
 
         $p      = $this->request->all();
         $brojIB = trim($p['BrojIstorijeBolesti'] ?? '');
@@ -153,18 +153,9 @@ class PacijentController extends BaseController {
         $db   = $this->db();
         $pObj = new Pacijent($db, 'Pacijent');
 
-        $sviCol    = $pObj->UcitajSveBrojeveBolesti();
-        $sviN      = $pObj->DajUkupanBrojPacijenata($sviCol);
-        $sviBrojevi = '';
-        for ($i = 0; $i < $sviN; $i++) {
-            $sviBrojevi .= $pObj->DajVrednostPoRednomBrojuZapisaPoRBPolja($sviCol, $i, 0);
-        }
-
-        $val    = new Validacije();
-        $greska = $val->DaLiJeJedinstvenBrojBolesti($sviBrojevi, $brojIB);
-        if ($greska) {
+        if ($pObj->DaLiPostojiBrojBolesti($brojIB)) {
             $db->disconnect();
-            $this->json(['error' => $greska], 422);
+            $this->json(['error' => 'Пацијент са овим бројем историје болести се већ налази у бази'], 422);
         }
 
         $maloletan = (new PoslovnaLogika())->DaLiJeMaloletan($datum);
@@ -187,7 +178,7 @@ class PacijentController extends BaseController {
 
     // PUT/POST api/pacijent-izmeni
     public function update(): void {
-        $this->requireAdminAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA]);
 
         $p      = $this->request->all();
         $brojIB = trim($p['BrojIstorijeBolesti'] ?? '');
@@ -228,7 +219,7 @@ class PacijentController extends BaseController {
 
     // POST api/pacijent-obrisi
     public function delete(): void {
-        $this->requireAdminAuth();
+        $this->requireRole([self::ROLE_ADMIN, self::ROLE_SESTRA]);
 
         $idP = $this->request->post('idPacijenta', '');
         if ($idP === '') {

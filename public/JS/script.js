@@ -14,11 +14,14 @@ x.textContent=x.textContent.substring(0,20)+'...';
 //     });
 
 // Vezivanje enter tastera na tastaturi sa html dugmetom
-const Enter = document.getElementById('Enter');
-window.onkeydown = function(event){
-    if(event.keyCode == 13){
-        Enter.classList.add('save-btn-clicked');
-        Enter.click();
-        setTimeout(function(){Enter.classList.remove('save-btn-clicked');},200);
-    }
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const Enter = document.getElementById('Enter');
+    if (!Enter) return;
+    window.onkeydown = function(event){
+        if(event.keyCode == 13){
+            Enter.classList.add('save-btn-clicked');
+            Enter.click();
+            setTimeout(function(){Enter.classList.remove('save-btn-clicked');},200);
+        }
+    };
+});
