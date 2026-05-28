@@ -128,9 +128,10 @@ class Korisnik extends Tabela {
         } elseif (!password_verify($loginpassword, $stored)) {
             return 'NE';
         }
-
-        $this->cachedUser = $user;
-        return 'DA';
+        else {
+            $this->cachedUser = $user;
+            return 'DA';
+        }
     }
 
     public function DajImePrijavljenogKorisnika($loginusername, $loginpassword)
