@@ -1,5 +1,8 @@
 <?php
 require_once APP_DIR . '/Controllers/BaseController.php';
+require_once APP_DIR . '/Models/BaznaKonekcija.php';
+require_once APP_DIR . '/Models/BaznaTabela.php';
+require_once APP_DIR . '/Models/DBPrijem.php';
 
 class PageController extends BaseController {
 
@@ -133,6 +136,17 @@ class PageController extends BaseController {
         if ($id === '') {
             $this->redirect(APP_BASE . '/');
         }
+
+        $db      = new Konekcija(APP_DIR . '/Models/BaznaParametriKonekcije.xml');
+        $db->connect();
+        $prijem  = new Prijem($db, 'prijem');
+        $vecPrimljen = $prijem->DaLiJePacijentAktivnoPrimljen($id);
+        $db->disconnect();
+
+        if ($vecPrimljen) {
+            $this->redirect(APP_BASE . '/pacijent-lista?error=vec_primljen');
+        }
+
         Response::view(APP_DIR . '/Views/pages/prijem/unos.php', ['idPacijenta' => $id]);
     }
 

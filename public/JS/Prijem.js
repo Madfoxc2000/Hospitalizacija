@@ -11,7 +11,10 @@ nePovredjen.addEventListener('click', () => { povreda.disabled = true;  });
 
 // ── Punjenje padajućih menija pri učitavanju ──────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('api/prijem-form-data', { credentials: 'same-origin' })
+    const idPacijenta = document.querySelector("input[name='idPacijenta']")?.value || '';
+    const url = `api/prijem-form-data?idPacijenta=${encodeURIComponent(idPacijenta)}`;
+
+    fetch(url, { credentials: 'same-origin' })
         .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.json(); })
         .then(data => {
             const odeljSel   = document.querySelector("select[name='OdeljenjeNaPrijemu']");
@@ -32,6 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const text = item.sifra ? `${item.sifra} ${item.naziv || ''}`.trim() : item.naziv || '';
                 if (spoljniSel) spoljniSel.appendChild(new Option(text, item.sifra));
             });
+
+            if (data.maloletan) {
+                const col = document.createElement('div');
+                col.className = 'col-12 col-sm-6 col-md-4';
+                col.innerHTML = `
+                    <label class="form-label" for="Pratnja">Пратња — име и презиме пратиоца<span aria-label="required">*</span></label>
+                    <input type="text" class="form-control" name="Pratnja" id="Pratnja">
+                    <span class="ValidationMessage" id="PratanjaMessage"></span>`;
+                const statusEl = document.getElementById('prijem-status');
+                statusEl.parentNode.insertBefore(col, statusEl);
+            }
         })
         .catch(() => {
             const statusEl = document.getElementById('prijem-status');
@@ -50,6 +64,8 @@ TezinaNaPrijemu.oninput   = invalid;
 
 const OdeljenjeNaPrijemuMessage    = document.getElementById('OdeljenjeNaPrijemuMessage');
 const UputnaDijagnozaMessage       = document.getElementById('UputnaDijagnozaMessage');
+const pratanjaEl                   = document.getElementById('Pratnja');
+const pratanjaMessage              = document.getElementById('PratanjaMessage');
 
 function validateForm() {
     const form = document.forms['prijemForm'];
@@ -65,6 +81,12 @@ function validateForm() {
         return false;
     }
     UputnaDijagnozaMessage.textContent = '';
+
+    if (pratanjaEl && pratanjaEl.value.trim() === '') {
+        pratanjaMessage.textContent = 'Морате унети ime и презиме пратиоца';
+        return false;
+    }
+    if (pratanjaMessage) pratanjaMessage.textContent = '';
 
     return true;
 }
@@ -84,9 +106,9 @@ document.getElementById('prijemForm').addEventListener('submit', function (event
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(new FormData(this)).toString(),
     })
-        .then(r => { if (!r.ok) throw new Error('Request failed'); return r.json(); })
-        .then(data => {
-            if (data && data.ok) {
+        .then(r => r.json().then(data => ({ ok: r.ok, data })))
+        .then(({ ok, data }) => {
+            if (ok && data.ok) {
                 window.location.href = 'primljeni-pacijenti';
             } else {
                 if (statusEl) statusEl.textContent = data.error || 'Грешка при чувању';

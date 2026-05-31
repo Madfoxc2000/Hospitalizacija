@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(Get-ChildItem -Path \"C:\\\\xampp\\\\htdocs\\\\Hospitalizacija\" -Recurse -Force | Where-Object { $_.PSIsContainer } | Select-Object -ExpandProperty FullName | Sort-Object)",
-      "PowerShell(Get-ChildItem -Path \"C:\\\\xampp\\\\htdocs\\\\Hospitalizacija\" -Force | Where-Object { -not $_.PSIsContainer } | Select-Object Name, FullName | Sort-Object Name)"
-    ]
-  }
-}

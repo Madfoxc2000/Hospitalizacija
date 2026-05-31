@@ -7,6 +7,8 @@ require_once APP_DIR . '/Models/DBPrijem.php';
 require_once APP_DIR . '/Models/DBOdeljenje.php';
 require_once APP_DIR . '/Models/DBMKB.php';
 require_once APP_DIR . '/Models/DBSpoljniUzrokPovrede.php';
+require_once APP_DIR . '/Models/DBPacijent.php';
+require_once APP_DIR . '/Models/PoslovnaLogika.php';
 
 class PrijemController extends BaseController {
 
@@ -88,8 +90,15 @@ class PrijemController extends BaseController {
             ];
         }
 
+        $maloletan    = false;
+        $idPacijenta  = trim($this->request->get('idPacijenta', ''));
+        if ($idPacijenta !== '') {
+            $datumRodjenja = (new Pacijent($db, 'Pacijent'))->DajDatumRodjenja($idPacijenta);
+            $maloletan     = (new PoslovnaLogika())->DaLiJeMaloletan($datumRodjenja);
+        }
+
         $db->disconnect();
-        $this->json(['odeljenja' => $odeljenja, 'mkb' => $mkb, 'spoljniUzroci' => $spoljni]);
+        $this->json(['odeljenja' => $odeljenja, 'mkb' => $mkb, 'spoljniUzroci' => $spoljni, 'maloletan' => $maloletan]);
     }
 
     // POST api/prijem-unos
@@ -104,16 +113,32 @@ class PrijemController extends BaseController {
         $povreda       = $p['Povreda'] ?? '';
         $spoljniUzrok  = $p['SpoljniUzrokPovrede'] ?? '';
         $uputnaDij     = $p['UputnaDijagnoza'] ?? '';
+        $pratnja       = trim($p['Pratnja'] ?? '');
 
         if ($idPacijenta === '' || $odeljenje === '' || $datumPrijema === '') {
             $this->json(['error' => 'missing_required'], 400);
         }
 
-        $db        = $this->db();
+        $db            = $this->db();
+        $pacijentObj   = new Pacijent($db, 'Pacijent');
+        $datumRodjenja = $pacijentObj->DajDatumRodjenja($idPacijenta);
+        $maloletan     = (new PoslovnaLogika())->DaLiJeMaloletan($datumRodjenja);
+
+        if ($maloletan && $pratnja === '') {
+            $db->disconnect();
+            $this->json(['error' => 'Морате унети ime и презиме пратиоца за малолетног пацијента'], 400);
+        }
+
         $prijemObj = new Prijem($db, 'prijem');
+
+        if ($prijemObj->DaLiJePacijentAktivnoPrimljen($idPacijenta)) {
+            $db->disconnect();
+            $this->json(['error' => 'Пацијент је већ примљен и има активан пријем. Прво архивирајте постојећи пријем.'], 409);
+        }
+
         $greska    = $prijemObj->DodajNoviPrijem(
             $idPacijenta, $odeljenje, $tezina,
-            $datumPrijema, $povreda, $spoljniUzrok, $uputnaDij
+            $datumPrijema, $povreda, $spoljniUzrok, $uputnaDij, $pratnja
         );
         $db->disconnect();
 

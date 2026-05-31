@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const params      = new URLSearchParams(window.location.search);
     const filterValue = params.get('filter') || '';
+    const errorParam  = params.get('error') || '';
     if (filterInput) filterInput.value = filterValue;
 
     const apiUrl = filterValue
@@ -21,7 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (statusEl) statusEl.textContent = 'Нема података';
                 return;
             }
-            if (statusEl) statusEl.textContent = '';
+            if (errorParam === 'vec_primljen') {
+                if (statusEl) {
+                    statusEl.textContent = 'Пацијент је већ примљен и има активан пријем. Прво архивирајте постојећи пријем.';
+                    statusEl.style.color = '#dc3545';
+                }
+            } else {
+                if (statusEl) statusEl.textContent = '';
+            }
 
             items.forEach(item => {
                 const id        = item.brojIstorijeBolesti || '';

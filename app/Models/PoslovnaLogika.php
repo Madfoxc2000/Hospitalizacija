@@ -9,7 +9,7 @@ class PoslovnaLogika {
         $xml = simplexml_load_file(APP_DIR . '/Models/ParametarGodina.xml')
             or die("Ne moze da se ucita XML fajl");
         $parametarGodine = $xml->godina;
-        return ($godine > $parametarGodine) ? "Не" : "Да";
+        return ($godine > $parametarGodine) ? false : true;
     }
 
     public function DajBrojDana($Date1, $Date2) {

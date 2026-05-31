@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2026 at 12:08 AM
+-- Generation Time: May 31, 2026 at 05:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -97,7 +97,10 @@ INSERT INTO `aktivnosthospitalizacije` (`ID`, `PrijemID`, `TipAktivnostiID`, `Da
 (67, 51, '39009-00', '2026-05-15', '  dvc'),
 (68, 51, '39003-00', '2026-05-12', 'cxzc'),
 (69, 52, '39009-00', '2026-05-12', 'mmmm'),
-(70, 53, '39003-00', '2026-05-12', 'Neki opis');
+(70, 53, '39003-00', '2026-05-12', 'Neki opis'),
+(71, 54, '39003-00', '2026-05-11', ''),
+(72, 54, '39003-00', '2026-05-06', ''),
+(73, 54, '39006-00', '2026-05-13', '');
 
 -- --------------------------------------------------------
 
@@ -131,7 +134,8 @@ INSERT INTO `hospitalizacija` (`ID`, `IDPrijema`, `OsnovniUzrokHospitalizacije`,
 (52, 51, 'C00 D48', 'L00 L99', 12, '2026-05-14', 5, '1-1', 1, NULL, NULL),
 (53, 52, 'E00 E90', 'L00 L99', 12, '2026-05-12', 5, '1-2', 6, 'Да', NULL),
 (54, 50, 'C00 D48', 'L00 L99', 10, '2026-05-08', 12, '1-1', 1, NULL, NULL),
-(55, 53, 'C00 D48', 'L00 L99', 1, '2026-05-20', 8, '1-2', 1, NULL, NULL);
+(55, 53, 'C00 D48', 'L00 L99', 1, '2026-05-20', 8, '1-2', 1, NULL, NULL),
+(56, 54, 'C00 D48', 'L00 L99', 12, '2026-05-18', 3, '1-2', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -317,23 +321,25 @@ CREATE TABLE `prijem` (
   `DatumPrijema` date NOT NULL,
   `Povreda` varchar(5) NOT NULL,
   `SpoljniUzrokPovrede` varchar(8) DEFAULT NULL,
-  `Arhiviran` int(2) DEFAULT NULL
+  `Arhiviran` int(2) DEFAULT NULL,
+  `Pratnja` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `prijem`
 --
 
-INSERT INTO `prijem` (`ID`, `BrojIstorijeBolesti`, `OdeljenjeNaprijemu`, `UputnaDijagnoza`, `TezinaNaPrijemu`, `DatumPrijema`, `Povreda`, `SpoljniUzrokPovrede`, `Arhiviran`) VALUES
-(43, 'AA119', '1-3', 'I00 I99', 0, '2023-09-13', 'Не', NULL, 1),
-(44, 'AA118', '2-1', 'V01 Y98', 0, '2023-09-14', 'Да', 'W00 W19', 1),
-(45, 'AA111', '1-3', 'G00 G99', 0, '2023-09-01', 'Да', 'V98 V99', 1),
-(49, 'AA111', '1-1', 'A00 B99', 0, '2023-09-05', 'Не', NULL, 1),
-(50, 'Jessie.Kulas82', '1-1', 'C00 D48', 86, '2026-05-20', 'Да', 'V70 V79', 1),
-(51, 'AA111', '1-2', 'D50 D89', 86, '2026-05-19', 'Да', NULL, 1),
-(52, 'X1238', '1-3', 'E00 E90', 100, '2026-05-07', 'Да', 'V80 V89', 1),
-(53, 'AA111', '1-2', 'E00 E90', 0, '2026-05-12', 'Да', NULL, 1),
-(54, 'AA111', '1-2', 'D50 D89', 100, '2026-05-15', 'Не', NULL, NULL);
+INSERT INTO `prijem` (`ID`, `BrojIstorijeBolesti`, `OdeljenjeNaprijemu`, `UputnaDijagnoza`, `TezinaNaPrijemu`, `DatumPrijema`, `Povreda`, `SpoljniUzrokPovrede`, `Arhiviran`, `Pratnja`) VALUES
+(43, 'AA119', '1-3', 'I00 I99', 0, '2023-09-13', 'Не', NULL, 1, NULL),
+(44, 'AA118', '2-1', 'V01 Y98', 0, '2023-09-14', 'Да', 'W00 W19', 1, NULL),
+(45, 'AA111', '1-3', 'G00 G99', 0, '2023-09-01', 'Да', 'V98 V99', 1, NULL),
+(49, 'AA111', '1-1', 'A00 B99', 0, '2023-09-05', 'Не', NULL, 1, NULL),
+(50, 'Jessie.Kulas82', '1-1', 'C00 D48', 86, '2026-05-20', 'Да', 'V70 V79', 1, NULL),
+(51, 'AA111', '1-2', 'D50 D89', 86, '2026-05-19', 'Да', NULL, 1, NULL),
+(52, 'X1238', '1-3', 'E00 E90', 100, '2026-05-07', 'Да', 'V80 V89', 1, NULL),
+(53, 'AA111', '1-2', 'E00 E90', 0, '2026-05-12', 'Да', NULL, 1, NULL),
+(54, 'AA111', '1-2', 'D50 D89', 100, '2026-05-15', 'Не', NULL, 1, NULL),
+(55, 'AA111', '1-1', 'A00 B99', 10, '2026-05-27', 'Не', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -626,19 +632,19 @@ ALTER TABLE `zaposleni`
 -- AUTO_INCREMENT for table `aktivnosthospitalizacije`
 --
 ALTER TABLE `aktivnosthospitalizacije`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `hospitalizacija`
 --
 ALTER TABLE `hospitalizacija`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `prijem`
 --
 ALTER TABLE `prijem`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `zaposleni`

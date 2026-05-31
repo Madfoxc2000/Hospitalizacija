@@ -1,16 +1,28 @@
 <?php
 class Prijem extends Tabela{
-    public function DodajNoviPrijem($idPacijenta,$Odeljenje,$TezinaNaPrijemu,$DatumPrijema,$Povreda,$SpoljniUzrokPovrede,$UputnaDijagnoza)
+    public function DaLiJePacijentAktivnoPrimljen($BrojIstorijeBolesti): bool {
+        $conn = $this->OtvorenaKonekcija->konekcijaDB;
+        $db   = $this->OtvorenaKonekcija->KompletanNazivBazePodataka;
+        $stmt = mysqli_prepare($conn, "SELECT 1 FROM `{$db}`.`prijem` WHERE BrojIstorijeBolesti = ? AND Arhiviran IS NULL LIMIT 1");
+        mysqli_stmt_bind_param($stmt, 's', $BrojIstorijeBolesti);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+        $postoji = mysqli_stmt_num_rows($stmt) > 0;
+        mysqli_stmt_close($stmt);
+        return $postoji;
+    }
+
+    public function DodajNoviPrijem($idPacijenta,$Odeljenje,$TezinaNaPrijemu,$DatumPrijema,$Povreda,$SpoljniUzrokPovrede,$UputnaDijagnoza,$Pratnja='')
     {
         if (empty($SpoljniUzrokPovrede)){
-        $SQL = "INSERT INTO `prijem` (BrojIstorijeBolesti,OdeljenjeNaPrijemu,UputnaDijagnoza,TezinaNaprijemu,DatumPrijema,Povreda) VALUES ('$idPacijenta','$Odeljenje','$UputnaDijagnoza','$TezinaNaPrijemu','$DatumPrijema','$Povreda')";
+        $SQL = "INSERT INTO `prijem` (BrojIstorijeBolesti,OdeljenjeNaPrijemu,UputnaDijagnoza,TezinaNaprijemu,DatumPrijema,Povreda,Pratnja) VALUES ('$idPacijenta','$Odeljenje','$UputnaDijagnoza','$TezinaNaPrijemu','$DatumPrijema','$Povreda','$Pratnja')";
         }
     //Unosi vrednosti u entitet prijem
         else{
-        $SQL = "INSERT INTO `prijem` (BrojIstorijeBolesti,OdeljenjeNaPrijemu,UputnaDijagnoza,TezinaNaprijemu,DatumPrijema,Povreda,SpoljniUzrokPovrede) VALUES ('$idPacijenta','$Odeljenje','$UputnaDijagnoza','$TezinaNaPrijemu','$DatumPrijema','$Povreda','$SpoljniUzrokPovrede')";
+        $SQL = "INSERT INTO `prijem` (BrojIstorijeBolesti,OdeljenjeNaPrijemu,UputnaDijagnoza,TezinaNaprijemu,DatumPrijema,Povreda,SpoljniUzrokPovrede,Pratnja) VALUES ('$idPacijenta','$Odeljenje','$UputnaDijagnoza','$TezinaNaPrijemu','$DatumPrijema','$Povreda','$SpoljniUzrokPovrede','$Pratnja')";
             }
         $greska=$this->IzvrsiAktivanSQLUpit($SQL);
-       
+
         return $greska;
     }
     
